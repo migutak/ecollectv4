@@ -1,0 +1,56 @@
+
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">ARO Code</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Update arocode : {{dataIn.arocode}}</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                <div class="col-md-12">
+                	<form class="cmxform" name="updatearocodeForm" ng-submit="aroupdate()">
+                		<div class="col-md-12">
+                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <input type="text" class="form-text" id="arocode" name="arocode" ng-model="dataIn.arocode" required readonly="readonly">
+                              <span class="bar"></span>
+                              <div>ARO Code</div>
+                            </div>
+
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <input type="text" class="form-text" id="currcolofficer" name="currcolofficer" ng-model="dataIn.currcolofficer" required readonly="readonly">
+                              <span class="bar"></span>
+                              <div>Current colofficer</div>
+                            </div>
+                            
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <select id="newcolofficer" name ="newcolofficer" class="form-text android" ng-model="dataIn.newcolofficer" required>
+              									<option ng-repeat="c in Col" value="{{c.USERNAME}}"> {{c.FIRSTNAME | uppercase}} {{c.SURNAME | uppercase}}</option>
+              							  </select>
+                              <span class="bar"></span>
+                              <div ng-if="updatearocodeForm.newcolofficer.$error.required" class="error">
+              								   Select new colofficer
+              							  </div>
+                            </div>
+
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <input type="text" class="form-text" id="dept" name="dept" ng-model="dataIn.dept" required readonly="readonly">
+                              <span class="bar"></span>
+                              <div>Department</div>
+                            </div>
+                		</div>
+                		<div class="col-md-12">
+                              <input class="submit btn btn-primary" type="submit" value="Update">
+                              <a class="btn btn-danger btn-flat" href="#/aro"><i class="fa fa-chevron-left"></i> Cancel</a>
+                        </div>
+                	</form>
+                </div>
+            </div>
+		</div>
+	</div>
+	</div>
+</div>

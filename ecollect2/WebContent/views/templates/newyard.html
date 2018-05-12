@@ -1,0 +1,107 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">New Yard</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">New entry to a yard</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newyardForm" ng-submit="newyard()">
+	                		<div class="col-md-6">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custnumber" name="custnumber" ng-model="dataIn.custnumber" ng-blur="lookupdetails(dataIn.custnumber)" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.custnumber.$error.required" class="error">
+								      Enter the customer number
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="accnumber" name="accnumber" ng-model="dataIn.accnumber" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.accnumber.$error.required" class="error">
+								      Enter the account number
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custname" name="custname" ng-model="dataIn.custname" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.custname.$error.required" class="error">
+								      Name of customer
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text dateAnimate" id="dateinput" name="dateinput" ng-model="dataIn.dateinput" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.dateinput.$error.required" class="error">
+								      <span class="fa fa-calendar"></span> Date of input
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="accbalance" name="accbalance" ng-model="dataIn.accbalance">
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-money"></span> Account balance
+								  </div>
+	                            </div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="arocode" name="arocode" ng-model="dataIn.arocode" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.arocode.$error.required" class="error">
+								      Aro code
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="fileno" name="fileno" ng-model="dataIn.fileno" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newyardForm.fileno.$error.required" class="error">
+								      File number
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="vehicleregno" name="vehicleregno" ng-model="dataIn.vehicleregno">
+	                              <span class="bar"></span>
+	                              <div>
+								      Vehicle registration number
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="vehiclemake" name="vehiclemake" ng-model="dataIn.vehiclemake">
+	                              <span class="bar"></span>
+	                              <div>
+								      Vehicle make
+								  </div>
+	                            </div>
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+	                              <a ng-show="showcancel" class="btn btn-danger btn-flat" href="#/yards"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script>      
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  })
+ </script>

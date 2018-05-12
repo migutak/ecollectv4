@@ -1,0 +1,70 @@
+   
+        <div class="container" id="filesid">
+        	<span us-spinner="{radius:30, width:8, length: 16}"></span>
+            <a href="#/filesEmp"><span><i class="fa fa-upload" aria-hidden="true"></i></span> Upload to Employer</a> | <a href="#/filesNote"><span><i class="fa fa-upload" aria-hidden="true"></i></span> Bulk Employer note</a>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <form  ng-controller="filesCtrl2 as up" name="up.upload_form">
+                                <label>Document Type:</label>
+                                                        <select id="doctype" name="doctype" class="form-control android" ng-model="up.doctype">
+                                                            <option value="Other">Other</option>
+                                                            <option value="Demand 1">Demand 1</option>
+                                                            <option value="Demand 2">Demand 2</option>
+                                                            <option value="Demand 3">Demand 3</option>
+                                                        </select>
+                                <label>Description:</label>
+                                <textarea class="form-control" rows="2" id="uploadnote" name="uploadnote" ng-model="up.uploadnote" required></textarea>
+                                <p>supported files: pdf,jpg,doc,docx,xls,xlsx</p>
+                        <input 
+                           type="file" 
+                           ngf-select 
+                           ng-model="up.file" 
+                           name="file"
+                           ngf-pattern="'.pdf,.jpg,image/*,.doc,.docx,.xls,.xlsx'"
+                           ngf-max-size="10MB" 
+                           />
+                        <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                        <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+                        {{up.file.size / 1000000|number:1}}MB: max 10M</i>
+                        <button type="submit" class="btn btn-default" ng-click="up.submit()">Upload</button>
+                        <p>{{up.progress}}</p>
+                    </form>
+				
+				<!--
+					<br>
+				<button type="button" class="btn btn-default" ng-click="openPage()">alternative upload</button>
+				-->
+                </div>
+
+                <div class="col-md-9">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>FileName</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>By</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="d in dataFiles">
+                                <td><strong>{{d.FILENAME}}</strong></td>
+                                <td>{{d.DOCDESC}}</td>
+                                <td>{{d.DOCTYPE}}</td>
+                                <td>{{d.COLOFFICER}}</td>
+                                <td>{{d.STAGEDATE}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-xs" ng-click="download(d.DESTPATH)">
+                                        <span class="glyphicon glyphicon-download"></span> Download
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>

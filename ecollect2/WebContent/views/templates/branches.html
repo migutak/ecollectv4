@@ -1,0 +1,101 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-6">
+									<h3 class="animated fadeInLeft">Branches</h3>
+									<button class="btn-link" ng-click="showlist()">List Branches</button>|<button class="btn-link" ng-click="addbr()">Add</button>
+								</div>
+							</div>
+						</div>
+	<div class="col-md-12">
+<div class="row" ng-show="showme">
+    <div class="search col-md-3">
+        <input type="text" class="form-text border-bottom" ng-model="query" placeholder="search.."/>
+    </div>
+		<div class="col-lg-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+			<table class="table table-striped header-fixed" >
+				<thead>
+					<tr>
+						<th>Branch#</th>
+						<th>Branch Name</th>
+						<th>Manager</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in branches | filter:query">
+						<td>{{d.BRANCHCODE}}</td>
+						<td>{{d.BRANCHNAME}}</td>
+						<td>{{d.MANAGER}}</td>
+						<td><a href="#/editbranch/{{d.BRANCHCODE}}">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>
+<div class="row" ng-show="showupdate">
+	<div class="col-md-3">
+		<form role="form" ng-submit="updateBranch()">
+			  <div class="form-group">
+			    <label for="oBranchcode">BranchCode:</label>
+			    <input type="text" class="form-control" id="Branchcode" ng-model="dataIn.oBranchcode" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="newBranchcode">New BranchCode:</label>
+			    <input type="text" class="form-control" id="newBranchcode" ng-model="dataIn.newBranchcode" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="nBranname">Branch Name:</label>
+			    <input type="text" class="form-control" id="nBranname" ng-model="dataIn.nBranname" required>
+			  </div>
+			  <div class="form-group">
+			  	<label for="Branname">Region:</label>
+	                   <select class="form-control" ng-model="dataIn.nregionname" id="nregionname" name="nregionname" required>
+							<option>CENTRAL</option>
+							<option>CO-OP HSE & MALL BRS</option>
+							<option>COAST</option>
+							<option>NAIROBI EAST</option>
+							<option>NAIROBI WEST</option>
+							<option>P/ROAD & MALL BRS</option>
+							<option>RIFT VALLEY</option>
+							<option>WESTERN</option>
+						</select>
+	          </div>
+			  <button type="submit" class="btn btn-sm btn-primary">{{submitHeader}}</button>
+			  {{message}}
+		</form>
+	</div>
+</div>
+<div class="row" ng-show="showadd">
+	<div class="col-md-3">
+		<form role="form" ng-submit="addBranch()">
+			  <div class="form-group">
+			    <label for="Branchcode">BranchCode:</label>
+			    <input type="text" class="form-control" id="Branchcode" ng-model="dataIn.Branchcode" required>
+			  </div>
+			  <div class="form-group">
+			    <label for="Branname">Branch Name:</label>
+			    <input type="text" class="form-control" id="Branname" ng-model="dataIn.Branname" required>
+			  </div>
+			  <div class="form-group">
+			  	<label for="Branname">Region:</label>
+	                   <select class="form-control" ng-model="dataIn.regionname" id="regionname" name="regionname" required>
+							<option>CENTRAL</option>
+							<option>CO-OP HSE & MALL BRS</option>
+							<option>COAST</option>
+							<option>NAIROBI EAST</option>
+							<option>NAIROBI WEST</option>
+							<option>P/ROAD & MALL BRS</option>
+							<option>RIFT VALLEY</option>
+							<option>WESTERN</option>
+						</select>
+	          </div>
+			  <button type="submit" class="btn btn-sm btn-primary">{{submitHeader}}</button>
+			  {{_message}}
+		</form>
+	</div>
+</div>
+</div>
+</div>
+</div>

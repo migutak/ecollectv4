@@ -1,0 +1,67 @@
+<div class="col-md-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="dob"> <label>DOB/Incorporation</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="nationalid"> <label>National ID</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="email"> <label>E-mail</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="address"> <label>Address</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="colofficer"> <label>Collection Officer</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	var globalUrl;
+	
+	var cust= document.getElementById("cust").value;
+	var acc= document.getElementById("acc").value;
+	var dept= localStorage.getItem("division");
+	var user= localStorage.getItem("username");
+	
+	//document.getElementById("uploadcust").value=cust;
+	//document.getElementById("uploadacc").value=acc;
+	$.ajax({
+		url: './ips.json',
+	    type: "get", 
+	    success: function(response) {
+	    	//globalUrl = response[0].CurrentInUse;
+	    	//globalUrl = "http://192.168.0.51:7001/ecollect_3"
+	    	globalUrl = "http://localhost:8080/ecollect_3"
+			$.ajax({
+				type: 'GET',
+		        url: globalUrl + '/api/v2/accountinfo/'+acc,
+		        success: function(data) {
+		        	//console.log('account info ',data[0]);
+		        	document.getElementById("dob").value = data[0].DOB;
+		        	document.getElementById("nationalid").value = data[0].NATIONID;
+		        	document.getElementById("email").value = data[0].EMAIL;
+		        	document.getElementById("address").value = data[0].ADDRESSLINE1 +" - "+ data[0].POSTCODE;
+		        	document.getElementById("colofficer").value = data[0].COLOFFICER;
+		        }
+			})
+		}
+	})
+</script>

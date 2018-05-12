@@ -1,0 +1,94 @@
+	<div class="col-md-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="custnumber"> <label>Phone Number</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="accnumber"> <label>Loan account Number</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="oustbalance"> <label>Loan amount</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="daysinarr"> <label>Amount disbursed</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="princarrears"> <label>Disbursement date</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="intratearr"> <label>Grade</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="penalarr"> <label>Arrears category</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="productcode"> <label>Product Code</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="instamount"> <label>Repayment amount</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="nextrepaydate"> <label>Last payment date</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="arocode"> <label>ARO Code</label>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="asset/js/global.js"></script>
+<script type="text/javascript">
+	
+	var cust = document.getElementById("cust").value;
+	var acc = document.getElementById("acc").value;
+	var dept = localStorage.getItem("division");
+	var user = localStorage.getItem("username");
+	
+	
+	    	var globalUrl = urladdress;
+    		$.ajax({
+				type : 'GET',
+				url : globalUrl + '/api/status/getmcoop/' + acc,
+				success : function(data) {
+					document.getElementById("custnumber").value = data[0].PHONENUMBER;
+					document.getElementById("accnumber").value = data[0].LOANACCNUMBER;
+					document.getElementById("oustbalance").value = data[0].LOANAMOUNT;
+					document.getElementById("daysinarr").value = data[0].AMOUNTDISBURSED;
+					document.getElementById("princarrears").value = data[0].DISBURSALDATE;
+					document.getElementById("intratearr").value = data[0].GRADE;
+					document.getElementById("penalarr").value = data[0].ARREARS_CATEGORY;
+					document.getElementById("productcode").value = data[0].LOAN_TYPE;
+					document.getElementById("instamount").value = data[0].REPAYMENTAMOUNT;
+					document.getElementById("nextrepaydate").value = data[0].LASTPAYMENTDATE;
+					document.getElementById("arocode").value = data[0].AROCODE;
+				}
+			})
+	    
+</script>

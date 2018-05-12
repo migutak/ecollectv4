@@ -1,0 +1,60 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Edit Branch</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Regional allocations</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+                <form class="cmxform" ng-submit="editBranch()">
+                <div class="col-md-12">
+                	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+                        <input type="text" class="form-text" id="branchid" name="branchid" ng-model="dataIn.branchid" readonly="readonly">
+                     </div>
+                     <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                        <input type="text" class="form-text" id="branchname" name="branchname" ng-model="dataIn.branchname" readonly="readonly">
+                     </div>
+                     		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <select id="sme" name ="sme" class="form-text android" ng-model="dataIn.sme" required>
+									<option ng-repeat="u in users">{{u.USERNAME}}</option>
+							  </select>
+                              <span class="bar"></span>
+                              <div>Collector SME</div>
+                            </div>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <select id="portfolio" name ="portfolio" class="form-text android" ng-model="dataIn.portfolio" required>
+									<option ng-repeat="u in users">{{u.USERNAME}}</option>
+							  </select>
+                              <span class="bar"></span>
+                              <div>Collector Portfolio</div>
+                            </div>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <select id="mcu" name ="mcu" class="form-text android" ng-model="dataIn.mcu" required>
+									<option ng-repeat="u in users">{{u.USERNAME}}</option>
+							  </select>
+                              <span class="bar"></span>
+                              <div>Collector MCU</div>
+                            </div>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                              <select id="assetfinance" name ="assetfinance" class="form-text android" ng-model="dataIn.assetfinance" required>
+									<option ng-repeat="u in users">{{u.USERNAME}}</option>
+							  </select>
+                              <span class="bar"></span>
+                              <div>Collector Asset Finance</div>
+                            </div>
+                </div>
+                <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-flat">Submit</button>
+				<a class="btn btn-danger btn-flat" href="#/branch">Cancel</a>
+                </div>
+			</form>
+            </div>
+		</div>
+	</div>
+	</div>
+</div>

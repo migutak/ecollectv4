@@ -1,0 +1,115 @@
+
+<div id="content">
+			<div class="col-md-12 padding-0">
+				<div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-2">
+							<h3 class="animated fadeInLeft">Paying Watch</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">No Credit Watch {{section}}</p>
+						</div>
+						<div class="col-md-2">
+						<div class="form-group form-animate-text" style="margin-top: 30px !important;">
+							<select class="form-text android" ng-model="section">
+									<option>CORPORATE</option>
+                                    <option>ASSETFINANCE</option>
+                                    <option>SACCO</option>
+                                    <option>AGRI</option>
+                                    <option>MORTGAGE</option>
+                                    <option>SME</option>
+                                    <option>MICROCREDIT</option>
+                                    <option>IPF</option>
+                                    <option>PBBSCHEME</option>
+                                    <option>PBBSCORED</option>
+                                    <option>CMDR</option>
+                                    <option>PORTFOLIO</option>
+                                    <option>MCOOPCASH</option>
+							</select>
+							<div>Division</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	<div class="col-md-12 padding-0">
+		<table id="users" data-height="500" data-side-pagination="server" data-pagination="true" data-search="true" data-toolbar="#Error">
+        </table>
+	</div>
+
+</div>
+
+<!-- Global valiable -->
+<script src="asset/js/global.js"></script>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table-export.js"></script>
+<script src="bower_components/bootstrap-table/dist/tableExport/tableExport.js"></script>
+
+
+<script type="text/javascript">
+        $(document).ready(function(e) {
+            $('#users').bootstrapTable({
+                    method: 'GET',
+                    url: urladdress+'/api/v2/lazy',
+                    cache: false,
+                    height: 700,
+                    striped: true,
+                    pagination: true,
+                    pageSize: 50,
+                    search: true,
+                    showRefresh: true,
+                    columns: [
+                            {field: 'CUSTNAME',title: 'CUSTNAME',visible:true},
+                            {field: 'ACCNUMBER',title: 'ACCNUMBER',align: 'center',valign: 'middle',sortable: true}, 
+                            {field: 'CUSTNUMBER',title: 'CUSTNUMBER',align: 'left',valign: 'top',sortable: true},
+                            {field: 'SETTLEACCBAL',title: 'SETTLEACCBAL',align: 'left',valign: 'top',sortable: true},
+                            {field: 'SETTLEACCNO',title: 'SETTLEACCNO',align: 'left',valign: 'top',sortable: true},
+                            {field: 'BRANCHCODE',title: 'BRANCHCODE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'AROCODE',title: 'AROCODE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'PRODUCTCODE',title: 'PRODUCTCODE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'DEPTCODE',title: 'DEPTCODE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'NATIONID',title: 'NATIONID',align: 'left',valign: 'top',sortable: true},
+                            {field: 'EMPLOYER',title: 'EMPLOYER',align: 'left',valign: 'top',sortable: true},
+                            {field: 'EMPLOYERNO',title: 'EMPLOYERNO',align: 'left',valign: 'top',sortable: true},
+                            {field: 'DOB',title: 'ACTION',align: 'center',valign: 'middle',clickToSelect: false,formatter: operateFormatter,events: operateEvents}]
+                });
+        });
+        
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                    '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>&nbsp;'
+            ].join('');
+        }
+        
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                //console.log(row);
+                 $("#acc_number").val(row.ACCNUMBER);
+		         $("#cust_number").val(row.CUSTNUMBER);
+		         $("#username").val(localStorage.getItem('uname'));
+		         servletPass();
+		         window.open('topnav2.jsp','_blank');
+            },
+            'click .remove': function (e, value, row, index) {
+                if(!confirm("Are you sure you want to delete this Record?"))
+                {
+                return false;
+                };
+                
+                $.getJSON('api/deleteuser.php?id='+row.UserID,
+                function(d) 
+                {
+                    $('#Error').text(d.message);
+                    $('#users').bootstrapTable('refresh');
+                });        
+            }
+        };	
+    </script>
+

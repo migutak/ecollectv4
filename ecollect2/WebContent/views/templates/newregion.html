@@ -1,0 +1,51 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Create Branch Region</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">New</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<form class="cmxform" name="newregionForm" ng-submit="addregion()">
+	                		<div class="col-md-12">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="regionname" name="regionname" ng-model="newregion.regionname" required>
+	                              <span class="bar"></span>
+	                              <div ng-if="newregionForm.regionname.$error.required" class="error">
+								      Enter Region Name
+								  </div>
+	                            </div>
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-left">Create</button>
+	                              <a class="btn btn-danger btn-flat" href="#/bankregions"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+					<div class="col-md-8">
+						<table class="table table-striped header-fixed">
+		    				<thead>
+		    					<tr>
+		    						<th>Region#</th>
+		    					</tr>
+		    				</thead>
+		    				<tbody>
+		    						<tr ng-repeat="d in Regions | filter:query">
+		    							<td>{{d.REGIONNAME}}</td>
+		    							<td>
+		    								<a style="color:red" href="" ng-click="deleteregion(d.REGIONNAME)"><i class="fa fa-trash-o fa-2x"></i></a>
+		    							</td>	
+		    						</tr> 	
+		    				</tbody>
+		    			</table>
+					</div>
+				</div>
+			</div>
+        </div>

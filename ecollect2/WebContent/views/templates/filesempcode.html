@@ -1,0 +1,29 @@
+
+        <div class="container">
+          <a href="#/files"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Back</a>
+            <div class="row">
+                <form  ng-controller="filesEmpCtrl as up" name="up.upload_form" ng-submit="up.submit()">
+                                <label>Employer Code:</label>
+                                <input id="empcode" name="empcode" class="form-control android" ng-model="up.empcode" ng-blur="lookupemployer(up.empcode)"/>
+                                <label>Employer name:</label>
+                                <input id="empname" name="empname" class="form-control android" ng-model="up.empname" />                           
+                                <label>Description:</label>
+                                <textarea class="form-control" rows="2" id="uploadnote" name="uploadnote" ng-model="up.uploadnote" required></textarea>
+                        <input 
+                           type="file" 
+                           ngf-select 
+                           ng-model="up.file" 
+                           name="file"
+                           ngf-pattern="'.pdf,.jpg,image/*,.doc,.docx,.xls,.xlsx'"
+                           ngf-max-size="10MB" 
+                           />
+                        <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                        <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+                        {{up.file.size / 1000000|number:1}}MB: max 10M</i>
+                        <!--<button type="submit" class="btn btn-default" ng-click="up.submit()">Upload</button> 0705 949296-->
+                        <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-spinner-size="30">Submit</button>
+                        <p>{{up.progress}}</p>
+                    </form>
+                
+            </div>
+        </div>

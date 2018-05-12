@@ -1,0 +1,38 @@
+<div class="col-md-12">
+	<form class="cmxform" ng-submit="updatePlan()">
+		<div class="col-md-12">
+		<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="pname" ng-model="dataIn.pcode" readonly="readonly">
+				<div>Plan Code</div>
+			</div>
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="activtitle" ng-model="dataIn.activcode" readonly="readonly">
+				<div>Activity Code</div>
+			</div>
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text dateAnimate" id="dateupdated" ng-model="dataIn.dateupdated" required>
+				<div><span class="fa fa-calendar"></span> Date action taken</div>
+			</div>
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="pcomment" ng-model="dataIn.pcommnet" required>
+				<div>Comment</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<button type="submit" class="btn btn-primary" ladda="Loading">Update</button>
+			<a href="#/activityaccplan" class="btn btn-danger" type="buttton">Cancel</a>
+		</div>
+	</form>
+</div>
+
+<!-- GLOBAL SCRIPTS -->
+<script src="views/templates/plugins/bootstrap-material-datetimepicker.js"></script>
+<script >
+	$(document).ready(function(){
+		$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false, animation:true, maxDate : new Date()});
+	})
+</script>

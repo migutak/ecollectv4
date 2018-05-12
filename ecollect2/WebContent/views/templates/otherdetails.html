@@ -1,0 +1,55 @@
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th class="col-md-10">Contact</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="c in contactsData">
+				<td class="col-md-10">{{c.CONTACT}}</td>
+				<td>
+					<button ng-click="edit(c.ID)" class="btn btn-xs btn-info">
+						<i class="fa fa-pencil-square-o"></i>
+					</button>
+					<button ng-click="delC(c.ID)" class="btn btn-xs btn-danger">
+						<i class="fa fa-trash-o"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row" ng-show="addShow">
+		<form ng-submit="saveContact()">
+			<div class="form-group">
+				<input type="text" class="form-control"
+					ng-model="dataContacts.contact" placeholder="Add contact here"
+					required>
+			</div>
+			<button type="submit" class="btn btn-xs btn-primary">Add</button>
+		</form>
+	</div>
+	<div class="row" ng-show="editShow">
+		<form ng-submit="editContact()">
+			<div class="form-group">
+				<input type="text" class="form-control"
+					ng-model="editContacts.contact">
+			</div>
+			<button ng-click="backCont()" type="button"
+				class="btn btn-xs btn-danger">Cancel</button>
+			<button type="submit" class="btn btn-xs btn-primary">Edit</button>
+		</form>
+	</div>
+	<div class="row" ng-show="deleteShow">
+		<form ng-submit="deleteCont()">
+			<div class="form-group">
+				Delete Id: <input type="text" class="form-control"
+					ng-model="delContacts.contact" ng-disabled=true>
+			</div>
+			<button ng-click="backCont()" type="button"
+				class="btn btn-xs btn-danger">Cancel</button>
+			<button type="submit" class="btn btn-xs btn-primary">Delete</button>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,184 @@
+					<div class="panel panel-default">
+                      <div class="panel-heading">
+                      <h4>System Generated</h4>
+                      </div>
+                      <!-- Table -->
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Acc#</th>
+                            <th>Collateral name</th>
+                            <th>Open Market Value</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="c in Collateral">
+                            <td>{{c.ACCNUMBER}}</td>
+                            <td>{{c.SECURDESC}}</td>
+                            <td>{{c.OPENMRKVAL}}</td>
+                            <td>RO</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <div class="col-md-12 tabs-area">
+		                    <ul id="tabs-demo6" class="nav nav-tabs nav-tabs-v6" role="tablist">
+		                      <li role="presentation" class="active">
+		                        <a href="#tabs-demo7-area1" id="tabs-demo6-1" role="tab" data-toggle="tab" aria-expanded="true">Department updated</a>
+		                      </li>
+		                    </ul>
+		                    <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12">
+		                      <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
+		                        <a ng-show="showassign" class="btn-link" href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-text"></i> assign</a>
+		                        <div style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+		                        	<div class="media" ng-repeat="i in instructions">
+		                                
+		                                <div class="media-body">
+		                                  <table class="table">
+					                        <thead>
+					                          <tr>
+					                            <th>Acc#</th>
+					                            <th>Collateral name</th>
+					                            <th>Market Value</th>
+					                            <th>Status</th>
+					                          </tr>
+					                        </thead>
+					                        <tbody>
+					                          <tr ng-repeat="c in dataDeptColl">
+					                            <td>{{c.ACCNUMBER}}</td>
+					                            <td>{{c.COLLATERALNAME}}</td>
+					                            <td>{{c.MARKETVALUE}}</td>
+					                            <td><button ng-click="edit(c.ID)" class="btn btn-xs btn-info">
+													<i class="fa fa-pencil-square-o"></i>
+												</button>
+												<button ng-click="delC(c.ID)" class="btn btn-xs btn-danger">
+													<i class="fa fa-trash-o"></i>
+												</button>
+												</td>
+					                          </tr>
+					                        </tbody>
+					                      </table>
+		                                   
+		                                </div>
+		                              </div>
+		                        </div>
+		                        
+		                      </div>
+		                    </div>
+		
+		                  </div>
+					</div>
+
+							<div class="row" ng-show="addShow">
+										<div class="col-md-12">
+											<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+												<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="headingOne">
+						                          <h4 class="panel-title">
+						                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="" aria-expanded="true" aria-controls="collapseOne">
+						                              <h4>Add new collateral</h4>
+						                            </a>
+						                          </h4>
+						                        </div>
+						                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+						                        <div class="panel-body">
+						                        <form class="cmxform" id="signupForm" method="post" ng-submit="saveDeptColl()">
+						                          <div class="col-md-6">
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text" id="validate_collateralname" name="validate_collateralname" ng-model="deptColl.collateralname" required>
+						                              <span class="bar"></span>
+						                              <div>Collateral Name</div>
+						                            </div>
+						
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text mask-money" id="validate_insvalue" name="validate_insvalue" ng-model="deptColl.insvalue" required>
+						                              <span class="bar"></span>
+						                              <div>Insurance Value</div>
+						                            </div>
+						
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text mask-date" id="validate_valuedate" name="validate_valuedate" ng-model="deptColl.valuedate" required>
+						                              <span class="bar"></span>
+						                              <div>Valuation Date</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text mask-money2" id="validate_valuer" name="validate_valuer" ng-model="deptColl.salevalue" required>
+						                              <span class="bar"></span>
+						                              <div>Forced Sale Value</div>
+						                            </div>
+						                          </div>
+						
+						                          <div class="col-md-6">
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text" id="validate_valuer" name="validate_valuer" ng-model="deptColl.valuer" required>
+						                              <span class="bar"></span>
+						                              <div>Valuer</div>
+						                            </div>
+						
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text mask-money2" id="validate_mktvalue" name="validate_mktvalue" ng-model="deptColl.mktvalue" required>
+						                              <span class="bar"></span>
+						                              <div>Market Value</div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text" id="validate_regowner" name="validate_regowner" ng-model="deptColl.regowner" required>
+						                              <span class="bar"></span>
+						                              <div>Registered Owner</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:5px !important;">
+						                              <input type="text" class="form-text" id="validate_mktvalue" name="validate_mktvalue" ng-model="deptColl.tenure" required>
+						                              <span class="bar"></span>
+						                              <div>Tenure</div>
+						                            </div>
+						                          </div> 
+						                          <div class="col-md-12">
+						                              <button class="btn btn-primary" ladda="Loading" type="submit" data-style="expand-right">Submit</button>
+						                          </div>
+						                      </form>
+						                      </div>
+						                      </div>
+						                      </div>
+					                      </div>
+					                    </div>
+							</div>
+<div class="row" ng-show="editShow">
+	<form ng-submit="editContact()">
+		<div class="form-group">
+			<input type="text" class="form-control" ng-model="editContacts.contact">
+		</div>
+		<button ng-click="backCont()" type="button"
+			class="btn btn-xs btn-danger">Cancel</button>
+		<button type="submit" class="btn btn-xs btn-primary">Edit</button>
+	</form>
+</div>
+<div class="row" ng-show="deleteShow">
+	<form ng-submit="deleteCont()">
+		<div class="form-group">
+			Delete Id: <input type="text" class="form-control" ng-model="delContacts.contact" ng-disabled=true>
+		</div>
+		<button ng-click="backCont()" type="button" class="btn btn-xs btn-danger">Cancel</button>
+		<button type="submit" class="btn btn-xs btn-primary">Delete</button>
+	</form>
+</div>
+
+<!-- plugins 
+<script src="plugins/jquery.mask.min.js"></script>
+<script src="templates/plugins/jquery.validate.min.js"></script> -->
+
+<script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.mask-date').mask('00/00/0000',{placeholder: "__/__/____"});
+		$('.mask-money2').mask("#,##0.00", {reverse: true});
+		$('.mask-money').mask("###0", {reverse: true});
+
+		$(".nav-tabs a").click(function (e) {
+	      e.preventDefault();  
+	      $(this).tab('show');
+	    });
+	})
+</script>

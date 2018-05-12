@@ -1,0 +1,352 @@
+
+	<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-6">
+									<h3 class="animated fadeInLeft">Yards</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">storage yards</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-link" href="#newyard"><i class="fa fa-file-text-o"></i> New</a>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<table 	id="table"
+								data-toggle="table" 
+								data-classes="table table-hover table-condensed"
+					       		data-striped="true"
+					       		data-show-columns="true"
+					       		data-card-view="false"
+					       		data-show-refresh="true"
+					       		data-search="true"
+					       		data-pagination="true"
+					       		data-height="700"
+					       		data-sort-name="DATEINPUT"
+       							data-sort-order="desc"
+       							data-click-to-select="true"
+       							data-toolbar="#toolbar"
+       							data-show-export="true"
+								data-url="http://192.168.0.51:7001/ecollect_3/api/status/yards">
+						    <thead>
+						        <tr>
+						            <th data-field="CUSTNUMBER" data-sortable="true" data-radio="true">CUSTNUMBER</th>
+						            <th data-field="ACCNUMBER" data-sortable="true" data-visible="false">ACCNUMBER</th>
+						            <th data-field="CUSTNAME" data-sortable="true">CUSTNAME</th>
+						            <th data-field="VEHICLEMAKE" data-sortable="true">VEHICLEMAKE</th>
+						            <th data-field="VEHICLEREGNO" data-sortable="true">VEHICLEREGNO</th>
+						            <th data-field="DATEINPUT" data-sortable="true" data-visible="false">DATEINPUT</th>
+						            <th data-field="AROCODE" data-sortable="true" data-visible="false">AROCODE</th>
+						            <th data-field="FILENO" data-sortable="true" data-visible="false">FILENO</th>
+						            <th data-field="OWNER" data-sortable="true">OWNER</th>
+						        </tr>
+						    </thead>
+						</table>
+						<div id="toolbar">
+				            <select class="form-control">
+				                <option value="">Export Basic</option>
+				                <option value="all">Export All</option>
+				                <option value="selected">Export Selected</option>
+				            </select>
+				        </div>
+					</div>
+					<div class="col-md-6">
+						<div class="col-md-12 tabs-area">
+		                    <ul id="tabs-demo6" class="nav nav-tabs nav-tabs-v6" role="tablist">
+		                      <li role="presentation" class="active">
+		                        <a href="#tabs-demo7-area1" id="tabs-demo6-1" role="tab" data-toggle="tab" aria-expanded="true">Work assignment</a>
+		                      </li>
+		                      <li role="presentation">
+		                        <a href="#tabs-demo7-area3" id="tabs-demo6-3" role="tab" data-toggle="tab" aria-expanded="false">Work distribution</a>
+		                      </li>
+		                    </ul>
+		                    <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12">
+		                      <div role="tabpanel" class="tab-pane fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
+		                        <a ng-show="showassign" class="btn-link" href="" data-toggle="modal" data-target="#myModal"><i class="fa fa-file-text"></i> assign</a>
+		                        <div style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+		                        	<div class="media" ng-repeat="i in instructions">
+		                                <div class="media-left">
+		                                  {{}}
+		                                </div>
+		                                <div class="media-body">
+		                                  <h4 class="media-heading">{{i.SERVICEPROVIDER}}</h4>
+		                                   <p><strong>Date issued :</strong> {{i.DATEINST}}</p>
+		                                   <p><strong>Status :</strong> {{i.STATUS}}</p>
+		                                   <p><strong>Original due Date :</strong> {{i.DUEDATE}}</p>
+		                                   <p><strong>Extended due date :</strong> {{i.EXTDUEDATE}}</p>
+		                                   <p><strong>Fee note :</strong> {{i.FEENOTE}}</p>
+		                                   <!--  <a href="" data-toggle="modal" data-target="#myModal">
+		                                     <i class="icon-user icons"></i> Comment
+		                                   </a>-->
+		                                   <a class="extendopenDialog" href="" data-toggle="modal" data-target="#myextend" data-spname="{{i.SERVICEPROVIDER}}" data-extendid="{{i.ID}}"> Extend</a> 
+		                                   | <a class="statusopenDialog" href="" data-toggle="modal" data-target="#mystatus" data-spname="{{i.SERVICEPROVIDER}}" data-statusid="{{i.ID}}">Status</a> 
+		                                   | <a class="openDialog" href="" data-toggle="modal" data-target="#myfeenote" data-spname="{{i.SERVICEPROVIDER}}" data-feenoteid="{{i.ID}}">Fee note</a> 
+		                                </div>
+		                              </div>
+		                        
+		                        </div>
+		                        
+		                      </div>
+		                      <div role="tabpanel" class="tab-pane fade" id="tabs-demo7-area3" aria-labelledby="tabs-demo7-area3">
+		                        <fusioncharts 
+								    width="600" 
+								    height="400"
+								    type="column2d"
+								    datasource="{{myDataSource}}"
+								></fusioncharts>
+		                      </div>
+		                    </div>
+		
+		                  </div>
+					</div>
+				</div>
+			</div>
+        </div>
+        
+        <!-- modals -->
+        
+								<div id="myModal" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								        <h4 class="modal-title">{{name}}</h4>
+								      </div>
+      									<div class="modal-body">
+        									<form class="cmxform" name="newyardForm" ng-submit="newinvestigatorfunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="id" name="id" ng-model="newyard.id" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+										              <select class="form-text android" ng-model="newyard.investigator" id="investigator" name="investigator" required>
+																<option ng-repeat="y in yards">{{y.SPTITLE}}</option>
+													  </select>
+													  <div ng-if="newyardForm.investigator.$error.required" class="error">
+													      Select yard
+													  </div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate" id="dateinst" name="dateinst" ng-model="newyard.dateinst" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newyardForm.dateinst.$error.required" class="error">
+													      <span class="fa fa-calendar"></span> Date of instruction
+													  </div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate2" id="duedate" name="duedate" ng-model="newyard.duedate" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newyardForm.duedate.$error.required" class="error">
+													      <span class="fa fa-calendar"></span> Due date
+													  </div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+							  </div>
+							</div>
+							
+							<div id="myfeenote" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								      </div>
+      									<div class="modal-body">
+        									<form class="cmxform" name="newfeenoteForm" ng-submit="feefunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="feenoteid" name="feenoteid" ng-model="newfeenote.feenoteid" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="spname" name="spname" ng-model="newfeenote.spname" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate" id="datefeenote" name="datefeenote" ng-model="newfeenote.datefeenote" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newfeenoteForm.datefeenote.$error.required" class="error">
+													      <span class="fa fa-calendar"></span> Fee note date
+													  </div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="feenote" name="feenote" ng-model="newfeenote.feenote" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newfeenoteForm.feenote.$error.required" class="error">
+													      Fee note amount
+													  </div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+							  </div>
+							</div>
+							
+							<div id="myextend" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								      </div>
+      									<div class="modal-body">
+        									<form class="cmxform" name="newextendForm" ng-submit="extendfunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="extendid" name="extendid" ng-model="extend.extendid" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="extendspname" name="extendspname" ng-model="extend.extendspname" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate" id="extdate" name="extdate" ng-model="extend.extdate" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newextendForm.extdate.$error.required" class="error">
+													      <span class="fa fa-calendar"></span> Date Extended
+													  </div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate2" id="extduedate" name="extduedate" ng-model="extend.extduedate" required>
+						                              <span class="bar"></span>
+						                              <div ng-if="newextendForm.extduedate.$error.required" class="error">
+													      <span class="fa fa-calendar"></span> Extension due date
+													  </div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+							  </div>
+							</div>
+							
+							<div id="mystatus" class="modal fade" role="dialog">
+								  <div class="modal-dialog">
+								    <!-- Modal content-->
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <button type="button" class="close" data-dismiss="modal">&times;</button>
+								      </div>
+      									<div class="modal-body">
+        									<form class="cmxform" name="newstatusForm" ng-submit="statusfunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="statusid" name="statusid" ng-model="newstatus.statusid" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="statuspname" name="statuspname" ng-model="newstatus.statuspname" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <select class="form-text android" ng-model="newstatus.status" id="status" name="status" required>
+																<option>PENDING</option>
+																<option>SERVED</option>
+																<option>EXTENDED</option>
+																<option>RECALLED</option>
+																<option>RETURNED</option>
+																<option>RECEIVED</option>
+													  </select>
+						                              <span class="bar"></span>
+						                              <div ng-if="newstatusForm.status.$error.required" class="error">
+													      Select status
+													  </div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								      </div>
+								    </div>
+							  </div>
+							</div>
+        
+
+<script type="text/javascript" src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table-export.js"></script>
+<script src="bower_components/bootstrap-table/dist/tableExport/tableExport.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".nav-tabs a").click(function (e) {
+      e.preventDefault();  
+      $(this).tab('show');
+    });
+
+  });
+</script>
+       
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  	
+  	 $(document).on("click", ".openDialog", function () {
+	     var spname = $(this).data('spname');
+	     var feenoteid = $(this).data('feenoteid');
+	     $(".modal-body #spname").val( spname );
+	     $(".modal-body #feenoteid").val( feenoteid );
+	});
+	$(document).on("click", ".statusopenDialog", function () {
+	     var statuspname = $(this).data('spname');
+	     var statusid = $(this).data('statusid');
+	     $(".modal-body #statuspname").val( statuspname );
+	     $(".modal-body #statusid").val( statusid );
+	});
+	$(document).on("click", ".extendopenDialog", function () {
+	     var extendspname = $(this).data('spname');
+	     var extendid = $(this).data('extendid');
+	     $(".modal-body #extendspname").val( extendspname );
+	     $(".modal-body #extendid").val( extendid );
+	});
+  })
+ </script>
+ <script>
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('destroy').bootstrapTable({
+                exportDataType: $(this).val()
+            });
+        });
+    })
+</script>

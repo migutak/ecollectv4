@@ -1,0 +1,215 @@
+<link href="bower_components/multiselect/multiple-select.css" rel="stylesheet"/>
+<style>
+    .grid {
+      height: 800px;
+    }
+    .blue { color: blue; }
+    .red { color: red; }
+</style>
+
+<div id="content">
+    <div class="col-md-12 padding-0">
+                <div class="panel box-shadow-none content-header">
+                    <div class="panel-body">
+                        <div class="col-md-2">
+                            <h3 class="animated fadeInLeft">Work Queue</h3>
+                            <p class="animated fadeInDown" style="line-height: .4;">View All {{section}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text" ng-model="searchbyarocode" ng-keypress="mySearcharocode($event)" placeholder="Arocode">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search <b>AROCODE</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text" ng-model="searchbycustnumber" ng-keypress="mySearchcustnumber($event)" placeholder="Custnumber">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"> Search <b>Custnumber</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="searchbyname" ng-keypress="mySearchname($event)" placeholder="CustName">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>Name</b> </div>-->
+                            </div>
+                        </div>
+                        <!--<div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="searchbyaccnumber" ng-keypress="mySearchaccnumber($event)" placeholder="accnumber">
+                              <span class="bar"></span>
+                            </div>
+                        </div>-->
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="mysearchempcode" ng-keypress="mySearchempcode($event)" placeholder="Employer">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>employer code</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="mysearchidnumber" ng-keypress="mySearchidnumber($event)" placeholder="IDNumber">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>employer code</b> </div>-->
+                            </div>
+                        </div>
+                    </div>
+                               Region 
+                                <select multiple="multiple" id="regionselect" name="regionselect" ng-model="regionselect">
+                                    <option>NAIROBI WEST</option>
+                                    <option>NAIROBI EAST</option>
+                                    <option>COAST</option>
+                                    <option>WESTERN</option>
+                                    <option>CENTRAL</option>
+                                    <option>RIFT VALLEY</option>
+                                </select>
+                                Product
+                                <select multiple="multiple" id="divisionselect" name="divisionselect" ng-model="divisionselect">
+                                    <option>CORPORATE</option>
+                                    <option>ASSETFINANCE</option>
+                                    <option>SACCO</option>
+                                    <option>AGRI</option>
+                                    <option>MORTGAGE</option>
+                                    <option>SME</option>
+                                    <option>MICROCREDIT</option>
+                                    <option>IPF</option>
+                                    <option>PBBSCHEME</option>
+                                    <option>PBBSCORED</option>
+                                    <option>CMD</option>
+                                    <option>PORTFOLIO</option>
+                                </select>
+                                <a href="" ng-click="refreshViewall()"><span><i class="{{spinner}}"></i></span>refresh</a> | <a href="" ng-click="reset()">reset</a>
+                </div>
+            </div>
+
+    <div class="col-md-12 padding-0" style="min-height: 500; max-height: 600px; overflow-y: scroll;" id="grid01">
+        <table id="table" 
+            data-height="500" 
+            data-side-pagination="server" 
+            data-pagination="true" 
+            data-show-export="true"
+            data-search="true" 
+            >
+        </table>
+    </div>
+    <div class="col-md-12 padding-0" style="min-height: 500; max-height: 600px; overflow-y: scroll;" id="grid02">
+        <div id="grid" ui-grid="gridOpts" ui-grid-save-state ui-grid-exporter ui-grid-move-columns ui-grid-resize-columns class="grid"></div>
+    </div>
+</div>
+<!-- Global valiable -->
+<script src="asset/js/global.js"></script>
+
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+
+<script src="bower_components/multiselect/multiple-select.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table-export.js"></script>
+<script src="bower_components/bootstrap-table/dist/tableExport/tableExport.js"></script>
+ <script>
+ $(document).ready(function() {
+    $('#regionselect').multipleSelect({
+        placeholder: "Select region",
+        selectAll: false,
+        single: true,
+        filter: true
+    });
+    $('#divisionselect').multipleSelect({
+        placeholder: "Product (max 2)",
+        selectAll: false,
+        filter: true
+    });
+
+    var last_valid_selection = "";
+
+      $('#divisionselect').change(function(event) {
+        if ($(this).val().length > 2) {
+          alert('You can only choose 2!');
+          //$(this).val(last_valid_selection);
+          $('#divisionselect').multipleSelect('setSelects', [0,1]);
+        } else {
+          last_valid_selection = $(this).val();
+        }
+      });
+ })
+</script>
+<script type="text/javascript">
+        $(document).ready(function(e) {
+            var division  = localStorage.getItem("division");
+            var branch  = localStorage.getItem("branch");
+            
+            
+                $('#table').bootstrapTable({
+                    method: 'GET',
+                    url: urladdress+'/api/v2/lazyviewall/CMD',//added division
+                    cache: false,
+                    height: 700,
+                    striped: true,
+                    pagination: true,
+                    pageSize: 20,
+                    search: true,
+                    showRefresh: true,
+                    columns: [
+                            {field: 'ACCNUMBER',title: 'ACCNUMBER',align: 'left',valign: 'middle',clickToSelect: false,
+                                    formatter: operateFormatter,events: operateEvents},
+                            {field: 'CUSTNUMBER',title: 'CUSTNUMBER',align: 'left',valign: 'middle',formatter: colorFormatter,sortable: true}, 
+                            {field: 'CLIENT_NAME',title: 'CLIENTNAME',align: 'left',valign: 'top',sortable: true},
+                            {field: 'AROCODE',title: 'AROCODE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'SECTION',title: 'SECTION',align: 'left',valign: 'top',sortable: true},
+                            {field: 'DAYSINARR',title: 'DAYSINARR',align: 'left',valign: 'top',sortable: true},
+                            {field: 'BUCKET',title: 'BUCKET',align: 'left',valign: 'top',sortable: true},
+                            {field: 'OUSTBALANCE',title: 'OUSTBALANCE',align: 'left',valign: 'top',sortable: true},
+                            {field: 'TOTALARREARS',title: 'TOTALARREARS',align: 'left',valign: 'top',sortable: true},
+                            {field: 'COLOFFICER',title: 'COLOFFICER',align: 'left',valign: 'top',sortable: true},
+                            {field: 'REGION',title: 'REGION',align: 'left',valign: 'top',sortable: true},
+                            {field: 'BRANCHNAME',title: 'BRANCHNAME',align: 'left',valign: 'top',sortable: true},
+                            {field: 'REVIEWDATE',title: 'REVIEWDATE',align: 'left',visible:true},
+                            {field: 'OVERDUE',title: 'OVERDUE',align: 'left',visible:false}
+                            ]
+                });
+            
+        });
+        
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="edit ml10" href="javascript:void(0)" title="Action">'+ value +'</a>&nbsp;'
+            ].join('');
+        }
+
+        function colorFormatter(value, row) {
+        // 16777215 == ffffff in decimal
+            if(row.OVERDUE>5){
+                var color = 'red';
+                return '<div  style="color: ' + color + '">' + value + '</div>';
+            }else{
+                var color = 'black';
+                return '<div  style="color: ' + color + '">' + value + '</div>';
+            }
+        }
+        
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+               // console.log(row);
+                 $("#acc_number").val(row.ACCNUMBER);
+                 $("#cust_number").val(row.CUSTNUMBER);
+                 $("#username").val(localStorage.getItem('uname'));
+                 servletPass();
+                 window.open('topnav2.jsp','_blank');
+            },
+            'click .remove': function (e, value, row, index) {
+                if(!confirm("Are you sure you want to delete this Record?"))
+                {
+                    return false;
+                };
+                
+                $.getJSON('api/deleteuser.php?id='+row.UserID, function(d) 
+                {
+                    $('#Error').text(d.message);
+                    $('#table').bootstrapTable('refresh');
+                });        
+            }
+        };  
+    </script>

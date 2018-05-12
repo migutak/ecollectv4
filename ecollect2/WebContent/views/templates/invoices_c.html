@@ -1,0 +1,130 @@
+
+	<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-6">
+									<h3 class="animated fadeInLeft">Invoices</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">Fee notes</p>
+								</div>
+								<!--<div class="col-md-3">
+									<div class="form-group form-animate-text" style="margin-top: 30px !important;">
+										<select class="form-text android" ng-model="dataIn.section">
+												<option>View all</option>
+			                                    <option>Not processed</option>
+			                                    <option>Processed</option>
+										</select>
+										<div>Select to filter</div>
+									</div>
+								</div>-->
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-link" href="#newinvoice"><i class="fa fa-file-text-o"></i> New</a>
+						</div>
+					</div>
+					<div class="col-md-12" style="min-height: 700; max-height: 800px; overflow-y: scroll;">
+						<table 	id="table"
+								data-toggle="table" 
+								data-classes="table table-hover table-condensed"
+					       		data-striped="true"
+					       		data-show-columns="true"
+					       		data-card-view="false"
+					       		data-show-refresh="true"
+					       		data-search="true"
+					       		data-pagination="true"
+					       		data-height="700"	
+       							data-click-to-select="true"
+       							data-toolbar="#toolbar"
+       							data-show-export="true"
+								data-url="https://ecollect03.co-opbank.co.ke/ecollect2/api/status/invoices">
+						    <thead>
+						        <tr>
+						            <th data-field="" data-sortable="false" data-visible="false" data-radio="true"></th>
+						        	<th data-field="ID" data-sortable="false" data-visible="true" data-formatter="assignFormatter"></th>
+						            <th data-field="CUSTNUMBER" data-sortable="true" data-visible="true">CUSTNUMBER</th>
+						            <th data-field="ACCNUMBER" data-sortable="true" data-visible="true">ACCNUMBER</th>
+						            <th data-field="CUSTNAME" data-sortable="true">CUSTNAME</th>
+						            <th data-field="SPTITLE" data-sortable="true">SERVICEPROVIDER</th>
+						            <th data-field="SPACCOUNT" data-sortable="true">SP ACCNUMBER</th>
+						            <th data-field="FEENOTEAMNT" data-sortable="true" data-visible="false">FEENOTEAMNT</th>
+						            <th data-field="APPROVEDAMNT" data-sortable="true">APPROVEDAMNT</th>
+						            <th data-field="DATEINPUT" data-sortable="true" data-visible="true">DATEINPUT</th>
+						            <th data-field="DATEFEENOTE" data-sortable="true">DATEFEENOTE</th>
+						            <th data-field="AROCODE" data-sortable="true" data-visible="true">AROCODE</th>
+						            <th data-field="STATUS" data-sortable="true" data-visible="false">STATUS</th>
+						        </tr>
+						    </thead>
+						</table>
+						<script>
+							function assignFormatter(value,row) {
+								return '<select onChange="window.location.href=this.value"><option value="">Select to update</option><option value="#/ammendinvoice/'+value+'/'+row.CUSTNUMBER+'">ammend</option><option value="#/deleteinvoice/'+value+'/'+row.CUSTNUMBER+'">Delete</option><option value="#/payinvoice/'+value+'/'+row.CUSTNUMBER+'">Confirm payment</option></select>';
+							}
+						</script>
+						<div id="toolbar">
+				            <select class="form-control">
+				                <option value="">Export Basic</option>
+				                <option value="all">Export All</option>
+				                <option value="selected">Export Selected</option>
+				            </select>
+				        </div>
+					</div>
+					
+				</div>
+			</div>
+        </div>
+        
+
+<script type="text/javascript" src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table-export.js"></script>
+<script src="bower_components/bootstrap-table/dist/tableExport/tableExport.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $(".nav-tabs a").click(function (e) {
+      e.preventDefault();  
+      $(this).tab('show');
+    });
+
+  });
+</script>
+       
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(), maxDate : moment().add(45, 'days'),format : 'DD-MMM-YYYY'});
+  	
+  	 $(document).on("click", ".openDialog", function () {
+	     var spname = $(this).data('spname');
+	     var feenoteid = $(this).data('feenoteid');
+	     $(".modal-body #spname").val( spname );
+	     $(".modal-body #feenoteid").val( feenoteid );
+	});
+	$(document).on("click", ".statusopenDialog", function () {
+	     var statuspname = $(this).data('spname');
+	     var statusid = $(this).data('statusid');
+	     $(".modal-body #statuspname").val( statuspname );
+	     $(".modal-body #statusid").val( statusid );
+	});
+	$(document).on("click", ".extendopenDialog", function () {
+	     var extendspname = $(this).data('spname');
+	     var extendid = $(this).data('extendid');
+	     $(".modal-body #extendspname").val( extendspname );
+	     $(".modal-body #extendid").val( extendid );
+	});
+  })
+ </script>
+ <script>
+    var $table = $('#table');
+    $(function () {
+        $('#toolbar').find('select').change(function () {
+            $table.bootstrapTable('destroy').bootstrapTable({
+                exportDataType: $(this).val()
+            });
+        });
+    })
+</script>

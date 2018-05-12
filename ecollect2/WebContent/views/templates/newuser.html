@@ -1,0 +1,67 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-6">
+									<h3 class="animated fadeInLeft">New User</h3>
+									<p class="animated fadeInDown" style="line-height: .4;"> create user</p>
+								</div>
+							</div>
+						</div>
+					</div>
+	<div class="col-md-4">
+		<form role="form" ng-submit="createUser()" autocomplete="off">
+			  <div class="form-group">
+			    <label for="username">Username:</label>
+			    <input type="text" class="form-control" id="username" ng-model="dataIn._username" required autocomplete="off" ng-blur="usernamecheck()">
+			  </div>
+			  <div class="form-group">
+			    <label for="fname">First Name:</label>
+			    <input type="text" class="form-control" id="fname" ng-model="dataIn._fname" required autocomplete="off">
+			  </div>
+			  <div class="form-group">
+			    <label for="username">Last Name:</label>
+			    <input type="text" class="form-control" id="lname" ng-model="dataIn._lname" required autocomplete="off">
+			  </div>
+			  <div class="form-group">
+			    <label for="email">Email Address:</label>
+			    <input type="email" class="form-control" id="email" ng-model="dataIn._email" required autocomplete="off">
+			  </div>
+			  <div class="form-group">
+			    <label for="dept">Department:</label>
+						<select class="form-control" id="_dept" ng-model="dataIn._dept" required>
+								<option ng-repeat="d in departments">{{d.DEPTNAME}}</option>
+						</select>
+			  </div>
+			  <div class="form-group">
+			    <label for="dept">Access Rights:</label>
+							<select class="form-control" ng-model="dataIn._rights" required>
+									<option value="User">User</option>
+									<option value="Admin">Team Reviewer</option>
+									<option value="BranchReviewer">Branch Reviewer</option>
+							</select>
+			  </div>
+			  <div class="form-group">
+			    			<label for="dept">Branch:</label>
+							<select class="form-control" ng-model="dataIn._branch" required>
+									<option ng-repeat="u in branch" value="{{u.BRANCHCODE}}">{{u.BRANCHNAME}}</option>
+							</select>
+			  </div>
+			  <div class="form-group">
+					<label>Team:</label>
+					<select class="form-control" ng-model="dataIn._team" required>
+						<option selected>OTHER</option>
+						<option>CMD-COLLECTIONS</option>
+						<option>CMD-REMEDIAL</option>
+						<option>BRANCH</option>
+						<option>CREDITCARDS</option>
+					</select>
+			  </div>
+			  <a type="button" class="btn btn-danger" href="#/users">Cancel</a>
+			  <button type="submit" class="btn btn-primary">Create User</button>
+			  {{_message}}
+		</form>
+	</div>
+	</div>
+</div>

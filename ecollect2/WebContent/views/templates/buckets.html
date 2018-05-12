@@ -1,0 +1,71 @@
+
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+						<div class="panel-body">
+							<div class="col-md-3">
+								<h3 class="animated fadeInLeft">Bucket Assignment</h3>
+								<p class="animated fadeInDown" style="line-height: .4;">assign buckets</p>
+							</div>
+						</div>
+		</div>
+	</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+						</div>
+						<div class="col-lg-3">
+							<div class="form-group form-animate-text">
+								<select class="form-text android" ng-model="dataIn.section">
+										<option>CORPORATE</option>
+	                                    <option>ASSETFINANCE</option>
+	                                    <option>SACCO</option>
+	                                    <option>AGRI</option>
+	                                    <option>MORTGAGE</option>
+	                                    <option>SME</option>
+	                                    <option>MICROCREDIT</option>
+	                                    <option>IPF</option>
+	                                    <option>PBBSCHEME</option>
+	                                    <option>PBBSCORED</option>
+	                                    <option>CMDR</option>
+	                                    <option>MCOOPCASH</option>
+								</select>
+								<div>Division</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-3"><a class="btn-link" href="#newbuckets"><i class="fa fa-file-text-o"> </i> New</a></div>
+						</div>
+						
+						
+	<div class="col-md-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="col-md-3">Bracket</th>
+					<th class="col-md-3">Division</th>
+					<th class="col-md-3">Collection officer</th>
+					<th class="col-md-3"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="c in bucketData | filter:query">
+					<td class="col-md-3">{{c.LOWERLIMIT}} - {{c.UPPERLIMIT}} Days</td>
+					<td class="col-md-3">{{c.PRODUCT}}</td>
+					<td class="col-md-3">{{c.COLOFFICER}}</td>
+					<td class="col-md-3">
+						<button ng-click="delBucketButton(c.ID)" class="btn btn-xs btn-danger">
+							<i class="fa fa-trash-o"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<form ng-submit="delBucket()" ng-show="myShowme">
+			<div class="form-group">
+				<input type="text" class="form-control" ng-model="delIn.id" required readonly="readonly">
+				<button type="button" class="btn btn-primary" ng-click="cancelButton()">Cancel</button>
+				<button type="submit" class="btn btn-danger" >Delete</button>
+			</div>
+		</form>
+	</div>
+</div>

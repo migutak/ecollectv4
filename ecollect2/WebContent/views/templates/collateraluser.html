@@ -1,0 +1,70 @@
+													<table class="table table-striped">
+														<thead>
+													      <tr>
+													        <th>Accnumber</th>
+													        <th>Collateral name</th>
+													        <th>Market Value</th>
+													        <th>View</th>
+													        <th>Status</th>
+													      </tr>
+													    </thead>
+													    <tbody>
+													    	<tr ng-repeat="c in dataDeptColl">
+														        <td>{{c.ACCNUMBER}}</td>
+														        <td>{{c.COLLATERALNAME}}</td>
+														        <td>{{c.MARKETVALUE | number:0}}</td>
+														        <td><a href="">view</a></td>
+														        <td>
+														        	<button ng-click="edit(c.ID)" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i></button>
+							                        				<button ng-click="delC(c.ID)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+														        </td>
+														     </tr>
+													    </tbody>
+													</table>
+													<div class="row" ng-show="addShow">
+												        <form ng-submit="saveDeptColl()">
+												            <div class="form-group">
+												                Collateral Name:<input type="text" class="form-control" ng-model="deptColl.collateralname"  required>
+												            </div>
+												            <div class="form-group">
+												                Insurance Value: <input type="text" class="form-control" ng-model="deptColl.insvalue"  required>
+												            </div>
+												            <div class="form-group">
+												                Valuation Date:<input type="text" class="form-control" ng-model="deptColl.valuedate" required>
+												            </div>
+												            <div class="form-group">
+												                Valuer: <input type="text" class="form-control" ng-model="deptColl.valuer" required>
+												            </div>
+												            <div class="form-group">
+												                Market Value: <input type="text" class="form-control" ng-model="deptColl.mktvalue" required>
+												            </div>
+												            <div class="form-group">
+												                Registered Owner: <input type="text" class="form-control" ng-model="deptColl.regowner" required>
+												            </div>
+												            <div class="form-group">
+												                Forced Sale Value: <input type="text" class="form-control" ng-model="deptColl.salevalue" required>
+												            </div>
+												            <div class="form-group">
+												                Tenure: <input type="text" class="form-control" ng-model="deptColl.tenure" required>
+												            </div>
+												            <button type="submit" class="btn btn-xs btn-primary">Save</button>
+												        </form>
+												    </div>
+												    <div class="row" ng-show="editShow">
+												        <form ng-submit="editContact()">
+												            <div class="form-group">
+												                <input type="text" class="form-control" ng-model="editContacts.contact">
+												            </div>
+												            <button ng-click="backCont()" type="button" class="btn btn-xs btn-danger">Cancel</button>
+												            <button type="submit" class="btn btn-xs btn-primary">Edit</button>
+												        </form>
+												    </div>
+												    <div class="row" ng-show="deleteShow">
+												        <form ng-submit="deleteCont()">
+												            <div class="form-group">
+												                Delete Id: <input type="text" class="form-control" ng-model="delContacts.contact" ng-disabled=true>
+												            </div>
+												            <button ng-click="backCont()" type="button" class="btn btn-xs btn-danger">Cancel</button>
+												            <button type="submit" class="btn btn-xs btn-primary">Delete</button>
+												        </form>
+												    </div>

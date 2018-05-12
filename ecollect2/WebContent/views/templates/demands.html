@@ -1,0 +1,29 @@
+
+<div class="row">
+	<table class="table table-striped header-fixed">
+		<thead>
+			<tr>
+				<th>CustNumber</th>
+				<th>Customer Name</th>
+				<th>Demand</th>
+				<th>BranchName</th>
+				<th>Date Issued</th>
+				<th>Confirmation</th>
+				<th>Issued By</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="d in sendData">
+				<td>{{d.CUSTNUMBER}}</td>
+				<td>{{d.CLIENT_NAME}}</td>
+				<td>{{d.DEMAND}}</td>
+				<td>{{d.BRANCHNAME}}</td>
+				<td>{{d.STAGEDATE}}</td>
+				<td>{{d.SENTSTATUS}}</td>
+				<td>{{d.ISSUEDBY}}</td>
+				<td><a href="#/confirmletter/{{d.ACCNUMBER}}">Confirm</a></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

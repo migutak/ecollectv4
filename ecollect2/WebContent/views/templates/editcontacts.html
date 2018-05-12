@@ -1,0 +1,40 @@
+<div class="col-md-12">
+	<form class="cmxform" ng-submit="editContactfunc()">
+		<div class="col-md-6">
+		<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="id" ng-model="editContact.id" required>
+				<span class="bar"></span> <label>Code#</label>
+			</div>
+			
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="person" ng-model="editContact.person" required>
+				<span class="bar"></span> <label>Contact Name</label>
+			</div>
+
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="contact" ng-model="editContact.contact" required>
+				<span class="bar"></span> <label>Contact</label>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="rel" ng-model="editContact.rel" required>
+				<span class="bar"></span> <label>Relationship</label>
+			</div>
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="active" ng-model="editContact.active" required>
+				<span class="bar"></span> <label>Active</label>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<button type="submit" class="btn btn-primary" ladda="Loading" data-style="expand-left">Edit Contact</button>
+			<a href="#/contacts" class="btn btn-danger" type="buttton" ng-show="!Loading">Cancel</a>
+		</div>
+	</form>
+</div>

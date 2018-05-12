@@ -1,0 +1,222 @@
+<link rel="stylesheet" href="jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="jqwidgets/styles/jqx.bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="jqwidgets/styles/jqx.energyblue.css" type="text/css" />
+
+<style>
+	.grid {
+	  height: 800px;
+	}
+	.blue { color: blue; }
+	.red { color: red; }
+</style>
+
+<div id="content">
+    <div class="col-md-12 padding-0">
+                <div class="panel box-shadow-none content-header">
+                    <div class="panel-body">
+                        <div class="col-md-2">
+                            <h3 class="animated fadeInLeft">Work Queue</h3>
+                            <p class="animated fadeInDown" style="line-height: .4;">View All {{section}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text" ng-model="searchbyarocode" ng-keypress="mySearcharocode($event)" placeholder="Arocode">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search <b>AROCODE</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text" ng-model="searchbycustnumber" ng-keypress="mySearchcustnumber($event)" placeholder="Custnumber">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"> Search <b>Custnumber</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="searchbyname" ng-keypress="mySearchname($event)" placeholder="CustName">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>Name</b> </div>-->
+                            </div>
+                        </div>
+                        <!--<div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="searchbyaccnumber" ng-keypress="mySearchaccnumber($event)" placeholder="accnumber">
+                              <span class="bar"></span>
+                            </div>
+                        </div>-->
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="mysearchempcode" ng-keypress="mySearchempcode($event)" placeholder="Employer">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>employer code</b> </div>-->
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group form-animate-text">
+                              <input type="text" class="form-text android" ng-model="mysearchidnumber" ng-keypress="mySearchidnumber($event)" placeholder="IDNumber">
+                              <span class="bar"></span>
+                              <!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>employer code</b> </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    		<!--  Region 
+								<select multiple="multiple" id="regionselect" name="regionselect" ng-model="regionselect">
+							        <option>NAIROBI WEST</option>
+							        <option>NAIROBI EAST</option>
+                                    <option>COAST</option>
+                                    <option>WESTERN</option>
+                                    <option>CENTRAL</option>
+                                    <option>RIFT VALLEY</option>
+                                    <option>P/ROAD & MALL BRS</option>
+                                    <option>CO-OP HSE & MALL BRS</option>
+							    </select>
+							    Product
+							    <select multiple="multiple" id="divisionselect" name="divisionselect" ng-model="divisionselect">
+							        <option>CORPORATE</option>
+                                    <option>ASSETFINANCE</option>
+                                    <option>SACCO</option>
+                                    <option>AGRI</option>
+                                    <option>MORTGAGE</option>
+                                    <option>SME</option>
+                                    <option>MICROCREDIT</option>
+                                    <option>IPF</option>
+                                    <option>PBBSCHEME</option>
+                                    <option>PBBSCORED</option>
+                                    <option>CMD</option>
+                                    <option>PORTFOLIO</option>
+							    </select>
+							    <a href="" ng-click="refreshViewall()"><span><i class="{{spinner}}"></i></span>refresh</a> | <a href="" ng-click="reset()">reset</a>
+							    -->
+                </div>
+            </div>
+
+    <div class="col-md-12 padding-0" style="min-height: 600px; max-height: 800px; overflow-y: scroll;" id="grid01">
+        <!--  -->
+        <div id="jqxgrid">Loading ... ... </div>
+    </div>
+    <div class="col-md-12 padding-0" style="min-height: 500px; max-height: 600px; overflow-y: scroll;" id="grid02">
+		<!--  <div id="grid" ui-grid="gridOpts" ui-grid-save-state ui-grid-exporter ui-grid-move-columns ui-grid-resize-columns class="grid"></div> -->
+	</div>
+</div>
+	<!-- Global valiable -->
+	<script src="asset/js/global.js"></script>
+	<script src="bower_components/multiselect/multiple-select.js"></script>
+	<script type="text/javascript" src="jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxgrid.selection.js"></script>	
+	<script type="text/javascript" src="jqwidgets/jqxgrid.filter.js"></script>	
+	<script type="text/javascript" src="jqwidgets/jqxgrid.sort.js"></script>		
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>	
+	<script type="text/javascript" src="jqwidgets/jqxlistbox.js"></script>	
+	<script type="text/javascript" src="jqwidgets/jqxgrid.pager.js"></script>		
+	<script type="text/javascript" src="jqwidgets/jqxdropdownlist.js"></script>
+
+<script type="text/javascript">
+        $(document).ready(function(e) {
+            var username = document.getElementById("s_in_username").value
+			var division = document.getElementById("s_in_division").value
+			var branch = document.getElementById("s_in_branch").value
+            
+            
+	var source =
+		{
+			datatype: "json",
+			datafields: [
+			{ name: 'ACCNUMBER', type: 'string'},
+			{ name: 'CUSTNUMBER', type: 'string' },
+			{ name: 'CLIENT_NAME', type: 'string' },
+			{ name: 'OUSTBALANCE', type: 'number' },
+			{ name: 'TOTALARREARS', type: 'number' },
+			{ name: 'DAYSINARR', type: 'number' },
+			{ name: 'BUCKET', type: 'string' },
+			{ name: 'BRANCHNAME', type: 'string' },
+			{ name: 'REGION', type: 'string' },
+			{ name: 'COLOFFICER', type: 'string' },
+			{ name: 'SECTION', type: 'string' }
+			
+		],
+		cache: false,
+		url: urladdress + '/api/status/watchstage',
+		filter: function()
+		{
+			// update the grid and send a request to the server.
+			$("#jqxgrid").jqxGrid('updatebounddata', 'filter');
+		},
+		sort: function()
+		{
+			// update the grid and send a request to the server.
+			$("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+		},
+		root: 'Rows',
+		beforeprocessing: function(data)
+		{		
+			if (data != null)
+			{
+				source.totalrecords = data.TotalRows;	
+			}
+		}
+		};		
+		var dataadapter = new $.jqx.dataAdapter(source, {
+			loadError: function(xhr, status, error){
+				alert(error);
+			}
+		});
+		
+		var linkrenderer = function (row, column, value, defaultSettings, columnSettings, rowdata) {
+                if (value.indexOf('#') != -1) {
+                    value = value.substring(0, value.indexOf('#'));
+                }
+                var format = { target: '"_blank"' };
+                //var html = $.jqx.dataFormat.formatlink(value, format);
+                //$window.open('topnav2.jsp?accnumber='+accnumber+"&custnumber="+ custnumber+"&username="+ username,'_blank');
+                var html = '<a href="topnav2.jsp?accnumber='+rowdata.ACCNUMBER+'&custnumber='+ rowdata.CUSTNUMBER +'&username='+username+'" target="_blank">'+rowdata.ACCNUMBER+'</a>';
+                //'<a href="topnav2.jsp?accnumber=rowdata.ACCNUMBER&custnumber=rowdata.CUSTNUMBER&username=username" target="_blank">rowdata.CUSTNUMBER</a>'
+                return html;
+         }
+	
+		// initialize jqxGrid
+		$("#jqxgrid").jqxGrid(
+		{		
+			source: dataadapter,
+			width: '100%',
+			height: '600px',
+			showfilterrow: true,
+			filterable: true,
+			sortable: true,
+			pageable: true,
+			virtualmode: true,
+			pagesize:50,
+			pagesizeoptions:['50','100','200'],
+			theme:'energyblue',
+			rendergridrows: function(obj)
+			{
+				return obj.data;    
+			},
+			columns: [
+				{ text: 'ACCNUMBER', datafield: 'ACCNUMBER', width: 150, filtertype: 'input', cellsrenderer: linkrenderer },
+				{ text: 'CUSTNUMBER', datafield: 'CUSTNUMBER', width: 100, filtertype: 'input' },
+				{ text: 'CLIENT_NAME', datafield: 'CLIENT_NAME', width: 200, filtertype: 'input' },
+				{ text: 'OUSTBALANCE', datafield: 'OUSTBALANCE', filtertype: 'input', cellsformat: 'd' },
+				{ text: 'TOTALARREARS', datafield: 'TOTALARREARS', filtertype: 'input', cellsformat: 'd' },
+				{ text: 'DAYSINARR', datafield: 'DAYSINARR', filtertype: 'input', cellsformat: 'd' },
+				{ text: 'BUCKET', datafield: 'BUCKET', filtertype: 'input' },
+				{ text: 'BRANCHNAME', datafield: 'BRANCHNAME', filtertype: 'input' },
+				{ text: 'REGION', datafield: 'REGION', filtertype: 'input' },
+				{ text: 'COLOFFICER', datafield: 'COLOFFICER', filtertype: 'input' },
+				{ text: 'SECTION', datafield: 'SECTION', filtertype: 'input' }
+			]
+		});
+		//
+		/*$("#jqxgrid").bind('rowselect', function (event) {
+			var row = event.args.rowindex;
+    		var datarow = $("#jqxgrid").jqxGrid('getrowdata', row);
+            console.log(datarow);           
+        });*/
+            
+        });
+    </script>

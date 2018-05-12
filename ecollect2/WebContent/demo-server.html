@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Server Paging</title>
+    <link rel="stylesheet" href="css/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="css/jqx.ui-start.css" type="text/css" />
+    <script type="text/javascript" src="js/jquery-1.11.2.js"></script>
+    <script type="text/javascript" src="js/jqxcore.js"></script>
+    <script type="text/javascript" src="js/jqxbuttons.js"></script>
+    <script type="text/javascript" src="js/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="js/jqxlistbox.js"></script>
+    <script type="text/javascript" src="js/jqxmenu.js"></script>
+    <script type="text/javascript" src="js/jqxgrid.js"></script>
+    <script type="text/javascript" src="js/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="js/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="js/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="js/jqxdata.js"></script>
+    <script type="text/javascript" src="js/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="js/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="js/jqxwindow.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var source = {
+                datatype: "json",
+                datafields: [{
+                    name: 'ACCNUMBER',
+                    type: 'string'
+                }, {
+                    name: 'CUSTNUMBER',
+                    type: 'string'
+                }, {
+                    name: 'OUSTBALANCE',
+                    type: 'string'
+                }, {
+                    name: 'BRANCHCODE',
+                    type: 'string'
+                }],
+                cache: false,
+                url: 'server-side-data.jsp',
+                filter: function() {
+                    // update the grid and send a request to the server.
+                    $("#jqxgrid").jqxGrid('updatebounddata', 'filter');
+                },
+                sort: function() {
+                    // update the grid and send a request to the server.
+                    $("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+                },
+                beforeprocessing: function(data) {
+                    if (data != null && data.length > 0) {
+                        source.totalrecords = data[0].totalRecords;
+                    }
+                }
+            };
+            var filterChanged = false;
+            var dataadapter = new $.jqx.dataAdapter(source, {
+				/*
+				// remove the comment to debug
+                formatData: function(data) {
+					alert(JSON.stringify(data));
+                    return data;
+                },*/
+                downloadComplete: function(data, status, xhr) {
+                    if (!source.totalRecords) {
+                        source.totalRecords = data.length;
+                    }
+                },
+                loadError: function(xhr, status, error) {
+                    throw new Error(error);
+                }
+            });
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid({
+                width: 550,
+                source: dataadapter,
+                filterable: true,
+                showfilterrow: true,
+                sortable: true,
+                autoheight: true,
+                pageable: true,
+                pagesize: 25,
+                pagesizeoptions: ['25', '50', '100'],
+                virtualmode: true,
+                theme: 'ui-start',
+                rendergridrows: function(obj) {
+                    return obj.data;
+                },
+                renderstatusbar: function (statusbar) {
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; margin: 5px;'></div>");
+                    var addButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='images/add.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Add</span></div>");
+                    var deleteButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='images/close.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Delete</span></div>");
+                    var reloadButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='images/refresh.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Reload</span></div>");
+                    var searchButton = $("<div style='float: left; margin-left: 5px;'><img style='position: relative; margin-top: 2px;' src='images/search.png'/><span style='margin-left: 4px; position: relative; top: -3px;'>Find</span></div>");
+                    container.append(addButton);
+                    container.append(deleteButton);
+                    container.append(reloadButton);
+                    container.append(searchButton);
+                    statusbar.append(container);
+                    addButton.jqxButton({  width: 60, height: 20 });
+                    deleteButton.jqxButton({  width: 65, height: 20 });
+                    reloadButton.jqxButton({  width: 65, height: 20 });
+                    searchButton.jqxButton({  width: 50, height: 20 });
+                    // add new row.
+                    addButton.click(function (event) {
+                        var datarow = generatedata(1);
+                        $("#jqxgrid").jqxGrid('addrow', null, datarow[0]);
+                    });
+                    // delete selected row.
+                    deleteButton.click(function (event) {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                        $("#jqxgrid").jqxGrid('deleterow', id);
+                    });
+                    // reload grid data.
+                    reloadButton.click(function (event) {
+                        $("#jqxgrid").jqxGrid({ source: getAdapter() });
+                    });
+                    // search for a record.
+                    searchButton.click(function (event) {
+                        var offset = $("#jqxgrid").offset();
+                        $("#jqxwindow").jqxWindow('open');
+                        $("#jqxwindow").jqxWindow('move', offset.left + 30, offset.top + 30);
+                    });
+                },
+                columns: [{
+                    text: 'ACCNUMBER',
+                    datafield: 'ACCNUMBER',
+                    filtertype: 'input',
+                    width: 100
+                }, {
+                    text: 'CUSTNUMBER',
+                    datafield: 'CUSTNUMBER',
+                    width: 100
+                }, {
+                    text: 'OUSTBALANCE',
+                    datafield: 'OUSTBALANCE',
+                    width: 180
+                }, {
+                    text: 'BRANCHCODE',
+                    datafield: 'BRANCHCODE'
+                    //cellsformat: 'yyyy-MM-dd',
+                    //align: 'right',
+                    //cellsalign: 'right'
+                }]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="jqxgrid">
+    </div>
+</body>
+</html>

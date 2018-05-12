@@ -1,0 +1,18 @@
+
+
+<div class="container">
+	<a href="#/files"><span><i class="fa fa-arrow-left" aria-hidden="true"></i></span> Back</a>
+	<div class="row">
+		<form name="notebulkForm" ng-submit="bulkNotefunc()">
+			<label>Employer Code:</label> 
+			<input id="empcode" name="empcode" class="form-control android" ng-model="dataIn.empcode" ng-blur="lookupemployer(dataIn.empcode)" required/> 
+			<label>Employer name:</label> 
+			<input id="empname" name="empname" class="form-control android" ng-model="dataIn.empname" required/> 
+			<label>Notemade:</label>
+			<textarea class="form-control" rows="5" id="notemade" name="notemade"
+				ng-model="dataIn.notemade" required></textarea>
+
+			<button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-spinner-size="30">Submit</button>
+		</form>
+	</div>
+</div>

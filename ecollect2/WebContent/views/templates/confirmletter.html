@@ -1,0 +1,31 @@
+
+<div class="row">
+	<div class="col-lg-4">
+		<form action="./DownloadFile" id="dform">
+			<input type="hidden" name="filename" id="filename" value="{{dest}}">
+			<button class="btn btn-default btn-flat" type="submit">Download Letter</button>
+		</form>
+		<form ng-submit="confLetterfnc()">
+			<input type="text" class="form-control" ng-model="dataIn.cust"
+				ng-disabled=true> 
+				<input type="text" class="form-control"
+				ng-model="dataIn.acc" ng-disabled=true> 
+				<input type="text"
+				class="form-control" ng-model="dataIn.doctype" ng-disabled=true>
+			<input type="text" class="form-control" ng-model="dataIn.docdesc"
+				ng-disabled=true> 
+				<input type="text" class="form-control"
+				ng-model="dataIn.destpath" ng-disabled=true> 
+			<input
+				type="text" class="form-control" ng-model="dataIn.colofficer" ng-disabled=true> 
+				Confirmation:
+				<select class="form-control" ng-model="dataIn.confirmation" required>
+					<option>No</option>
+					<option>Yes</option>
+					<option>Reject</option>
+				</select>
+			<button type="submit" class="btn btn-primary btn-flat">Submit</button>
+		</form>
+		<a href="#/demands">Cancel</a>
+	</div>
+</div>

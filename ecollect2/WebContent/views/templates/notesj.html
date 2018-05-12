@@ -1,0 +1,143 @@
+<link rel="stylesheet" href="timeline.css">
+
+<div>
+	<div class="row">
+		<div id="console-event"></div>
+		<div class="col-lg-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+			<ul class="timeline" id="notesnode"></ul>
+		</div>
+	</div>
+</div>
+
+                    <div class="col-lg-12">
+                        <div id="editNote" class="modal fade" role="dialog">
+                          <div class="modal-dialog">
+                        
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title" id="editHeader">Edit Note</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="noteId" />
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" rows="3" cols="75" id="editNoteMade"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="AddNotefncbtn">Submit</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                        
+                          </div>
+                        </div>
+                    </div>
+
+	<!-- Global valiable -->
+	<script src="asset/js/global.js"></script>
+	
+<script type="text/javascript">
+	var cust = custnumber;//document.getElementById("cust").value;
+	var acc = accnumber;//document.getElementById("acc").value;
+	var dept= document.getElementById("s_in_division").value; // localStorage.getItem("division");
+	var user= username;//document.getElementById("username").value;
+	
+//loading 
+$("#notesnode").addClass("loading");
+	$.ajax({
+			type: 'GET',
+	        url: urladdress+'/api/status/notes/'+cust,
+	        success: function(data) {
+                $("#notesnode").removeClass("loading");
+	        	$('#notesnode').empty();
+                $.each(data, function(i,item){
+                 //console.log(item)
+                	 if(user===item.OWNER && item.DAYPAST===0){
+                		 var ul = $('#notesnode');
+                    	 var li = $("<li>");
+                    	 var i = $('<i>',{'class':'fa fa-envelope'});
+                    	 var i1 = $('<i>',{'class':'fa fa-clock-o'});
+                    	 var span = $('<span>',{'class':'time'}).text(" "+item.NOTEDATE);
+                    	 var div = $('<div>', {'class': 'timeline-item'}).append(span);
+                    	 
+                    	 var small = $('<small>').text(item.NOTESRC+" on acc: "+item.ACCNUMBER);
+                    	 var h3 = $('<h3>',{'class':'timeline-header'}).append(small);
+                    	 var a1 = $("<a>",{'href': '#'}).text(item.OWNER+" ");
+                    	 
+                    	 var div2 = $('<div>', {'class': 'timeline-body'}).text(item.NOTEMADE);
+                    	 var i2 = $('<i>',{'class':'fa fa-thumb-tack fa-rotate-270'});
+                    	 var edit = $('<i>',{'class':'fa fa-pencil'});
+                    	 var a2 = $("<a>",{'href':'#/editnote/'+item.ID}).append(edit);
+                    	 /*var a2 = $("<button>",{'data-toggle':'modal','data-target':'#editNote','class': 'btn btn-default btn-xs','onClick': 'Editfnc('+item.ID+')'}).append(edit);*/
+                    	 var div3 = $('<div>', {'class': 'timeline-footer'}).append(a2);
+                    	 
+                    	 span.prepend(i1);
+                    	 h3.prepend(a1);
+                    	 div.append(h3);
+                    	 div.append(div2);
+                    	 div.append(div3);
+                    	 li.append(i);
+                    	 li.append(div);
+                    	 
+                    	 ul.append(li);
+                	 }else{
+                		 var ul = $('#notesnode');
+                    	 var li = $("<li>");
+                    	 var i = $('<i>',{'class':'fa fa-envelope'});
+                    	 var i1 = $('<i>',{'class':'fa fa-clock-o'});
+                    	 var span = $('<span>',{'class':'time'}).text(" "+item.NOTEDATE);
+                    	 var div = $('<div>', {'class': 'timeline-item'}).append(span);
+                    	 
+                    	 var small = $('<small>').text(item.NOTESRC+" on acc: "+item.ACCNUMBER);
+                    	 var h3 = $('<h3>',{'class':'timeline-header'}).append(small);
+                    	 var a1 = $("<a>",{'href': '#'}).text(item.OWNER+" ");
+                    	 
+                    	 var div2 = $('<div>', {'class': 'timeline-body'}).text(item.NOTEMADE);
+                    	 var i2 = $('<i>',{'class':'fa fa-thumb-tack fa-rotate-270'});
+                    	 
+                    	 span.prepend(i1);
+                    	 h3.prepend(a1);
+                    	 div.append(h3);
+                    	 div.append(div2);
+                    	 li.append(i);
+                    	 li.append(div);
+                    	 
+                    	 ul.append(li);
+                	 }
+                 })
+	        }
+		})
+		
+</script>
+<script type="text/javascript">
+    	function Editfnc(id){
+    		//console.log(id);
+			//document.getElementById("noteId").innerHTML = id;
+			//document.getElementById("editNoteMade").value = note;
+			document.getElementById("noteId").value = id;
+		}
+		$('#AddNotefncbtn').click(function(){
+           		edit();
+    	});
+		function edit(){
+		   var id = $('#noteId').val();
+		   var note = $('#editNoteMade').val();
+			$.ajax({
+			        type: "POST",
+			        url: "EditNote",
+			        data: { 
+			        		noteId : 	id,
+			        		editNote : 	note
+			          }
+			      }).done(function( msg ) {
+			        alert( "Note Updated" );
+			        $('#editNote').modal('hide');
+			});
+		}
+    </script>

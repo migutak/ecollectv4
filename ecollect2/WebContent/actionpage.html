@@ -1,0 +1,408 @@
+
+<link href="bootstrap/css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+
+<style type="text/css">
+	.menu{
+		overflow-x: hidden;
+		position: relative;
+		left: 231px; 
+	}
+	.menu-open{
+		left: 231px;
+	}
+
+	.menu-open .menu-side{
+		left: 0px;
+	}
+
+	.menu-side, .menu{
+		-webkit-transition:left 0.5s ease;
+		-moz-transition:left 0.5s ease;
+		transition:left 0.5s ease;
+	}
+	.menu-side{
+		background-color: #fff;
+		border-right: 1px solid #000;
+		color: #333;
+		position: fixed;
+		top: 0;
+		left: -350px;
+		width: 350px;
+		height: 100%;
+		padding-top: 50px;
+		padding-left: 10px;
+	}
+	.error{
+		color:red;
+	}
+</style>
+
+<div id="main" class="menu">
+    <span us-spinner="{radius:30, width:8, length: 16}"></span>
+	<nav class="menu-side">
+		<div class="list-group" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+			<p>Demand Letters issued</p>
+			<p>{{cust}}</p>
+			<a href="" class="list-group-item" ng-repeat="l in letterissued">
+				<h5 class="list-group-item-text">{{l.LETTER}} <span class="badge">{{l.ACTIONDATE}}</span></h5>
+				<p class="list-group-item-text">{{l.OWNER}}</p>
+			</a>
+		</div>
+	</nav>
+</div>
+<form class="form-horizontal" ng-submit="addAction()" name="actionform">
+	<br>
+	<div class="row">
+		<div class="col-md-3">Collector Activity</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select class="form-control" id="action" ng-model="dataIn.action"
+					required>
+					<option value="OC">Outgoing Call</option>
+					<option value="IC">Incoming Call</option>
+					<option value="FT">Funds Transfer</option>
+					<option value="MET">Debtor Visited</option>
+					<option value="REVW">Account Review</option>
+					<option value="SC">Sent Correspondence</option>
+					<option value="LR">Received Correspondence</option>
+					<option value="RR">Route for review</option>
+					<option value="OA">Assign Outside Agency</option>
+					<option value="RF">Receive File</option>
+					<option value="NFA">New File allocation</option>
+					<option value="FLAG">Flag for allocation (PRE-DELQ)</option>
+					<option value="Invalid" selected>-- Select an Option --</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-3">Demand Letter</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group col-sm-12">
+					<select class="form-control" id="demand" ng-model="dataIn.demand">
+						<option ng-repeat="letter in letters" value="{{letter.DEMAND}}">
+							{{letter.DEMAND}}
+						</option>
+					</select>
+					<span class="input-group-addon"><a href="" ng-click="ddsent()"><i class="fa fa-external-link" aria-hidden="true"></i></a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Party Contacted</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select class="form-control" id="party" ng-model="dataIn.party" ng-disabled="partyinactive">
+					<option value="1">Account Holder</option>
+					<option value="2">No Answer</option>
+					<option value="3">Not In Service</option>
+					<option value="4">Secondary AccountHolder</option>
+					<option value="5">Third Party</option>
+					<option value="6">Disconnected</option>
+					<option value="NA">Not Applicable</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-3">Reason for Default</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select class="form-control border-bottom" id="reason" ng-model="dataIn.reason" required>
+					<option value="Hardship">Hardship</option>
+					<option value="Bankruptcy">Bankruptcy</option>
+					<option value="Death_In_family">Death in Family</option>
+					<option value="Deceased">Deceased</option>
+					<option value="Dispute">Dispute</option>
+					<option value="Divorce">Divorce</option>
+					<option value="Delay_in_proceeds">Delay in proceeds</option>
+					<option value="Diversion_of_proceeds">Diversion of proceeds</option>
+					<option value="Crop_failure">Crop failure</option>
+					<option value="AWOL">AWOL/Left employment</option>
+					<option value="Discharged">Discharged</option>
+					<option value="Dismissed">Dismissed</option>
+					<option value="Interdicted">Interdicted</option>
+					<option value="Left_Employment">Left Employment</option>
+					<option value="Resigned">Resigned</option>
+					<option value="Retired">Retired</option>
+					<option value="Retrenched">Retrenched</option>
+					<option value="Sacked">Sacked</option>
+					<option value="Self_Employed">Self Employed</option>
+					<option value="Summary_Dismissal">Summary Dismissal</option>
+					<option value="Suspended">Suspended</option>
+					<option value="Terminated">Terminated</option>
+					<option value="Business_Failure">Business Failure</option>
+					<option value="Business_Loss">Business Loss</option>
+					<option value="Other">Other</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Promise to pay</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group col-sm-12">
+					<select class="form-control border-bottom" id="ptp" ng-model="dataIn.ptp" ng-disabled="ptpinactive">
+						<option value="Yes">Yes</option>
+						<option value="No" selected>No</option>
+					</select>
+					<span class="input-group-addon"><a href="" data-toggle="modal" data-target="#promiseadvisor"><i class="fa fa-file-o" aria-hidden="true"></i></a></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">Route for Review</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select id="route" class="form-control" ng-model="dataIn.route">
+					<option ng-repeat="r in Reviewer" value="{{r.USERNAME}}">{{r.FNAME}}</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Promise Amount</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group col-sm-12">
+					<input type="text" class="form-control mask-money" id="ptpamount" ng-model="dataIn.ptpamount" ng-disabled="inactive" value="0"> 
+					<span class="input-group-addon"><a href="" data-toggle="modal" data-target="#multiptp">...</a></span>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">CMD Status</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select id="cmdstatus" class="form-control" ng-model="dataIn.cmdstatus">
+					<option ng-repeat="cmd in cmdstatus_src">{{cmd.VALUE}}</option>
+				</select> <input id="txtcmdstatus" type="hidden" class="form-control" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Promise Date</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group date form_date col-sm-12" data-date="" data-date-format="dd-M-yyyy" data-link-field="ptpdate" data-link-format="dd-M-yyyy">
+					<input class="form-control" type="text" value="{{date | date:'yyyy-MM-dd'}}" ng-model="dataIn.ptpdate"
+						ng-disabled="inactive"> <span class="input-group-addon" style="display:block" id="divptpdate"><span
+						class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+			<input type="hidden" id="ptpdate" ng-model="dataIn.ptpdate" /><br />
+		</div>
+		<div class="col-md-3">Branch Status</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select id="brstatus" class="form-control"
+					ng-model="dataIn.brstatus">
+					<option ng-repeat="br in brstatus_src">{{br.VALUE}}</option>
+				</select> <input id="brstatus" type="hidden" class="form-control" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Payment Mode</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<select id="payMode" class="form-control" class="input-medium"
+					ng-model="dataIn.paymode" ng-disabled="inactive">
+					<option value="Cash">Cash</option>
+					<option value="Cheque">Cheque</option>
+					<option value="Transfer">Transfer</option>
+					<option value="NA" selected>Not Applicable</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-3">Account Curing Method</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group col-sm-12" data-link-field="dataIn.curing">
+					<select class="form-control" id="curring" ng-model="dataIn.curing">
+						<option value="NOT">Not Updated</option>
+						<option value="REST">Restructure</option>
+						<option value="MERG">Loan Merging</option>
+						<option value="DCNH">Pay Date Change</option>
+						<option value="MORAT">Moratorium</option>
+						<option value="TAKEOVER">Take Over</option>
+						<option value="TOPUP">Top Ups</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-3">Review Date</div>
+		<div class="col-md-3">
+			<div class="col-lg-12">
+				<div class="input-group date form_date col-lg-12" data-date-format="dd-M-yyyy" data-link-field="reviewdate" data-link-format="dd-M-yyyy" >
+					<input class="form-control" type="text" ng-model="dataIn.reviewdate" id="reviewdate"> <span class="input-group-addon" style="display:block" id="divspan">
+					<span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+		</div>
+		<div ng-show="rfd_other" class="col-md-3">Reason Other:</div>
+		<div class="col-md-3" ng-show="rfd_other">
+			<div class="col-lg-12">
+				<textarea class="form-control" rows="2" cols="3" ng-model="dataIn.rfd_other"></textarea>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="form-group col-lg-12">
+			<label>&nbsp;Collector Note</label>
+			<textarea class="form-control" rows="5" ng-trim="false" maxlength="2000" ng-model="dataIn.notemade" required></textarea>
+			<span>{{2000 - dataIn.notemade.length}} characters left</span>
+		</div>
+	</div>
+	<div class="row">
+		<span class="pull-left">
+			<button type="submit" class="btn btn-primary" ladda="Loading" data-style="expand-right"> Submit</button>
+		</span>
+	</div>
+</form>
+<hr>
+<div class="row">
+	<span id="a_generate"><i class="{{iconGenerate}}"></i></span><a href="" ng-show=true ng-click="generate(dataIn.demand)" id="a_generate2"> Generate: {{dataIn.demand}}</a>
+	<form action="./DownloadFileServlet" id="myform">
+		<input type="text" name="reportname" id="reportname" ng-model="letterSpolled" style="display: none">
+	</form>
+	<span id="a_download2"><i class="fa fa-download fa-1x"></i></span><a target="_self" href="#" onclick="document.getElementById('myform').submit()" id="a_download"> Download Letter</a>
+</div>
+
+<!-- Modal -->
+<div id="promiseadvisor" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Promise advisor</h4>
+      </div>
+      <div class="modal-body">
+        <p>How much should I accept as th minimum PTP amount</p>
+        <form class="cmxform" name="ptpamountForm" ng-submit="promiseAdvisorfunc()">
+        	<div class="col-md-6">
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<input type="text" class="form-text" id="oustamount" name="oustamount" ng-model="dataIn.oustamount" required>
+        			<span class="bar"></span>
+        			<div>
+        				Loan amount <span ng-if="ptpamountForm.oustamount.$error.required" class="error">*</span>
+        			</div>
+        		</div>
+
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<input type="text" class="form-text" id="totalarrears" name="totalarrears" ng-model="dataIn.totalarrears" required>
+        			<span class="bar"></span>
+        			<div>
+        				Arrears amount <span ng-if="ptpamountForm.totalarrears.$error.required" class="error">*</span>
+        			</div>
+        		</div>
+
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<input type="text" class="form-text" id="daysinarr" name="daysinarr" ng-model="dataIn.daysinarr" required>
+        			<span class="bar"></span>
+        			<div>
+        				Days in arrears <span ng-if="ptpamountForm.daysinarr.$error.required" class="error">*</span>
+        			</div>
+        		</div>
+
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<select class="form-text android" ng-model="dataIn.frequency" id="frequency" name="frequency">
+        				<option>DAILY</option>
+        				<option>WEEKLY</option>
+        				<option>MONTHLY</option>
+        				<option>QUARTERLY</option>
+        				<option>YEARLY</option>
+        			</select>
+        			<div>Frequency</div>
+        		</div>
+        	</div>
+        	<div class="col-md-6">
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<input type="text" class="form-text" id="interest" name="interest" ng-model="dataIn.interest" required>
+        			<span class="bar"></span>
+        			<div>
+        				Default interest rate <span ng-if="ptpamountForm.interest.$error.required" class="error">*</span>
+        			</div>
+        		</div>
+
+        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+        			<input type="text" class="form-text" id="nooffrequency" name="nooffrequency" ng-model="dataIn.nooffrequency" required>
+        			<span class="bar"></span>
+        			<div>
+        				No of frequency <span ng-if="ptpamountForm.nooffrequency.$error.required" class="error">*</span>
+        			</div>
+        		</div>
+
+        		<p id="result"></p>
+
+        	</div>
+        	<div class="col-md-12">
+	            <button class="btn btn-primary" ladda="Loadingrepayment" ng-click="CalculateRepayment(dataIn.totalarrears,dataIn.nooffrequency,dataIn.interest)" data-style="expand-right">Calculate repayment</button>
+	        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- GLOBAL SCRIPTS -->
+<script type="text/javascript" src="views/bootstrap-datepicker/js/bootstrap-datetimepicker.js"></script>
+<script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+	$('.form_date').datetimepicker({
+		format : 'dd-M-yyyy',
+		startDate : '-0d',
+		language : 'en',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		daysOfWeekDisabled : [ 0, 6 ],
+		forceParse : 0
+	});
+	$('.form_date2').datetimepicker({
+		format : 'dd-M-yyyy',
+		language : 'en',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0
+	});
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		var cust = document.getElementById("cust").value;
+		var acc = document.getElementById("acc").value;
+		var dept = document.getElementById("s_in_division").value;
+		var user = document.getElementById("s_in_username").value;
+
+		// console.log('Dept === '+dept);
+		
+		if (dept === "CMD" || dept === "CC") {
+			document.getElementById("cmdstatus").disabled = false;
+			document.getElementById("brstatus").disabled = false;
+			//document.getElementById("smsMessage").disabled = true;
+		} else {
+			document.getElementById("cmdstatus").disabled = true;
+			document.getElementById("brstatus").disabled = true;
+			//document.getElementById("smsMessage").disabled = false;
+		}
+		
+		$('.mask-date').mask('00/00/0000',{placeholder: "__/__/____"});
+		$('.mask-money2').mask("#,##0.00", {reverse: true});
+		$('.mask-money').mask("###0", {reverse: true});
+	})
+</script>

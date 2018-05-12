@@ -1,0 +1,81 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="col-md-12 padding-0">
+			<div class="col-md-12 padding-0">
+				<div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<h3 class="animated fadeInLeft">Dashboard</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">User dashboard</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="panel money-ex text-center">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<fusioncharts
+							    width="100%" 
+							    height="400"
+							    type="mscolumn2d"
+							    datasource="{{dsregion}}"
+							></fusioncharts>
+						</div>
+						<!--  <div class="col-md-12" style="margin-top: 20px;">
+							<div class="col-md-6 col-sm-6 col-xs-12 money-ex-left">
+								<h1>{{PORTFOLIO_VALUE | number:2}}</h1>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-12 money-ex-right">
+								<h1>Vol: {{PORTFOLIO_VOLUME | number:0}}</h1>
+							</div>
+						</div>-->
+					</div>
+				</div>
+				<div class="panel">
+					<div class="panel-heading">
+						<h4>Buckets <span class="icon-options-vertical icons pull-right"></span></h4>
+						<p></p>
+					</div>
+					<div class="panel-body">
+						<div class="col-md-12 responsive-table">
+							<table class="table table-hover">
+								<tr>
+									<th>Bucket</th>
+									<th>Volume</th>
+									<th>Value</th>
+								</tr>
+								<tr ng-repeat="bucket in buckets">
+									<td>{{bucket.BUCKET}}</td>
+									<td>{{bucket.PORTFOLIO_VALUE | number:2}}</td>
+									<td>{{bucket.PORTFOLIO_VOLUME | number:0}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>
+
+<!-- plugins -->
+  <script src="asset/js/plugins/moment.min.js"></script>
+  <script src="asset/js/plugins/flot/jquery.flot.min.js"></script>
+  <script src="asset/js/plugins/flot/jquery.flot.pie.min.js"></script>
+  <script src="asset/js/plugins/flot/jquery.flot.time.min.js"></script>
+  <script src="asset/js/plugins/flot/jquery.flot.navigate.min.js"></script>
+  <script src="asset/js/plugins/flot/jquery.flot.stack.min.js"></script>
+  
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+    
+
+  });
+
+</script>

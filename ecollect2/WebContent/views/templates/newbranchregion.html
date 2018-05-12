@@ -1,0 +1,62 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Create Branch</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">add branch to a region</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newbranchregionForm" ng-submit="addbranchregion()">
+	                		<div class="col-md-12">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select class="form-text android" ng-model="newbranchregion.regionname" id="regionname" name="regionname" required>
+											<!-- <option ng-repeat="r in Regions" value="{{r.REGION_NAME}}">{{r.REGION_NAME}}</option> -->
+											<option>CENTRAL</option>
+											<option>CO-OP HSE & MALL BRS</option>
+											<option>COAST</option>
+											<option>NAIROBI EAST</option>
+											<option>NAIROBI WEST</option>
+											<option>P/ROAD & MALL BRS</option>
+											<option>RIFT VALLEY</option>
+											<option>WESTERN</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div ng-if="newbranchregionForm.regionname.$error.required" class="error">
+								      Select Region
+								  </div>
+	                            </div>
+	
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="newbranchregion.branchcode" id="branchcode" name="branchcode" required>
+											<option ng-repeat="d in Branches" value="{{d.BRANCHCODE}}">{{d.BRANCHCODE}}</option>
+								  </select>
+								  <div ng-if="newbranchregionForm.branchcode.$error.required" class="error">
+								      Select the Branch
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+								    <select id="branchname" name ="branchname" class="form-text android" ng-model="newbranchregion.branchname" required>
+										<option ng-repeat="b in Branches" value="{{b.BRANCHNAME}}"> {{b.BRANCHNAME}}</option>
+									</select>
+									<div ng-if="newbranchregionForm.branchname.$error.required" class="error">
+								      Branch Name
+								  </div>
+	                            </div>
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-left">Create</button>
+	                              <a class="btn btn-danger btn-flat" href="#/bankregions"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+				</div>
+			</div>
+        </div>

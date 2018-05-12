@@ -1,0 +1,38 @@
+
+
+<style>
+.grid {
+	height: 800px;
+}
+.blue { color: blue;}
+.red { color: red; }
+</style>
+
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-2">
+					<h3 class="animated fadeInLeft">Work Queue</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">View All Credit Cards</p>
+				</div>
+				<div class="col-md-2">
+				<div class="form-group form-animate-text">
+					<input type="text" class="form-text android" ng-model="mysearchidnumber" ng-keypress="mySearchidnumber($event)" placeholder="NATIONID">
+					<span class="bar"></span>
+					<!--<div class="label-search"><span class="fa fa-search icon-search"></span> Search by <b>employer code</b> </div>-->
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-12 padding-0">
+		<div id="grid1" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-move-columns ui-grid-resize-columns class="grid"></div>
+	</div>
+
+</div>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+

@@ -1,0 +1,41 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Branches</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Regional allocations</p>
+				</div>
+			</div>
+		</div>
+		<div class="search col-md-3">
+            <input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+        </div>
+		<div class="col-lg-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+			<table class="table table-striped header-fixed" >
+				<thead>
+					<tr>
+						<th>Branch#</th>
+						<th>Branch Name</th>
+						<th>Portfolio</th>
+						<th>SME</th>
+						<th>MCU</th>
+						<th>Asset Finance</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in AttData | filter:query">
+						<td>{{d.BRANCHCODE}}</td>
+						<td>{{d.BRANCHNAME}}</td>
+						<td>{{d.REGPORTFOLIO}}</td>
+						<td>{{d.REGSME}}</td>
+						<td>{{d.REGMICROCREDIT}}</td>
+						<td>{{d.REGASSETFINANCE}}</td>
+						<td><a href="#/editbranch/{{d.BRANCHCODE}}">Edit</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

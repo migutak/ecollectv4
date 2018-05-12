@@ -1,0 +1,36 @@
+<div class="col-md-12 mail-right-tool">
+	<ul class="nav">
+		<li><h4>To:</h4></li>
+		<li><input type="text" class="txtinput border-none box-shadow-none" placeholder="Email address.."  ng-model="send.to"/></li>
+	</ul>
+
+	<ul class="nav">
+		<li><h4>Subject:</h4></li>
+		<li><input type="text" class="txtinput border-none box-shadow-none" placeholder="Subject.." ng-model="send.subject" /></li>
+	</ul>
+</div>
+<div class="col-md-12 mail-right-content" style="padding =left: 10px;">
+	<div class="col-md-12 padding-0">
+		<textarea class="summernote hidden" placeholder="Type Your Message.." ng-model="send.msg"></textarea>
+	</div>
+	<div class="col-md-12">
+		<div class="pull-right">
+			<button class="btn btn-primary" ladda="Loading" ng-click="sendEmail()" data-spinner-size="30">Send</button>
+		</div>
+	</div>
+</div>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>
+
+<script src="asset/js/plugins/summernote.min.js"></script>
+
+<script type="text/javascript">
+	(function(jQuery) {
+		$('.summernote').summernote({
+			height : 450
+		});
+	})(jQuery);
+</script>

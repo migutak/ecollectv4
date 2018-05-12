@@ -1,0 +1,81 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Dashboard</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Summary Dashboard</p>
+				</div>
+				<div class="col-md-12">
+					<form class="cmxform" name="filterDashForm" ng-submit="filterDash()">
+						<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showfilterSpinner"></span>
+						<div class="col-md-2">
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="dataIn.region" id="region" name="region" ng-change="getBranches(dataIn.region)">
+											<option>CENTRAL</option>
+											<option>CO-OP HSE & MALL BRS</option>
+											<option>COAST</option>
+											<option>NAIROBI EAST</option>
+											<option>NAIROBI WEST</option>
+											<option>P/ROAD & MALL BRS</option>
+											<option>RIFT VALLEY</option>
+											<option>WESTERN</option>
+								  </select>
+					              <div>Region</div>
+	                            </div>
+						</div>
+						<div class="col-md-3">
+						<div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="dataIn.branchcode" id="branchcode" name="branchcode" ng-change="getArocodes(dataIn.branchcode)">
+										<option ng-repeat="br in branches" value="{{br.BRANCHCODE}}">{{br.BRANCHNAME}}</option>
+								  </select>
+					              <div>Branch</div>
+	                            </div>
+						</div>
+						<div class="col-md-3">
+							   <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="dataIn.arocode" id="arocode" name="arocode">
+										<option ng-repeat="c in aroname" value="{{c.AROCODE}}">{{c.AROCODE}} {{c.ARONAME}}</option>
+								  </select>
+					              <div>ARO Code</div>
+	                            </div>
+						</div>
+						<div class="col-md-2">
+						   <div class="btn-group" role="group" aria-label="First group">
+							   <button class="btn btn-outline-primary btn-sm" ladda="Loading" ng-click="Submit()" data-style="expand-right">Filter</button>
+							   <button class="btn btn-outline-success btn-sm" ladda="resetLoading" ng-click="resetFilters()" data-style="expand-right">Reset</button>
+						   </div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 padding-0" style="min-height: 500px; max-height: 600px; overflow-y: scroll;">
+		<!-- <iframe frameborder=0 width="100%" height="700px"
+			src="https://reports.zoho.com/ZDBDataSheetView.cc?OBJID=1224990000000023259&STANDALONE=true&privatelink=6df161ee66784f8250164009fb221cae&INTERVAL=
+			-1&REMTOOLBAR=true&INCLUDETITLE=false&INCLUDEDESC=false"></iframe>-->
+		<div class="row">
+		  <div class="col-md-12">
+		  	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showchartSpinner"></span>
+		  	<div id="chartcontainer"></div>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-6">
+		  <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showpieSpinner"></span>
+		  	<div id="piecontainer"></div>
+		  </div>
+		  <div class="col-md-6">
+		  <span us-spinner="{radius:30, width:8, length: 16, color:'blue'}" spinner-on="showSpinner"></span>
+		  	<div id="topcontainer"></div>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-12">
+		  	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="showgrpchartSpinner"></span>
+		  	<div id="grpchartcontainer"></div>
+		  </div>
+		</div>
+	</div>
+</div>

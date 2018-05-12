@@ -1,0 +1,74 @@
+	<div class="col-md-4">
+		<div class="col-md-12 panel">
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="dob" ng-model="contact.EMPLOYER"> <label>Employer</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="nationalid" ng-modeL="contact.IDNUMBER"> <label>National ID</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="email" ng-model="contact.PHONENUMBER"> <label>Phone</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="address" ng-model="contact.ADDRESS"> <label>Address</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="colofficer" ng-model="contact.COLOFFICER"> <label>Collection Officer</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<a ui-sref="addcontacts">Add new</a>
+				<div class="panel panel-default">
+                      <div class="panel-heading">
+                      	<h4>Collector added contacts</h4>
+                      </div>
+                      <!-- Table -->
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Cust#</th>
+                            <th>Contact Name</th>
+                            <th>Contact</th>
+                            <th>Relationship</th>
+                            <th>Active</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="c in contactsData">
+                            <td>{{c.CUSTNUMBER}}</td>
+                            <td>{{c.PERSON}}</td>
+                            <td>{{c.CONTACT}}</td>
+                            <td>{{c.REL}}</td>
+                            <td>{{c.ACTIVE}}</td>
+                            <td>
+                            	<button ng-click="edit(c.ID)" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i></button>
+							    <button ng-click="delC(c.ID)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+</div>
+
+<!-- start: Javascript -->
+	<script src="asset/js/jquery.min.js"></script>
+	<script src="asset/js/jquery.ui.min.js"></script>
+	<script src="asset/js/bootstrap.min.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	

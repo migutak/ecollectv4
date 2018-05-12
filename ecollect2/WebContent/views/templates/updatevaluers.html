@@ -1,0 +1,97 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Valuers</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">Status update</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newstatusForm" ng-submit="statusfunc()">
+                                            	<div class="col-md-4">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="statusid" name="statusid" ng-model="newstatus.statusid" readonly="readonly">
+						                              <span class="bar"></span>
+						                              <div>ID</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="statuspname" name="statuspname" ng-model="newstatus.statuspname" readonly="readonly">
+						                              <span class="bar"></span>
+						                              <div>Valuer name</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="omv" name="omv" ng-model="newstatus.omv">
+						                              <span class="bar"></span>
+						                              <div>Open market value</div>
+						                            </div>
+						                        </div>
+						                        <div class="col-md-4">
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="fsv" name="fsv" ng-model="newstatus.fsv">
+						                              <span class="bar"></span>
+						                              <div>Forced sale value</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="insurableamount" name="insurableamount" ng-model="newstatus.insurableamount">
+						                              <span class="bar"></span>
+						                              <div>Insurable amount</div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="improvementvalue" name="improvementvalue" ng-model="newstatus.improvementvalue">
+						                              <span class="bar"></span>
+						                              <div>Improved value</div>
+						                            </div>
+						                        </div>
+						                        <div class="col-md-4">
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate" id="receiptdate" name="receiptdate" ng-model="newstatus.receiptdate">
+						                              <span class="bar"></span>
+						                              <div>Receipt date</div>
+						                            </div>
+
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="remarks" name="remarks" ng-model="newstatus.remarks">
+						                              <span class="bar"></span>
+						                              <div>General Remarks</div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <select class="form-text android" ng-model="newstatus.status" id="status" name="status" required>
+																<option>PENDING</option>
+																<option>OVERDUE INSTRUCTIONS</option>
+																<option>REVOKED</option>
+																<option>RECALLED</option>
+																<option>LEGAL</option>
+																<option>RECEIVED</option>
+																<option>UNABLE TO ACCESS PROPERTY</option>
+													  </select>
+						                              <span class="bar"></span>
+						                              <div>Status</div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+                                            		<a class="btn btn-danger btn-flat" href="#/valuers"><i class="fa fa-chevron-left"></i> Cancel</a>
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script> 
+ <script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.mask-money').mask("###0", {reverse: true});
+  })
+ </script>

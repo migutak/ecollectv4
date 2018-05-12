@@ -1,0 +1,81 @@
+
+
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">{{firstname}}</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">{{address}}</p>
+					<p class="animated fadeInDown" style="line-height: .4;">{{tel}}</p>
+					<a ui-sref="viewall">Back</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 padding-0">
+		<div class="col-md-3 col-sm-12 col-xs-12 mail-left">
+			<div class="col-md-12 col-sm-12 col-xs-12 mail-left-content">
+				                               <ul class="nav">
+				                                  <li><h5>Activity</h5></li>
+				                                  <li>
+				                                    <a ui-sref="action.action"><div class="fa fa-circle text-primary"></div> Collector action</a>
+				                                  </li>
+				                                   <li>
+				                                    <a ui-sref="action.files"><div class="fa fa-circle text-success"></div> Files</a>
+				                                  </li>
+				                                   <li><a ui-sref="action.email"><div class="fa fa-circle text-info"></div> Email</a>
+				                                  </li>
+				                                  <li><h5>Sections</h5></li>
+				                                  <li><hr/></li>
+				                                  <li>
+				                                    <a ui-sref="action.accountinfo"><span class="fa fa-user-md"></span> Account Info</a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.customerinfo"><span class="fa fa-inbox"></span> Customer Info</a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.contacts"><span class="fa fa-comment-o"></span> Contacts </a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.collateral"><span class="fa fa-envelope"></span> Collateral <span class="badge badge-success">{{collateralnotification}}</span></a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.notes"><span class="fa fa-sticky-note"></span> Notes History <span class="badge badge-success">{{notesnotification}}</span></a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.ptps"><span class="fa fa-star"></span> Promises Made <span class="badge badge-success">{{promisesnotification}}</span></a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.otheraccs"><span class="fa fa-bell"></span> Other Accounts <span class="badge badge-success">{{otherLength}}</span></a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.sameidnumbers"><span class="fa fa-male"></span> Same ID Numbers <span class="badge badge-primary">{{sameidnotification}}</span></a>
+				                                  </li>
+				                                  <li>
+				                                    <a ui-sref="action.directors"><span class="fa fa-user"></span> Directors <span class="badge badge-info">{{directorsnotification}}</span></a>
+				                                  </li>
+				                                  
+				                              </ul>
+				                          </div>
+		</div>
+		<div class="col-md-9 col-sm-12 col-xs-12 mail-right">
+			<div
+				class="col-md-12 col-sm-12 col-xs-12 mail-right-content padding-0">
+				<div class="col-md-12 col-sm-12 col-xs-12 mail-right-text">
+
+					<!-- start: Content -->
+					<div id="popupContainer" ui-view></div>
+					<input type="hidden" id="acc">
+					<input type="hidden" id="cust">
+					<input type="hidden" id="username">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>

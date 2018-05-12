@@ -1,0 +1,92 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Memo group</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Create, update</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-12 panel-body" style="padding-bottom:30px;">
+			<button class="btn-link" ng-click="showadd()"><i class="fa fa-file-text-o"></i> New</button>
+				<table class="table table-striped header-fixed">
+	    				<thead>
+	    					<tr>
+	    						<th>Dept#</th>
+	    						<th>Memo Group</th>
+	    						<th>Collection Officer</th>
+	    						<th></th>
+	    					</tr>
+	    				</thead>
+	    				<tbody>
+	    						<tr ng-repeat="d in Memos">
+	    							<td>{{d.DIVISION}}</td>	
+	    							<td>{{d.MEMOGROUP}}</td>
+	    							<td>{{d.OWNER}}</td>
+	    							<td>
+		    							<a href="" ng-click="showupdate()"><i class="fa fa-pencil-square-o fa-2x"></i></a>|
+		    							<a style="color:red" href="" ng-click="deleteMemo(d.MEMOGROUP)"><i class="fa fa-trash-o fa-2x"></i></a>
+		    						</td>
+	    						</tr> 	
+	    				</tbody>
+	    		</table>
+            </div>
+		</div>
+	</div>
+	</div>
+        <div class="col-md-12">
+        	<form name="newmemoForm" ng-show="witch" ng-submit="memoadd()">
+        	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+                 <input type="text" class="form-text" id="memoCode" name="memoCode" ng-model="dataIn.m_memocode" required>
+                 <span class="bar"></span>
+                 <div ng-if="newmemoForm.memoCode.$error.required" class="error">Enter Memo group</div>
+             </div>
+			  <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	              <select id="dept" name="dept" class="form-text android" ng-model="dataIn.dept" required>
+										<option>CORPORATE</option>
+	                                    <option>ASSETFINANCE</option>
+	                                    <option>SACCO</option>
+	                                    <option>AGRI</option>
+	                                    <option>MORTGAGE</option>
+	                                    <option>SME</option>
+	                                    <option>MICROCREDIT</option>
+	                                    <option>IPF</option>
+	                                    <option>PBBSCHEME</option>
+	                                    <option>PBBSCORED</option>
+	                                    <option>CMDR</option>
+	                                    <option>PORTFOLIO</option>
+				  </select>
+				  <div ng-if="newmemoForm.dept.$error.required" class="error">Select department</div>
+	            </div>
+			  <div class="form-group form-animate-text" style="margin-top:40px !important;">
+			    <select id="m_colofficer" name="m_colofficer" class="form-text border-bottom" ng-model="dataIn.m_colofficer" required>
+					<option ng-repeat="c in Col" >{{c.USERNAME}}</option>
+				</select>
+				<div ng-if="newmemoForm.m_colofficer.$error.required" class="error">Select collection officer</div>
+			  </div>
+			  <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+			</form>
+			<form ng-show="witch2" ng-submit="memoupdate()">
+			  <div class="form-group">
+			    <label for="branchCode">Memo#</label>
+			    <input type="text" class="form-control" id="branchCode" placeholder="Memo Code" required ng-model="dataIn.umemo">
+			  </div>
+			  <div class="form-group">
+			    <label for="newmemo">New Memo</label>
+				<input type="text" class="form-control" id="newmemo" placeholder="Memo Code" required ng-model="dataIn.newmemo">
+			  </div>
+			  <div class="form-group">
+			    <label for="BranchReg">New Collector</label>
+			    <select id="BranchReg" class="form-control" ng-model="dataIn.newcolofficer" required>
+					<option ng-repeat="c in Col" >{{c.USERNAME}}</option>
+				</select>
+			  </div>
+			  <button type="submit" class="btn btn-sm btn-primary" ng-disabled="mySwitch">{{submitHeader}}</button>
+        		{{message}}
+			</form>
+        </div>
+
+ </div>

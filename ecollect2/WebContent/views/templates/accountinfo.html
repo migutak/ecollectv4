@@ -1,0 +1,109 @@
+	<div class="col-md-12" id="accountinfo">
+		<div class="col-md-12 panel">
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="custnumber"> <label>Customer Number</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="accnumber"> <label>Account Number</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="oustbalance"> <label>Outstanding Balance</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="daysinarr"> <label>Days In Arrears</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="princarrears"> <label>Principle Arrears</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="intratearr"> <label>Interest Arrears</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="penalarr"> <label>Penalty Arrears</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="productcode"> <label>Product Code</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="instamount"> <label>Installment Amount</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="nextrepaydate"> <label>Repayment Date</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="arocode"> <label>ARO Code</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="aroname"> <label>Relationship Manager</label>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="branch"> <label>Branch</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	
+	var cust = custnumber;//document.getElementById("cust").value;
+	var acc = accnumber;//document.getElementById("acc").value;
+	var dept = localStorage.getItem("division");
+	var user = gusername;//localStorage.getItem("username");
+	
+	//loading bar
+	$( "#accountinfo" ).addClass("loading");
+	
+    		$.ajax({
+				type : 'GET',
+				url : urladdress + '/api/v2/accountinfo/' + acc,
+				success : function(data) {
+					$("#accountinfo").removeClass("loading");
+					document.getElementById("custnumber").value = data[0].CUSTNUMBER;
+					document.getElementById("accnumber").value = data[0].ACCNUMBER;
+					document.getElementById("oustbalance").value = data[0].OUSTBALANCE;
+					document.getElementById("daysinarr").value = data[0].DAYSINARR;
+					document.getElementById("princarrears").value = data[0].PRINCARREARS;
+					document.getElementById("intratearr").value = data[0].INTRATEARR;
+					document.getElementById("penalarr").value = data[0].PENALARREARS;
+					document.getElementById("productcode").value = data[0].PRODUCTCODE;
+					document.getElementById("instamount").value = data[0].INSTAMOUNT;
+					document.getElementById("nextrepaydate").value = data[0].NEXTREPAYDATE;
+					document.getElementById("arocode").value = data[0].AROCODE;
+					document.getElementById("aroname").value = data[0].AROCODE;
+					document.getElementById("branch").value = data[0].BRANCHNAME;
+				}
+			})
+	    
+</script>

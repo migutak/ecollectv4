@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>E-Collect</title>
+    <!-- Adding CSS for Alignment -->
+    <link rel="stylesheet" href="css/login-form.css">
+    <!-- Adding Material Desgin CSS file -->
+    <link rel="stylesheet" href="css/material.min.css">
+    <link rel="stylesheet" href="css/materialdesignicons.css" media="all" rel="stylesheet" type="text/css">
+    <!-- Adding Material Desgin JS file -->
+    <script src="js/material.min.js"></script>
+    <!-- Adding Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+
+		<script>
+			var app = angular.module('App', []);
+			app.controller('loginCtrl',function($scope, $http, $location) {
+								$scope.userDetails = {};
+								$scope.Logged = {};
+								$scope.loginMessage = "";
+		
+								$scope.login = function() {
+									$scope.dataLoading = true;
+									$http(
+											{
+												url : './api/v2/Logged/' + $scope.userDetails.username,
+												method : 'get'
+											})
+											.success(
+													function(response) {
+														if (response.length == 0) {
+															$scope.loginMessage = "No Access to E-Collect";
+														} else {
+															console.log(response[0]);
+															$scope.Logged.user = response[0].USERNAME;
+															$scope.Logged.div = response[0].DIVISION;
+															$scope.Logged.rights = response[0].ACCESSRIGHTS;
+															$scope.Logged.role = response[0].ROLE;
+															$scope.Logged.branch = response[0].BRANCH;
+															$scope.Logged.expiry = response[0].EXPIRYDATE;
+		
+															if (response[0].EXPIRYDATE == "" || response[0].EXPIRYDATE == undefined) {
+																$scope.Logged.expiry = "2099-12-31"; //2016-02-06
+															}
+		
+															localStorage.setItem("uname",$scope.Logged.user);
+															localStorage.setItem("division",$scope.Logged.div);
+															localStorage.setItem("rights",$scope.Logged.rights);
+															localStorage.setItem("branch",$scope.Logged.branch);
+		
+															$scope.formatString = function(
+																	format) {
+																var day = parseInt(format.substring(8));
+																var month = parseInt(format.substring(5, 7));
+																var year = parseInt(format.substring(0, 4));
+																var date = new Date(
+																		year,
+																		month - 1, day);
+																return date;
+															}
+															var exp_date = new Date(
+																	$scope
+																			.formatString($scope.Logged.expiry));
+															var timeDiff = exp_date
+																	.getTime()
+																	- new Date()
+																			.getTime();
+															//$scope.dayDifference = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		
+															if (timeDiff < 0) {
+																$scope.loginMessage = "E-Collect access expired";
+															} else if (response[0].DIVISION == 'HELPDESK') {
+																//logged($scope.Logged.user);
+																window
+																		.open(
+																				"index_admin.jsp",
+																				"_self");
+															} else if (response[0].DIVISION == 'CC') {
+																//logged($scope.Logged.user);
+																window.open("index_cards.jsp","_self");
+															} else if (response[0].DIVISION == 'PORTFOLIO') {
+																//logged($scope.Logged.user);
+																window.open("index_portfolio.jsp","_self");
+															} else if (response[0].DIVISION == 'BRANCH') {
+																//logged($scope.Logged.user);
+																window.open("index_branch.jsp","_self");
+															} else {
+																logged($scope.Logged.user);
+																window.open("index.jsp","_self");
+															}
+														}
+														$scope.userDetails = {};
+														$scope.dataLoading = false;
+													})
+								}
+		
+								function logged(loginname) {
+									$http(
+											{
+												url : './api/whologged',
+												method : 'post',
+												data : $.param({
+													'username' : loginname
+												}),
+												headers : {
+													'Content-Type' : 'application/x-www-form-urlencoded'
+												}
+											}).success(function(response) {
+										console.log('WHologged successfully updated');
+									}).error(function(response) {
+										console.log(response);
+									})
+								}
+							});
+		</script>
+</head>
+
+<body ng-app="App" ng-controller="loginCtrl">
+	<div class="mdl-layout mdl-layout--fixed-header mdl-js-layout  mdl-color--white-100">
+			<main class="mdl-layout__content main_content">
+				<form ng-submit="login()" autocomplete="off" name="loginForm">
+			    <h3><strong>E-Collect</strong></h3>
+				<div class="login-form-div mdl-grid mdl-shadow--2dp">
+					<div class="mdl-cell mdl-cell--12-col cell_con">
+						<i class="material-icons">person</i>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="text" id="username" ng-model="userDetails.username" required autocomplete="off">
+							<label class="mdl-textfield__label" for="username">Enter valid Username</label>
+							<span class="mdl-textfield__error">Username is required</span>
+				        </div>
+					</div>				
+					<div class="mdl-cell mdl-cell--12-col cell_con">
+						<i class="material-icons">lock</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<input class="mdl-textfield__input" type="password" id="password" ng-model="userDetails.password" required>
+							<label class="mdl-textfield__label" for="password">Enter Password</label>
+							<span class="mdl-textfield__error">Password required</span>
+				        </div>
+					</div>				
+					<div class="mdl-cell mdl-cell--12-col  login-btn-con">
+						<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn">Login</button>
+					</div>
+				</div>
+				</form>
+		    </main>
+    </div>	
+</body>
+</html>

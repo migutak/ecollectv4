@@ -1,0 +1,98 @@
+<style type="text/css">
+.title {
+    border-bottom: 1px solid #C1C1C1;
+    padding: 10px 0;
+}
+.title h3 {
+    color: #111;
+    font-family: "Helvetica Neue", Helvetica, Arial, Verdana;
+    font-size: 16px;
+    font-weight: 700;
+}
+.country-stats {
+    width: 260px;
+    height: 97px;
+    border-right: 1px solid #ABABAB;
+    border-left: 1px solid #FBFAF9;
+}
+.country-stats:first-child {
+    border-left: none;
+    width: 261px;
+}
+.country-stats.last-child {
+    border-right: none;
+}
+.country-name {
+    color: #323232;
+    font-family: "Helvetica Neue", Helvetica, Arial, Verdana;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    display: block;
+    margin: 10px auto 29px auto;
+}
+.country-value {
+    color: #323232;
+    font-family: "Helvetica Neue", Helvetica, Arial, Verdana;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    display: block;
+}
+.pull-left {
+    float: left;
+}
+</style>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<div id="chartContainer">Chart will load here!</div>
+	</div>
+</div>
+<div class="row">
+	<div class="title"><h3>Summary</h3></div>
+	<div id="data-snapshot">
+		<div class="country-stats pull-left">
+			<span class="country-name">Total Balance</span>
+			<span class="country-value" ng-clock>{{totalbalance | number:2}}</span>
+		</div>
+		<div class="country-stats pull-left">
+			<span class="country-name">Total Arrears</span>
+			<span class="country-value" ng-clock>{{totalarrears | number:2}}</span>
+		</div>
+		<div class="country-stats pull-left">
+			<span class="country-name">No of accounts</span>
+			<span class="country-value" ng-clock>{{noofaccounts | number:0}}</span>
+		</div>
+		<div class="country-stats pull-left">
+			<span class="country-name"> Contact rate</span>
+			<span class="country-value" ng-clock>{{contactrate}}</span>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-4">
+			<!-- <fusioncharts 
+				width= "100%"
+				height= "300"
+				type= "doughnut2d"
+				dataFormat= "json"
+				dataSource= "{{dataSource1}}">
+			</fusioncharts>-->
+			<div id="chart-activity">Activity will load here</div>
+	</div>
+	<div class="col-sm-4">
+		<!-- <fusioncharts 
+			width= "100%"
+			height= "300"
+			type= "pie2d"
+			dataFormat= "json"
+			dataSource= "{{dataSource2}}">
+		</fusioncharts>-->
+		<div id="chart-products">Products will load here</div>
+	</div>
+	<div class="col-sm-4">
+		<div id="chart-collectionscore">Collection score will load here</div>
+	</div>
+</div>
+</div>

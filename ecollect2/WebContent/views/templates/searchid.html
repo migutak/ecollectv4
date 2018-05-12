@@ -1,0 +1,57 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="col-md-12 padding-0">
+			<div class="col-md-12 padding-0">
+				<div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<h3 class="animated fadeInLeft">Search by ID</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">Results {{searchtotal}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				
+				<div class="panel-body">
+					<div class="form-group">
+                         <div class="col-sm-3"><input ng-model="searchKeyword" type="text" class="form-control border-bottom" placeholder="Filter by"></div>
+                    </div>
+                        <div class="col-md-12 padding-0" style="min-height: 300; max-height: 500px; overflow-y: scroll;">
+                          <div class="col-md-4 padding-0" ng-repeat="acc in accounts | filter: searchKeyword" >
+                            <div class="badges-v1">
+	                             <div class="badges-ribbon">
+	                              	<div class="{{badge}}">{{acc.PRODUCTCODE}}</div>
+	                            </div>
+	                            <div class="panel-body">
+	                            	<address>
+                                        <strong>Account Information</strong><br>
+                                        {{acc.CLIENT_NAME}} <br>
+                                        {{acc.ADDRESSLINE1}} <br>
+                                        </address>
+                                        <address>
+                                        <abbr>Account: </abbr> {{acc.ACCNUMBER}} <br>
+                                        <abbr>Custnumber: </abbr> {{acc.CUSTNUMBER}} <br>
+                                        <abbr title="Relation">AROCODE:</abbr> {{acc.AROCODE}} <br>
+                                        <abbr title="idnumber">NationID:</abbr> {{acc.NATIONID}} 
+                                    </address>
+                                    <address>
+                                        <strong>Contacts</strong><br>
+                                        <abbr title="Phone">Phone:</abbr> {{acc.TELNUMBER}} <br>
+                                        <abbr title="Phone">Mobile:</abbr> {{acc.MOBILE}} <br>
+                                        
+                                    </address>
+                                    <address>
+                                    	<a href="" ng-click="showMe(acc.ACCNUMBER)"> Work on</a>
+                                    </address>
+                                </div>
+	                        </div>
+                          </div>
+                        </div>
+                    </div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>

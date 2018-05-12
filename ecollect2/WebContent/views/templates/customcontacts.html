@@ -1,0 +1,82 @@
+					<div align="right"><a href="" ng-click="contactsRefreshfnc()"><i class="{{refreshBtn}}"></i></a></div>
+					  <div class="col-md-12" ng-repeat="c in contactsData">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <address>
+                                        <strong>{{c.FULLNAME}}</strong><br>
+                                        {{c.FULLNAME}}<br>
+                                        {{c.ADDRESS}} <br>
+                                        <abbr title="Phone">Phone:</abbr> {{c.CONTACT}} <br>
+                                        <abbr title="Relation">Relation:</abbr> {{c.RELATIONSHIP}} <br>
+                                        <abbr title="Email">Email:</abbr> {{c.EMAIL}} </address> <br>
+                                        <abbr title="by">Added By: {{c.OWNER}}</abbr> <br>
+                                        <abbr title="dateadded">{{c.CREATEDATE}}</abbr>
+                                    <address>
+                                    	<button ng-click="edit(c.ID)" class="btn btn-xs btn-info"><i class="fa fa-pencil-square-o"></i></button>
+							            <button ng-click="delC(c.ID)" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        			<div class="row" ng-show="addShow">
+								        <div class="col-md-12">
+					                        <form class="cmxform" id="signupForm" method="post" ng-submit="saveContact()">
+					                          <div class="col-md-6">
+					                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                              <input type="text" class="form-text" id="validate_firstname" name="validate_firstname" ng-model="saveData.fullname" required>
+					                              <span class="bar"></span>
+					                              <label>Full Name</label>
+					                            </div>
+					
+					                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                              <input type="text" class="form-text" id="validate_lastname" name="validate_lastname" ng-model="saveData.address" required>
+					                              <span class="bar"></span>
+					                              <label>Address</label>
+					                            </div>
+					
+					                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                              <input type="text" class="form-text" id="validate_username" name="validate_username" ng-model="saveData.phone" required>
+					                              <span class="bar"></span>
+					                              <label>Phone Number</label>
+					                            </div>
+					                          </div>
+					
+					                          <div class="col-md-6">
+					                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                              <input type="text" class="form-text" id="validate_password" name="validate_password" ng-model="saveData.relationship" required>
+					                              <span class="bar"></span>
+					                              <label>Relationship</label>
+					                            </div>
+					
+					                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					                              <input type="text" class="form-text" id="validate_confirm_password" name="validate_confirm_password" ng-model="saveData.email" required>
+					                              <span class="bar"></span>
+					                              <label>Email</label>
+					                            </div>
+					                          </div>                   
+					                          <div class="col-md-12">
+					                              <input class="submit btn btn-success" type="submit" value="Add">
+					                              <a href="" class="btn btn-danger" type="buttton" value="Submit"></a>
+					                        </div>
+					                      </form>
+					                    </div>
+								    </div>
+								    <div class="row" ng-show="editShow">
+								        <form ng-submit="editContact()">
+								            <div class="form-group">
+								                <input type="text" class="form-control" ng-model="editContacts.contact">
+								            </div>
+								            <button ng-click="backCont()" type="button" class="btn btn-xs btn-danger">Cancel</button>
+								            <button type="submit" class="btn btn-xs btn-primary">Edit</button>
+								        </form>
+								    </div>
+								    <div class="row" ng-show="deleteShow">
+								        <form ng-submit="deleteCont()">
+								            <div class="form-group">
+								                Delete Id: <input type="text" class="form-control" ng-model="delContacts.contact" ng-disabled=true>
+								            </div>
+								            <button ng-click="backCont()" type="button" class="btn btn-xs btn-danger">Cancel</button>
+								            <button type="submit" class="btn btn-xs btn-primary">Delete</button>
+								        </form>
+								    </div>

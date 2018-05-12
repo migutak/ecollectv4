@@ -1,0 +1,52 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <link rel="styleSheet" href="angular-ui-grid/ui-grid.min.css"/>
+	<script src="angular-ui-grid/ui-grid.min.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('app', ['ngTouch', 'ui.grid']);
+ 
+		app.controller('MainCtrl', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, uiGridConstants) {
+		  $scope.gridOptions = {  
+		    enableFiltering: true,
+		    flatEntityAccess: true,
+		    showGridFooter: true,
+		    fastWatch: true
+		  };
+		 
+		   $scope.gridOptions.columnDefs = [
+		    {name:'OUSTBALANCE',cellFilter: 'number: 2'},
+	        {name:'TOTALARREARS',cellFilter: 'number: 2'},
+	        {name:'PRINCARREARS',cellFilter: 'number: 2'},
+	        {name:'COLOFFICER'},
+	        {name:'BRANCHNAME'},
+	        {name:'REGIONNAME'},
+	        {name:'REVIEWDATE'}
+		  ];
+		 
+		  $http.get('http://localhost:7001/ecollect2/api/status/watch_stage')
+		  .success(function(data) {
+		  	console.log('data loading ...',data);
+		    $scope.gridOptions.data = data;
+		  });
+		}]);
+	</script>
+	<style type="text/css">
+		.grid {
+		  width: 650px;
+		  height: 400px;
+		}
+	</style>
+  </head>
+  <body>
+    <div ng-controller="MainCtrl">
+      <div id="grid1" ui-grid="gridOptions" class="grid"></div>
+    </div>
+  </body>
+</html>

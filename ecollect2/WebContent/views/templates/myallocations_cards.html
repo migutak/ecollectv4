@@ -1,0 +1,918 @@
+
+
+<div class="row" id="dataList">
+    <div class="col-lg-12">
+        <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left; width: 100%; height: 900px">
+	        <div id="jqxgrid"></div>
+	    </div>
+    </div>
+</div>
+<div class="row" id="activityPg" ng-controller="cardCtrl">
+<input type="text" id="cardAccnt">
+	<div class="col-lg-12">
+			<div class="col-lg-5">
+                    <div class="panel panel-primary">
+                        <div class="panel-body">
+                        <div class="col-lg-12" style="text-align: center">
+                        	<a href="" id="back"><i class="fa fa-chevron-left"></i></a>
+							<img class="img-circle" src="views/img/avatar.jpg" width="100" height="100">
+						</div>
+						<div class="btn-group">
+							  <button class="btn btn-link dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id='btnName'>
+							     <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu">
+							  	<li><a href="" data-toggle="modal" data-target="#addcontact">Add a Contact</a></li>
+							    <li><a href="" data-toggle="modal" data-target="#emailconfirm">Send Email</a></li>
+							    <li><a href="" data-toggle="modal" data-target="#sms">Send SMS</a></li>
+							    <li><a href="" data-toggle="modal" data-target="#upload">Upload</a></li>
+							    <li role="separator" class="divider"></li>
+							    <li><a href="" data-toggle="modal" data-target="#reallocate" ng-disabled=true>Reallocate Account</a></li>
+							  </ul>
+						</div>
+                            <ul class="profile-details">
+								<li>
+									<div><i class="fa fa-briefcase"></i> Position</div>
+									{{}}
+								</li>
+								<li>
+									<div><i class="fa fa-building-o"></i> Company</div>
+									{{}}
+								</li>
+							</ul>
+							<tabset justified="true">
+								<tab heading="Contacts"> 
+							    	<div class="row">
+										<div class="col-lg-12">
+											<ul class="profile-details">
+												<li>
+													<div><i class="fa fa-phone"></i> Phone</div>
+													<div id="mobile"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-tablet"></i> Mobile phone</div>
+													<div id="tel"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-calendar"></i> Date of Birth</div>
+													<div id="mobile"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-tablet"></i> National ID</div>
+													<div id="mobile"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-envelope"></i> E-mail</div>
+													<div id="email"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-map-marker"></i> Address</div>
+													<div id="address"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-user"></i> Collection Officer</div>
+													<div id="colofficer"></div>
+												</li>
+											</ul>
+										</div>
+									</div>
+							   	</tab>
+							   	<tab heading="Accounts"> 
+							    	<div class="row">
+										<div class="col-lg-12">
+											<ul class="profile-details">
+												<li>
+													<div><i class="fa fa-money"></i> Outstanding Balance</div>
+													<div id="outstandingBal"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-calendar"></i> Date of Birth</div>
+													<div id="dob"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-calendar"></i> Months In Arrears</div>
+													<div id="ageinmonths"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-money"></i> Last Payment Date</div>
+													<div id="lastpayment"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-money"></i> Limit Amount</div>
+													<div id="limit"></div>
+												</li>
+												<li>
+													<div><i class="fa fa-money"></i> Cycle</div>
+													<div id="cycle"></div>
+												</li>
+										</ul>
+										</div>
+									</div>
+							   	</tab>
+							   	<tab heading="Custom">
+							   	  <div class="row">
+							   		<div class="tab-pane fade in" id="customs" ng-controller="contactCtrl">
+		                            <div align="right"><a href="" ng-click="contactsRefreshfnc()"><i class="{{refreshBtn}}"></i></a></div>
+		                            	<table class="table table-striped">
+											<thead>
+										      <tr>
+										        <th>Desc</th>
+										        <th>Contact</th>
+										      </tr>
+										    </thead>
+										    <tbody>
+										    	<tr ng-repeat="c in contactsData">
+											        <td>{{c.PERSON}}</td>
+											        <td>{{c.CONTACT}}</td>
+											     </tr>
+										    </tbody>
+										</table>
+		                            </div>
+		                            </div>
+							   	</tab>
+							   	<tab heading="Other">
+							   		<form action="saveMeta()">
+										<div class="row">
+											<div class="col-lg-10">
+												<ul class="profile-details">
+													<li>
+														<div><i class="fa fa-user-plus"></i> Employer Name</div>
+														<input type="text" class="form-control" ng-model="Meta.Employer" required>
+													</li>
+													<li>
+														<div><i class="fa fa-venus"></i> Employment Status</div>
+				                                            	<select class="form-control" ng-model="Meta.EmpStatus" required>
+															        <option value="Active">Active</option>
+															        <option value="Reinstated after Suspension">Reinstated after Suspension</option>
+															        <option value="Suspended">Suspended</option>
+															        <option value="Summary Dismissal">Summary Dismissal</option>
+															        <option value="Retrenched">Retrenched</option>
+															        <option value="Retired">Retired</option>
+															        <option value="Interdicted">Interdicted</option>
+															        <option value="Resigned">Resigned</option>
+															        <option value="Retrenched">Self-Employed</option>
+															        <option value="AWOL">AWOL/ Left employment</option>
+															        <option value="Sacked">Sacked</option>
+															        <option value="Transferred">Transferred</option>
+															    </select>
+													</li>
+													<li>
+														<div><i class="fa fa-calendar"></i> Date of Birth</div>
+														<input type="text" class="form-control form_date2" ng-model="Meta.DoB" required>
+													</li>
+													<li>
+														<div><i class="fa fa-tablet"></i> Date of Employment</div>
+														<input type="text" class="form-control form_date2" ng-model="Meta.DoE" required>
+													</li>
+													<li>
+														<div><i class="fa fa-circle"></i> Marital Status</div>
+																<select class="form-control" ng-model="Meta.Marital" required>
+															        <option value="Married">Married</option>
+															        <option value="Single">Single</option>
+															        <option value="Divorced">Divorced</option>
+															        <option value="Widowed">Widowed</option>
+															        <option value="Unknown">Unknown</option>
+															    </select>
+													</li>
+													<li>
+														<div><i class="fa fa-phone"></i> Primary Phone number</div>
+														<input type="text" class="form-control" ng-model="Meta.Phone" required>
+													</li>
+													<li>
+														<div><i class="fa fa-envelope"></i> Email Address</div>
+														<input type="text" class="form-control" ng-model="Meta.Email" required>
+													</li>
+													<li>
+														<div><i class="fa fa-money"></i> Net Salary</div>
+														<input type="text" class="form-control" ng-model="Meta.Salary" required>
+													</li>
+													<li>
+														<div><i class="fa fa-envelope-o"></i> Residential Address</div>
+																<select class="form-control" ng-model="Meta.Residential" required>
+															        <option value="Housed_by_employer">Housed by employer</option>
+															        <option value="Owner">Owner</option>
+															        <option value="Tenant">Tenant</option>
+															        <option value="Living_with_Parents.">Living with Parents</option>
+															    </select>
+													</li>
+													<li>
+														<button class="btn btn-xs btn-danger" ng-show="showEditSave" ng-click="cancelSave()"><i class="fa fa-times"></i> Cancel</button>
+														<button type="submit" class="btn btn-xs btn-primary" ng-show="showEditSave"><i class="fa fa-floppy-o"> Save</i></button>
+													</li>
+												</ul>
+											</div>
+											<div class="col-lg-2">
+												<div class="row">
+													<div class="col-lg-6"><a href="" ng-click="refreshMeta()"><i class="fa fa-undo"></i></a></div>
+													<div class="col-lg-6"><a href="" ng-click="editMeta()"><i class="fa fa-pencil"></i></a></div>
+												</div>
+											</div>
+										</div>
+									</form>
+							   	</tab>
+							</tabset>
+                        </div>
+                    </div>
+              </div>
+              <div class="col-lg-7">
+              	<tabset justified="true">
+              		<tab heading="Notes History" ng-controller="notesCtrl">
+              						<div class="row">
+										<div class="col-lg-12" style="min-height: 500; max-height: 750px;overflow-y: scroll;">
+											<div align="right"><a href="" ng-click="notesRefreshfnc()" ng-disabled="showMe"><i class="{{refreshBtn}}"></i></a></div>
+										    <ul class="timeline" >
+								                <!-- timeline item -->
+								                <li ng-repeat="n in notesData">
+								                  <i class="fa fa-envelope"></i>
+								                  <div class="timeline-item">
+								                    <span class="time"><i class="fa fa-clock-o"></i>  {{n.NOTEDATE}}</span>
+								                    <h3 class="timeline-header"><a href="">{{n.OWNER}}</a> <small>{{n.NOTESRC}}</small></h3>
+								                    <div class="timeline-body">
+								                      {{n.NOTEMADE}}
+								                    </div>
+								                    <div class="timeline-footer">
+								                      <a href=""><i class="fa fa-thumb-tack fa-rotate-270"></i></a>
+								                    </div>
+								                  </div>
+								                </li>
+								                <!-- END timeline item -->
+								             </ul>
+										</div>
+									</div>
+              		</tab>
+              		<tab heading="Promises Made" ng-controller="promisesCtrl">
+              						<div class="row">
+										<div class="col-lg-12">
+											<table class="table table-striped header-fixed">
+							    				<thead>
+							    					<tr>
+							    						<th>Account#</th>
+							    						<th>Promise Amount</th>
+							    						<th>Promise Date</th>
+							    						<th>Met?</th>
+							    						<th>Collection Officer</th>
+							    					</tr>
+							    				</thead>
+							    				<tbody>
+							    						<tr ng-repeat="d in promiseData">
+							    							<td>{{d.ACCNUMBER}}</td>	
+							    							<td>{{d.PTPAMOUNT}}</td>
+							    							<td>{{d.PTPDATE}}</td>
+							    							<td>{{}}</td>	
+							    							<td>{{d.OWNER}}</td>	
+							    						</tr> 	
+							    				</tbody>
+							    			</table>
+										</div>
+									</div>
+              		</tab>
+              		<tab heading="Collector Action">
+              			<form class="form-horizontal" data-toggle="validator"  ng-submit="addAction()">
+                                    	<br>
+										<div class="row">
+											<div class="col-md-3">Collector Activity</div>
+							                <div class="col-md-3">
+												<div class="col-lg-12">
+													<select class="form-control" id="action" ng-model="dataIn.action" required>
+													  <option value="OC">Outgoing Call</option>
+													  <option value="IC">Incoming Call</option>
+													  <option value="MET">Debtor Visited</option>
+													  <option value="REVW">Account Review</option>
+													  <option value="SC">Sent Correspondence</option>
+													  <option value="LR">Received Correspondence</option>
+													  <option value="RR">Route for review</option>
+													  <option value="OA">Assign Outside Agency</option>
+													  <option value="RF">Receive File</option>
+													  <option value="NFA">New File Allocation</option>
+													  <option value="Invalid" selected>-- Select an Option --</option>
+													</select>
+												</div>
+											</div>
+							                <div class="col-md-3">Demand Letter</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<div class="input-group col-sm-12" data-link-field="dataIn.demand" ng-controller="Appctrl">
+											         	<select class="form-control" id="demand" ng-model="dataIn.demand">
+														  <option ng-repeat="letter in letters" ng-selected="letter.SELECTED">{{letter.DEMAND}}</option>
+														</select>
+											     	</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">Party Contacted</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<select class="form-control" id="party" ng-model="dataIn.party" ng-disabled="partyinactive">
+													  <option value="1">Account Holder</option>
+													  <option value="2">No Answer</option>
+													  <option value="3">Number not In Service</option>
+													  <option value="4">Secondary AccountHolder</option>
+													  <option value="5">Third Party</option>
+													  <option value="6">Disconnected</option>
+													  <option value="NA">Not Applicable</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3">Reason for Default</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<select class="form-control" id="reason" ng-model="dataIn.reason">
+													  <option value="Hardship">Hardship</option>
+													  <option value="Bankruptcy">Bankruptcy</option>
+													  <option value="Death_In_family">Death in Family</option>
+													  <option value="Deceased">Deceased</option>
+													  <option value="Dispute">Dispute</option>
+													  <option value="Divorce">Divorce</option>
+													  <option value="Delay_in_proceeds">Delay in proceeds</option>
+													  <option value="Diversion_of_proceeds">Diversion of proceeds</option>
+													  <option value="Crop_failure">Crop failure</option>
+													  <option value="AWOL">AWOL/Left employment</option>
+													  <option value="Discharged">Discharged</option>
+													  <option value="Dismissed">Dismissed</option>
+													  <option value="Interdicted">Interdicted</option>
+													  <option value="Left_Employment">Left Employment</option>
+													  <option value="Resigned">Resigned</option>
+													  <option value="Retired">Retired</option>
+													  <option value="Retrenched">Retrenched</option>
+													  <option value="Sacked">Sacked</option>
+													  <option value="Self_Employed">Self Employed</option>
+													  <option value="Summary_Dismissal">Summary Dismissal</option>
+													  <option value="Suspended">Suspended</option>
+													  <option value="Terminated">Terminated</option>
+													  <option value="Business_Failure">Business Failure</option>
+													  <option value="Business_Loss">Business Loss</option>
+													  <option value="Other" selected>Others</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">Promise to pay</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<select class="form-control" id="ptp" ng-model="dataIn.ptp" ng-disabled="ptpinactive">
+													  <option value="Yes">Yes</option>
+													  <option value="No" selected>No</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-3">Route</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+							                        <select id="route" class="form-control" ng-model="dataIn.route">
+													  <option value="Revw1">Reviewer 1</option>
+													  <option value="Revw2">Reviewer 2</option>
+													  <option value="11" selected>Active Collection</option>
+													</select>
+							                    </div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">Promise Amount</div>
+											<div class="col-md-3">
+											    <div class="col-lg-12">
+													<div class="input-group col-sm-12" >
+											         	<input type="text" class="form-control" id="ptpamount" ng-model="dataIn.ptpamount" ng-disabled="inactive">
+											         	<span class="input-group-addon"><a href="">...</a></span>
+											     	</div>
+												</div>
+											</div>
+											<div class="col-md-3">CMD Status</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+							                        <select id="cmdstatus" class="form-control" ng-model="dataIn.cmdstatus" ng-controller="Appctrl">
+													  <option ng-repeat="cmd in cmdstatus_src">{{cmd.VALUE}}</option>
+													</select>
+													<input id="txtcmdstatus" type="hidden" class="form-control"/>
+							                    </div>
+											</div>
+										</div>
+						                <div class="row">
+						                	<div class="col-md-3">Promise Date</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<div class="input-group date form_date col-sm-12" data-date="" data-date-format="dd MM yyyy" data-link-field="ptpdate" data-link-format="dd-mm-yyyy">
+											         	<input class="form-control" type="text" value="{{date | date:'yyyy-MM-dd'}}" ng-model="dataIn.ptpdate" ng-disabled="inactive">
+														<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+											     	</div>
+												</div>
+											     <input type="hidden" id="ptpdate" ng-model="dataIn.ptpdate"/><br/>
+											</div>
+											<div class="col-md-3">Branch Status</div>
+											<div class="col-md-3">
+														<div class="col-lg-12">
+									                        <select id="brstatus" class="form-control"  ng-model="dataIn.brstatus" ng-controller="Appctrl">
+															  <option ng-repeat="br in brstatus_src" >{{br.VALUE}}</option>
+															</select>
+															<input id="brstatus" type="hidden" class="form-control"/>
+									                    </div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">Payment Mode</div>
+											<div class="col-md-3">
+												<div class="col-lg-12">
+													<select id="payMode" class="form-control" class="input-medium" ng-model="dataIn.paymode" ng-disabled="inactive">
+													  <option value="Cash">Cash</option>
+													  <option value="Cheque">Cheque</option>
+													  <option value="Transfer">Transfer</option>
+													  <option value="NA" selected>Not Applicable</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">Review Date</div>
+											<div class="col-md-3">
+													<div class="col-lg-12">
+														<div class="input-group date form_date col-lg-12" data-date-format="dd MM yyyy" data-link-field="reviewdate" data-link-format="dd-mm-yyyy">
+												         	<input class="form-control" type="text" ng-model="dataIn.reviewdate">
+															<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+												     	</div>
+													</div>
+													<input type="hidden" id="reviewdate" ng-model="dataIn.reviewdate"/><br/>
+											</div>
+										</div>
+						                <div class="row">
+											<div class="form-group col-lg-12">
+								                <label >&nbsp;Collector Note</label>
+								                <textarea class="form-control" rows="5" id="txtnote" data-maxlength="2000" ng-model="dataIn.notemade" required></textarea>
+								                <span class="help-block bg-info">Max 2000 characters</span>
+								            </div>
+										</div>
+										<div class="row">
+											Demand Letter Issued: <a href="http://localhost:8080/ecolhome/LettersView" target="_blank">{{dataIn.demand}}</a>
+										</div>
+						                <div class="row">
+						                	<div class="checkbox">
+											  <label><input type="checkbox" ng-model="datax.imp">Important Note</label>
+											  <input type="hidden" ng-model="dataIn.impvalue">
+											</div>
+											<br>
+							            	<span class="pull-left">
+												<button id="myButton" type="submit"  class="btn btn-primary" ng-disabled="mySwitch">{{submitHeader}}</button>
+											</span>
+							            </div>
+						            </form>
+						            <div class="row">
+						            	<div class="col-md-4"><span id="action_message" class="help-block bg-success">{{message}}</span></div>
+						            </div>
+              		</tab>
+              	</tabset>
+			</div>
+		</div>
+		
+</div>
+
+<div class="row">
+						<div class="col-lg-12">
+         					<div class="modal fade" id="multiptp" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="H1">Capture multiple PtPs</h4>
+                                        </div>
+                                        <div class="modal-body">
+		                                        <form class="form-inline">
+												  <div class="form-group">
+												    <div class="input-group">
+												      <div class="input-group-addon">Ksh</div>
+												      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+												      <div class="input-group-addon">.00</div>
+												    </div>
+												  </div>
+												  <button id="b1" class="btn add-more" type="button">+</button>
+												</form>
+                                            	<div class="row">
+                                            		<div class="form-group col-lg-12">
+                                            			<input type="hidden" name="count" value="1" />
+												        <div class="control-group" id="fields">
+												            <div class="form-group" id="profs" > 
+												                <form class="input-append">
+												                    <div id="field">
+												                    	<input autocomplete="off" class="form-control" id="field1" name="prof1" type="text" placeholder="Amount" data-items="8"/>
+												                    	<button id="b1" class="btn add-more" type="button">+</button>
+												                    </div>
+												                </form>
+												            <br>
+												            <small>Press + to add another form field</small>
+												            </div>
+												        </div>
+									                </div>
+                                            	</div>
+                                            
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-primary" href="#" role="button">Submit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>               
+         				</div>
+						<div class="col-lg-12">
+         					<div class="modal fade" id="emailconfirm" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" >Send Email</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        	<form role="form" action="mailto:someone@yourdomain.com?subject=Your Loan Arrears">
+		                                        <div class="form-group">
+		                                            <label>Email Address</label>
+		                                            <input type="email" class="form-control" required/>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label>Message</label>
+		                                            <textarea class="form-control" rows="3" required></textarea>
+		                                        </div>
+		                                        <button class="btn btn-xs btn-primary" type="submit">Send</button>
+	                                    	</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{messageEmail}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>               
+         				</div>
+         				<div class="col-lg-12">
+         					<div class="modal fade" id="metadatapop" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Customer Information</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        	<form class="form-horizontal">
+                                        		<div class="row">
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Customer Number</label>
+		                                            	<input id="txtcustedit" class="form-control" value="{{Accountinfo[0].CUSTNUMBER}}"/>
+                                        			</div>
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Employment Status</label><br/>
+		                                            	<select id="txtstatusedit" class="form-control">
+													        <option value="Active">Active</option>
+													        <option value="Reinstated after Suspension">Reinstated after Suspension</option>
+													        <option value="Suspended">Suspended</option>
+													        <option value="Summary Dismissal">Summary Dismissal</option>
+													        <option value="Retrenched">Retrenched</option>
+													        <option value="Retired">Retired</option>
+													        <option value="Interdicted">Interdicted</option>
+													        <option value="Resigned">Resigned</option>
+													        <option value="Retrenched">Self-Employed</option>
+													        <option value="AWOL">AWOL/ Left employment</option>
+													        <option value="Sacked">Sacked</option>
+													        <option value="Transferred">Transferred</option>
+													    </select>
+                                        			</div>
+                                        		</div>
+                                        		<div class="row">
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Employer Name</label>
+		                                            	<input id="txtemployeredit" class="form-control" value="{{Custinfo[0].EMPNAME}}"/>
+                                        			</div>
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Date of Employment</label>
+		                                            	<input id="txtdateempedit" class="form-control" value="{{Custinfo[0].EMPDATE}}"/>
+                                        			</div>
+                                        		</div>
+                                        		<div class="row">
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Marital Status</label>
+		                                            	<select id="txtmaritaledit" class="form-control">
+													        <option value="Married">Married</option>
+													        <option value="Single">Single</option>
+													        <option value="Divorced">Divorced</option>
+													        <option value="Widowed">Widowed</option>
+													        <option value="Unknown">Unknown</option>
+													    </select>
+                                        			</div>
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Residential Address</label>
+		                                            	<select id="txtaddressedit" class="form-control">
+													        <option value="Housed_by_employer">Housed by employer</option>
+													        <option value="Owner">Owner</option>
+													        <option value="Tenant">Tenant</option>
+													        <option value="Living_with_Parents.">Living with Parents</option>
+													    </select>
+                                        			</div>
+                                        		</div>
+                                        		<div class="row">
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Email Address</label>
+		                                            	<input id="txtemailedit" class="form-control" value="{{Custinfo[0].EMAIL}}"/>
+                                        			</div>
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Primary Phone number</label>
+		                                            	<input id="txtphoneedit" class="form-control" value="{{Custinfo[0].PHONE}}"/>
+                                        			</div>
+                                        		</div>
+                                        		<div class="row">
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Date of Birth</label>
+		                                            	<input id="txtdobedit" class="form-control" value="{{Custinfo[0].DOB}}" />
+                                        			</div>
+                                        			<div class="form-group col-lg-6">
+                                        				<label>Net Salary</label>
+		                                            	<input id="txtsalaryedit" class="form-control" value="{{Custinfo[0].SALARY}}" />
+                                        			</div>
+                                        		</div>
+                                        	</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" onclick="CustomerDetailsUpdatefunc()">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>               
+         				</div>
+          				<div class="col-lg-12">
+         					<div class="modal fade" id="addcontact" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Add a Contact</h4>
+                                        </div>
+                                        <div class="modal-body">
+	                                        <form role="form" ng-submit="AddContact()">
+		                                        <div class="form-group">
+		                                            <label>Contact Name</label>
+		                                            <input id="txtrel" class="form-control" ng-model="dataContacts.person" required/>
+		                                        </div>
+		                                        <div class="form-group">
+		                                            <label>Contact Details</label>
+		                                            <textarea ng-model="dataContacts.contact" class="form-control" rows="2" placeholder="Add the contact here!" required></textarea>
+		                                        </div>
+		                                        <button class="btn btn-primary" type="submit" ng-disabled="mySwitch">{{submitHeader}}</button>
+	                                    	</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{addcontactconfirm}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>               
+         				</div>
+         			<div class="col-lg-12">
+                        <div class="modal fade" id="sms" tabindex="-1" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Send SMS</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form role="form" ng-submit="sendSMS()">
+	                                        <div class="form-group">
+	                                            <label>Mobile Number</label>
+	                                            <input class="form-control" ng-model="dataSms.smsNumber" required/>
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <label>SMS Message</label>
+	                                            <textarea class="form-control" rows="3" ng-model="dataSms.smsMessage" required ></textarea>
+	                                        </div>
+	                                        <button type="submit" class="btn btn-sm btn-primary" ng-disabled="mySwitch">{{submitHeader}}</button>
+                                    	</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{sendsmsconfirm}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="modal fade" id="reallocate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" >Re-Allocate this account</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form role="form">
+	                                        <div class="form-group">
+	                                            <label>Current Collection Officer</label>
+	                                            <input id="colofficer" class="form-control" value="{{accdata[0].COLOFFICER}}" ng-disabled=true></input>
+	                                        </div>
+	                                        <div class="form-group">
+	                                            <label>New Collection Officer</label>
+	                                            <select id="newcollector" class="form-control">
+											        <option ng-repeat="c in colOfficer">{{c.USERNAME}}</option>
+											    </select>
+	                                        </div>
+                                    	</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" onclick="reAllocatefunc()">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Upload File</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                        	<form action="FileUploadServlet" method="post" enctype="multipart/form-data">
+												<textarea class="form-control" rows="2" placeholder="Describe" id="attnote" name="attnote" required></textarea><br />
+												<input type="file" name="fileName"> <br>
+												<input type="submit" class="btn btn-sm btn-primary" value="Upload">
+											</form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            {{confirmUpload}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+	</div>
+	
+
+<link rel="stylesheet" type="text/css" href="../../bower_components/bootstrap/dist/css/bootstrap.coop.css">
+
+<script type="text/javascript">
+    $(document).ready(function () { 
+    	$("#activityPg").hide();
+    	$("#loading").show();
+    	var host;
+    	$.getJSON('./env.json', function(data) {
+    		var host = data[0].CurrentInUse;
+    		accList(host);
+    	});
+    	function accList(host) {
+    	    var url = host + "/api/status/Allcards";
+    	    console.log('Using this url---->'+url);
+    	    
+    	    var source =
+	        {
+	            datatype: "json",
+	            datafields: [
+	                { name: 'CARDNUMBER', type: 'string' },
+	                { name: 'CARDNAME', type: 'string' },
+	                { name: 'CARDACCT', type: 'string' },
+	                { name: 'OUTBALANCE', type: 'number' },
+	                { name: 'LIMIT', type: 'number' },
+	                { name: 'EXPPMNT', type: 'number' },
+	                { name: 'PREVDEBT', type: 'number' },
+	                { name: 'CYCLE', type: 'number' },
+	                { name: 'COLOFFICER', type: 'string' },
+	                { name: 'REVIEWDATE', type: 'string' }
+	            ],
+	            id: 'id',
+	            url: url
+	        };
+	        var dataAdapter = new $.jqx.dataAdapter(source);
+	        $("#jqxgrid").jqxGrid(
+	                {
+	                    width: '100%',
+	                    height: '100%',
+	                    source: dataAdapter,                
+	                    virtualmode: true,
+	                    pageable: true,
+	                    pageSize: 30,
+	                    theme : 'coop',
+	                    filterable: true,
+	                    sortable: true,
+	                    selectionmode : 'singlerow',
+	                    rendergridrows: function(obj)
+	        			{
+	        				return obj.data;
+	        			},
+	                    columns: [
+	                        { text: 'CardNumber', datafield: 'CARDNUMBER', width: 150,cellsRenderer: accnumrender },
+	                        { text: 'Card Name', datafield: 'CARDNAME', width: 200 },
+	                        { text: 'Card Account', datafield: 'CARDACCT', width: 120 },
+	                        { text: 'Outstanding Balance', datafield: 'OUTBALANCE', width: 180, cellsformat: 'f' },
+	                        { text: 'Limit Amount', datafield: 'LIMIT', cellsformat: 'f' },
+	                        { text: 'Expected Payment', datafield: 'EXPPMNT', cellsformat: 'f' },
+	                        { text: 'Previous Debt', datafield: 'PREVDEBT', cellsformat: 'f' },
+	                        { text: 'Review Date', datafield: 'REVIEWDATE',cellsformat: 'dd/MM/yyyy'},
+	                        { text: 'Collection Officer', datafield: 'COLOFFICER'}
+	                    ]
+	                });
+	        $("#worklist").click(function() {
+	        	 console.log('worklist ......');
+	     		var urlWorklist = host+"/api/v2/worklist/";
+	     		source.url = urlWorklist;
+	             $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+	     	});
+	         $("#teamleader").click(function() {
+	        	console.log('...teamreviewer List');
+	     		var urlWorklist = host+"/api/v2/worklist/";
+	     		source.url = urlWorklist;
+	             $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+	     	});
+	         $("#viewall").click(function() {
+	        	 console.log('view all .......');
+	     		var urlWorklist = host+"/api/v2/worklist/";
+	     		source.url = urlWorklist;
+	             $("#jqxgrid").jqxGrid('updatebounddata', 'cells');
+	     	});
+    	} 
+    		
+    	
+        
+        
+        function accnumrender (row, columnDataField, value) {
+			return "<a href='action_cc.jsp'>"+value+"</a>";
+         };
+         
+         $('.form_date').datetimepicker({
+     		format: 'dd-mm-yyyy',
+     		startDate: '-0d',
+             language:  'en',
+             weekStart: 1,
+             todayBtn:  1,
+     		autoclose: 1,
+     		todayHighlight: 1,
+     		startView: 2,
+     		minView: 2,
+     		daysOfWeekDisabled: [0,6],
+     		forceParse: 0
+         });
+         
+         $("#jqxgrid").bind('rowselect', function (event) {
+        	    var row = event.args.rowindex;
+        	    var accID = event.args.row.CARDNUMBER;
+                var customerID = event.args.row.CARDACCT;
+                $("#activityPg").show();
+                $("#dataList").hide();
+                $('#cardAccnt').value = accID;
+                activityCc(customerID, accID);
+        });
+         $("#back").click(function(){
+        	 $("#dataList").show();
+             $("#activityPg").hide();
+         });
+         
+         function activityCc(customerID, accID){
+        	 $.getJSON('./env.json', function(data) {
+         		var host = data[0].CurrentInUse;
+         		accDetails(host,customerID, accID);
+         	});
+         };
+         
+         function accDetails(host,customerID, accID){
+        	 console.log('retrieving customer info....'+host+' '+customerID+' '+accID);
+        	 $.getJSON('http://localhost:8080/ecolhome/api/v2/cardInfo/'+customerID, function(data) {
+          		setValues(data);
+          	});
+        
+        	 function setValues(data){
+        		 $("#btnName").text(data[0].CARDNAME);
+        		 $("#cardnumber").text(data[0].CARDNUMBER);
+        		 $("#cardsatus").text(data[0].CARDSTATUS);
+        		 $("#cardacct").text(data[0].CARDACCT);
+        		 $("#accountno").text(data[0].ACCOUNTNO);
+        		 $("#limit").text(data[0].LIMIT);
+        		 $("#prevdebt").text(data[0].PREVDEBT);
+        		 $("#cycle").text(data[0].CYCLE);
+        		 $("#ageinmonths").text(data[0].AGEINMONTHS);
+        		 $("#lastpayment").text(data[0].LASTPAYMENTDATE);
+        		 $("#colofficer").text(data[0].COLOFFICER);
+        		 
+        		 $("#excuse").text(data[0].EXCUSE);
+        		 $("#route").text(data[0].ROUTETOSTATE);
+        		 $("#cmdstatus").text(data[0].cmdstatus);
+        		 $("#branchstatus").text(data[0].branchstatus);
+        		 $("#fileno").text(data[0].fileno);
+        		 
+        		 $("#employer").text(data[0].EMPLOYER);
+        		 $("#dob").text(data[0].DOB);
+        		 $("#mobile").text(data[0].MOBILE);
+        		 $("#tel").text(data[0].TEL);
+        		 $("#address").text(data[0].ADDRESS);
+        		 $("#mobile").text(data[0].MOBILE);
+        	 }
+         };
+         
+    });
+    </script>
+    <style>
+	#activityPg:after {
+	/*   content: "\f110";  */
+	  font-family: FontAwesome;
+	  font-style: normal;
+	  font-weight: normal;
+	  text-decoration: inherit;
+	  position: absolute;
+	  font-size: 400px;
+	  color: #999;
+	  top: 50%;
+	  left: 50%;
+	  margin: -300px 0 0 -200px;
+	  z-index: 1;
+	}
+</style>
+    

@@ -1,0 +1,70 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Repossessor</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">assign account to repossessor</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newrepoForm" ng-submit="newrepofunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="hidden" class="form-text" id="id" name="id" ng-model="newrepossessor.id" readonly="readonly">
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="hidden" class="form-text" id="acc" name="acc" ng-model="newrepossessor.acc" readonly="readonly">
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="hidden" class="form-text" id="cust" name="cust" ng-model="newrepossessor.cust" readonly="readonly">
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+										              <select class="form-text android" ng-model="newrepossessor.repossessor" id="repossessor" name="repossessor" required>
+																<option ng-repeat="p in repossessors">{{p.SPTITLE}}</option>
+													  </select>
+													  <div>
+													      Select a repossessor<span ng-if="newrepoForm.repossessor.$error.required" class="error">*</span>
+													  </div>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="dateinst" name="dateinst" ng-model="newrepossessor.dateinst" required ng-change="duedatefunc()">
+						                              <span class="bar"></span>
+						                              <div>
+													      <span class="fa fa-calendar"></span> Date of instruction<span ng-if="newrepoForm.dateinst.$error.required" class="error">*</span>
+													  </div>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate2" id="duedate" name="duedate" ng-model="newrepossessor.duedate" required>
+						                              <span class="bar"></span>
+						                              <div>
+													      <span class="fa fa-calendar"></span> Due date<span ng-if="newrepoForm.duedate.$error.required" class="error">*</span>
+													  </div>
+						                            </div>
+                                            	</div> 
+                                            	<div class="col-md-12">
+                                            		<a class="btn btn-danger btn-flat" href="#/repossessors"><i class="fa fa-chevron-left"></i> Cancel</a>
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script> 
+ <script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.mask-money').mask("###0", {reverse: true});
+  })
+ </script>

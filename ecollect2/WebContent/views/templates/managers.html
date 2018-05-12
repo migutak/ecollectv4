@@ -1,0 +1,36 @@
+
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Branch Managers</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">list of
+						branch managers</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+	</div>
+	<div class="col-md-12 padding-0" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+		<table class="table table-striped header-fixed">
+			<thead>
+				<tr>
+					<th>Branch#</th>
+					<th>Branch Name</th>
+					<th>Manager</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in Managers | filter:query">
+					<td>{{d.BRANCHCODE}}</td>
+					<td>{{d.BRANCHNAME}}</td>
+					<td>{{d.MANAGER}}</td>
+					<td><a href="#/editmanager/{{d.BRANCHCODE}}">Edit</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

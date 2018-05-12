@@ -1,0 +1,109 @@
+
+<div class="row">
+  <div class="col-lg-3">
+	<b>Branch Code {{branchcode}} : {{branchname}}</b>
+  </div>
+  <div class="col-lg-3">
+  	<b>Select ARO code</b>
+  	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <i class="fa fa-reorder"></i> <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a href="" href="" data-toggle="modal" data-target="#aroaccnt" >ARO CODE</a></li>
+	  </ul>
+	  
+	</div>
+  </div>
+  <div class="col-lg-3">
+  	<b>Select Category</b>
+    <div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	    <i class="fa fa-reorder"></i> <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu">
+	    <li><a ng-click="$event.preventDefault();deptclick('CORPORATE')" href="#">CORPORATE</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('ASSETFINANCE')" href="#">ASSETFINANCE</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('SACCO')" href="#">SACCO</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('AGRIBUSINESS')" href="#">AGRI</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('MORTGAGE')" href="#">MORTGAGE</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('SME')" href="#">SME</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('MICROCREDIT')" href="#">MICROCREDIT</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('IPF')" href="#">IPF</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('PBBSCHEME')" href="#">PBBSCHEME</a></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('PBBSCORED')" href="#">PBBSCORED</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('CMD')" href="#">CMDR</a></li>
+	    <li role="separator" class="divider"></li>
+	    <li><a ng-click="$event.preventDefault();deptclick('PORTFOLIO')" href="#">PORTFOLIO</a></li>
+	  </ul>
+	  
+	</div>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-3"></div>
+</div><!-- /.row -->
+
+<div class="row">
+    <div class="col-lg-12">
+        	<p ng-show="swith"><i class="fa fa-refresh fa-2x fa-spin"></i>&nbsp; Please Wait Data Loading ......</p>
+        <!-- <div>
+            <jqx-grid id="gridid" jqx-create="createWidget" jqx-settings="gridSettings" jqx-on-rowselect="acinfo()"></jqx-grid>
+        </div>  class="jqx-input"-->
+        <div id='jqxgrid'></div>
+			<div id="jqxwindow">
+	            <div>Find Record</div>
+	            <div style="overflow: hidden;">
+	                <div>
+	                    Find what:</div>
+	                <div style='margin-top:5px;'>
+	                    <input id='inputField' type="text" style="width: 200px; height: 23px;" />
+	                </div>
+	                <div style="margin-top: 7px; clear: both;">
+	                    Look in:</div>
+	                <div style='margin-top:5px;'>
+	                    <div id='dropdownlist'>
+	                    </div>
+	                </div>
+	                <div>
+	                    <input type="button" style='margin-top: 15px; margin-left: 50px; float: left;' value="Find" id="findButton" />
+	                    <input type="button" style='margin-left: 5px; margin-top: 15px; float: left;' value="Clear" id="clearButton" />
+	                </div>
+	            </div>
+	        </div>
+    </div>
+</div>
+				<div class="col-lg-12">
+                        <div id="aroaccnt" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						    <!-- Modal content-->
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title">Search Accounts</h4>
+						      </div>
+						      <div class="modal-body">
+						        <form>
+						        	<div class="form-group">
+						        		<input class="form-control" ng-model="in_arocode" id="in_arocode"/>
+						        	</div>
+						        	<button type="button" class="btn btn-default btn-flat" ng-click="$event.preventDefault();arodeptclick(in_arocode)">Submit</button>
+						        </form>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						
+						  </div>
+						</div>
+                    </div>
+<script type="text/javascript">
+	$(".dropdown-menu li a").click(function(){
+	  var selText = $(this).text();
+	  $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+	  //document.getElementById("dept").value = selText;
+	});
+	$("#csvExport").click(function () {
+        $("#gridid").jqxgrid('exportData', 'csv');
+    });
+</script>

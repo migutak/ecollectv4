@@ -1,0 +1,92 @@
+	<div class="col-md-12">
+		<div class="col-md-12 panel">
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="cardnumber"> <label>CARDNUMBER</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="cardstatus"> <label>CARD STATUS</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="cardacct"> <label>CARDACCT</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="accountno"> <label>ACCOUNTNO</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="outbalance"> <label>OUTBALANCE</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="limit"> <label>LIMIT</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="payment"> <label>PAYMENT</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="cycle"> <label>CYCLE</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="prevdebt"> <label>PREVDEBT</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="exppmnt"> <label>EXPPMNT</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="lastpaymentdate"> <label>LASTPAYMENTDATE</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script src="asset/js/global.js"></script>
+<script type="text/javascript">
+	
+	var cust = custnumber;//document.getElementById("cust").value;
+	var acc = accnumber;//document.getElementById("acc").value;
+	
+	    	var globalUrl = urladdress;
+    		$.ajax({
+				type : 'GET',
+				url : globalUrl + '/api/v2/cardInfo/' + acc,
+				success : function(data) {
+					document.getElementById("cardnumber").value = data[0].CARDNUMBER;
+					document.getElementById("cardstatus").value = data[0].CARDSTATUS;
+					document.getElementById("cardacct").value = data[0].CARDACCT;
+					document.getElementById("accountno").value = data[0].ACCOUNTNO;
+					document.getElementById("outbalance").value = data[0].OUTBALANCE;
+					document.getElementById("limit").value = data[0].LIMIT;
+					document.getElementById("payment").value = data[0].PAYMENT;
+					document.getElementById("cycle").value = data[0].CYCLE;
+					document.getElementById("prevdebt").value = data[0].PREVDEBT;
+					document.getElementById("exppmnt").value = data[0].EXPPMNT;
+					document.getElementById("lastpaymentdate").value = data[0].LASTPAYMENTDATE;
+				}
+			})
+	    
+</script>

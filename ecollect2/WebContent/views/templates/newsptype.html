@@ -1,0 +1,153 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Service providers</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">New service provider</p>
+								</div>
+								<a href="" ng-click="toexcelupload()" ng-show="excelupload">Upload from excel</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12" ng-show="excelupload">
+						<form class="cmxform" name="newsptypeForm" ng-submit="addsptype()">
+	                		<div class="col-md-4">
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="spname" name="spname" ng-model="dataIn.spname" required>
+	                              <span class="bar"></span>
+	                              <div>
+								       Service provider name
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="address" name="address" ng-model="dataIn.address">
+	                              <span class="bar"></span>
+	                              <div>
+								       Address
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="tel" name="tel" ng-model="dataIn.tel" required>
+	                              <span class="bar"></span>
+	                              <div>
+								       Telephone Number
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text dateAnimate2" id="endofindemnity" name="endofindemnity" ng-model="dataIn.endofindemnity">
+	                              <span class="bar"></span>
+	                              <div>
+								       <span class="fa fa-calendar"></span> End of indemnity
+								  </div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-4">
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="email" name="email" ng-model="dataIn.email">
+	                              <span class="bar"></span>
+	                              <div>Email</div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="coverage" name="coverage" ng-model="dataIn.coverage">
+	                              <span class="bar"></span>
+	                              <div>Coverage</div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                				<select class="form-text android" ng-model="dataIn.sptype" id="sptype" name="sptype" required>
+											<option>INVESTIGATORS</option>
+											<option>VALUERS</option>
+											<option>AUCTIONEERS-MARKETORS-REPOSSESSORS</option>
+											<option>DEBT COLLECTORS</option>
+											<option>STORAGE YARDS</option>
+								  	</select>
+								  <div ng-if="newsptypeForm.sptype.$error.required" class="error">
+								      Select service provider type
+								  </div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-4">
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="contactperson" name="contactperson" ng-model="dataIn.contactperson" required>
+	                              <span class="bar"></span>
+	                              <div>
+								       Contact Person
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="accnumber" name="accnumber" ng-model="dataIn.accnumber">
+	                              <span class="bar"></span>
+	                              <div>
+								       Account number
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text dateAnimate" id="startdate" name="startdate" ng-model="dataIn.startdate" required>
+	                              <span class="bar"></span>
+	                              <div>
+								       <span class="fa fa-calendar"></span> Contract start date
+								  </div>
+	                            </div>
+	                            
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-spinner-size="30">Submit</button>
+	                              <a class="btn btn-danger btn-flat" href="#/sptype"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+					<div class="col-md-12" ng-show="!excelupload">
+						<a href="" ng-click="backfromexcelupload()">Back</a>
+						<p>Service provider upload (xls)</p>
+						<hr>
+						<form id="uploadsptypesFrm" action="Testspupload" method="post" enctype="multipart/form-data">
+                            <input type="file" name="uploadnotesfile" id="uploadnotesfile" onchange="Noteupload()" accept=".xls"/>
+                            <p id="uploadsptypes_id"></p>
+                            <input class="btn btn-primary" type="submit" value="Upload" id="submitBtn"/>
+                        </form>
+					</div>
+				</div>
+			</div>
+        </div>
+
+<script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script>      
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+
+  })
+
+  function Noteupload() {
+		var x = document.getElementById("uploadnotesfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("uploadsptypes_id").innerHTML = txt;
+	}
+	
+ </script>

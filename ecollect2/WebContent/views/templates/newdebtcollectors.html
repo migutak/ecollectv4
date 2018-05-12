@@ -1,0 +1,137 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">New debt collector</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">New entry for debt collection</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newdebtcollectorForm" ng-submit="newdebtcollector()">
+	                		<div class="col-md-4">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custnumber" name="custnumber" ng-model="dataIn.custnumber" ng-blur="lookupdetails(dataIn.custnumber)" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Enter customer number <span ng-if="newdebtcollectorForm.custnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custname" name="custname" ng-model="dataIn.custname" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Name of customer <span ng-if="newdebtcollectorForm.custname.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="accnumber" name ="accnumber" class="form-text android" ng-model="dataIn.accnumber" required>
+										<option ng-repeat="acc in custaccounts">{{acc.ACCNUMBER}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Select account number <span ng-if="newdebtcollectorForm.accnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="region" name ="region" class="form-text android" ng-model="dataIn.region">
+										<option>NAIROBI</option>
+										<option>CENTRAL</option>
+										<option>COAST</option>
+										<option>WESTERN</option>
+										<option>RIFT VALLEY</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Region <span ng-if="newdebtcollectorForm.region.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                        </div>
+	                        <div class="col-md-4">    
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <input type="text" class="form-text" id="address" name="address" ng-model="dataIn.address">
+					              <div>
+								      Address <span ng-if="newdebtcollectorForm.address.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="dateinput" name="dateinput" ng-model="dataIn.dateinput" readonly="readonly">
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-calendar"></span> Date of input <span ng-if="newdebtcollectorForm.dateinput.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="arocode" name="arocode" ng-model="dataIn.arocode" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Aro code <span ng-if="newdebtcollectorForm.arocode.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="settlementacc" name ="settlementacc" class="form-text android" ng-model="dataIn.settlementacc" required>
+										<option ng-repeat="acc in custaccounts">{{acc.ACCNUMBER}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Settlement a/c <span ng-if="newdebtcollectorForm.settlementacc.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+							</div>
+							<div class="col-md-4">
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="fileno" name="fileno" ng-model="dataIn.fileno" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      File number <span ng-if="newdebtcollectorForm.fileno.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text mask-money" id="accbalance" name="accbalance" ng-model="dataIn.accbalance" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-money"></span> Account balance <span ng-if="newdebtcollectorForm.accbalance.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+								    <input type="text" class="form-text" id="town" name="town" ng-model="dataIn.town" required>
+								    <div>
+									      Town <span ng-if="newdebtcollectorForm.town.$error.required" class="error">*</span>
+									</div>
+	                            </div>
+	                            
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+	                              <a ng-show="showcancel" class="btn btn-danger" href="#/debtcollectors"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script> 
+ <script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.mask-money').mask("###0", {reverse: true});
+  })
+ </script>

@@ -1,0 +1,19 @@
+					<div class="col-md-12" ng-repeat="d in directorsData" id="directorsid">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <address>
+                                        <strong>{{d.FULLNAME}}</strong><br>
+                                        {{d.ADDRESS}} <br>
+                                        <abbr title="Account">Acc:</abbr> {{d.ACCNUMBER}} <br>
+                                        <abbr title="Customer">Cust:</abbr> {{d.CUSTNUMBER}} <br>
+                                        <abbr title="Phone">Phone:</abbr> {{d.TELNUMBER}} <br>
+                                        <abbr title="Relation">Relation:</abbr> {{d.RELATIONSHIP}} <br>
+                                        <abbr title="idnumber">NationID:</abbr> {{d.NATIONID}} 
+                                    </address>
+                                    <address>
+                                        <strong>Email Address</strong><br>
+                                        <a href="mailto:#">{{d.EMAIL}}</a>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>

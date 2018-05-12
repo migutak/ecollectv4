@@ -1,0 +1,38 @@
+<div id="content">
+		<div class="col-md-12 padding-0">
+			<div class="col-md-12 padding-0">
+				<div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-12">
+							<h3 class="animated fadeInLeft">SLA</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">Define Service level agreements</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="container">
+					<strong>Current Notification SLA : {{slas.NUOFDAYS}} minutes</strong>
+					<hr>
+					<form ng-submit="saveNotificationSla()">
+						   <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                        <input type="text" class="form-text mask-money" ng-model="slas.newsla" required>
+	                        <span class="bar"></span>
+	                        <label>Minutes to read Notifications</label>
+	                      </div>
+	                      <div class="col-md-12">
+                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-spinner-size="30">Update</button>
+                        </div>
+					</form>
+				</div>
+			</div>
+		</div>
+</div>
+<script src="views/templates/plugins/jquery.mask.min.js"></script>
+ <script type="text/javascript">
+	$(document).ready(function() {
+
+		$('.mask-money').mask("###0", {reverse: true});
+		
+	})
+</script>   

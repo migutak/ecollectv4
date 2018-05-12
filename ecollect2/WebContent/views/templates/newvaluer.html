@@ -1,0 +1,246 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">New valuer</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">New entry for valuation</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+								<div class="form-group">
+								    <select id="typeofproperty" name ="typeofproperty" class="form-text android" ng-model="dataIn.typeofproperty" required>
+										<option>VEHICLE</option>
+										<option>PROPERTY</option>
+									</select>
+									<div>
+		                              	Type of property<span class="error">*</span>
+		                             </div>
+	                            </div>
+	                            
+						<form class="cmxform" name="newvaluerForm" ng-submit="newvaluer()" ng-show="showPropertyForm">
+	                		<div class="col-md-4">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custnumber" name="custnumber" ng-model="dataIn.custnumber" ng-blur="lookupdetails(dataIn.custnumber)" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Enter the customer number <span ng-if="newvaluerForm.custnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="accnumber" name ="accnumber" class="form-text android" ng-model="dataIn.accnumber" required>
+										<option ng-repeat="acc in custaccounts">{{acc.ACCNUMBER}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Select account number <span ng-if="newvaluerForm.accnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custname" name="custname" ng-model="dataIn.custname" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Name of customer <span ng-if="newvaluerForm.custname.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="dataIn.ownership" id="ownership" name="ownership">
+											<option>OWNER</option>
+											<option>THIRD PARTY</option>
+								  </select>
+					              <div>Ownership</div>
+	                            </div>
+	                    </div>
+	                    <div class="col-md-4">        
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="dateinput" name="dateinput" ng-model="dataIn.dateinput" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-calendar"></span>  Date of input <span ng-if="newvaluerForm.dateinput.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text mask-money" id="accbalance" name="accbalance" ng-model="dataIn.accbalance" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-money"></span> Account balance <span ng-if="newvaluerForm.accbalance.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+							
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="arocode" name="arocode" ng-model="dataIn.arocode" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Aro code <span ng-if="newvaluerForm.arocode.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="fileno" name="fileno" ng-model="dataIn.fileno" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      File number <span ng-if="newvaluerForm.fileno.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                    </div>
+	                    <div class="col-md-4">        
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="propertyno" name="propertyno" ng-model="dataIn.propertyno">
+	                              <span class="bar"></span>
+	                              <div>
+								      Property L.R. No.<span ng-if="newvaluerForm.propertyno.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="regowner" name="regowner" ng-model="dataIn.regowner" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Registered owner <span ng-if="newvaluerForm.regowner.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select class="form-text android" ng-model="dataIn.yard" id="yard" name="yard">
+											<option ng-repeat="y in yards">{{y.SPTITLE}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Storage yard
+								  </div>
+	                            </div>
+	                            
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+	                              <a ng-show="showcancel" class="btn btn-danger" href="#/valuers"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+
+	                	<form class="cmxform" name="newvaluerForm" ng-submit="newvaluer()" ng-show="!showPropertyForm">
+	                		<div class="col-md-4">
+	                			<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custnumber" name="custnumber" ng-model="dataIn.custnumber" ng-blur="lookupdetails(dataIn.custnumber)" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Enter the customer number <span ng-if="newvaluerForm.custnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="accnumber" name ="accnumber" class="form-text android" ng-model="dataIn.accnumber" required>
+										<option ng-repeat="acc in custaccounts">{{acc.ACCNUMBER}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Select account number <span ng-if="newvaluerForm.accnumber.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="custname" name="custname" ng-model="dataIn.custname" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Name of customer <span ng-if="newvaluerForm.custname.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <input type="text" class="form-text" id="vehiclemake" name="vehiclemake" ng-model="dataIn.vehiclemake">
+					              <div>
+								      Vehicle make
+								  </div>
+	                            </div>
+	                    </div>
+	                    <div class="col-md-4">        
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="dateinput" name="dateinput" ng-model="dataIn.dateinput" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-calendar"></span>  Date of input <span ng-if="newvaluerForm.dateinput.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text mask-money" id="accbalance" name="accbalance" ng-model="dataIn.accbalance" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      <span class="fa fa-money"></span> Account balance <span ng-if="newvaluerForm.accbalance.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+							
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="arocode" name="arocode" ng-model="dataIn.arocode" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Aro code <span ng-if="newvaluerForm.arocode.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="fileno" name="fileno" ng-model="dataIn.fileno" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      File number <span ng-if="newvaluerForm.fileno.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                    </div>
+	                    <div class="col-md-4">        
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+					              <select class="form-text android" ng-model="dataIn.ownership" id="ownership" name="ownership">
+											<option>OWNER</option>
+											<option>THIRD PARTY</option>
+								  </select>
+					              <div>Ownership</div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="regowner" name="regowner" ng-model="dataIn.regowner" required>
+	                              <span class="bar"></span>
+	                              <div>
+								      Registered owner <span ng-if="newvaluerForm.regowner.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select class="form-text android" ng-model="dataIn.yard" id="yard" name="yard">
+											<option ng-repeat="y in yards">{{y.SPTITLE}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>
+								      Storage yard
+								  </div>
+	                            </div>
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <input type="text" class="form-text" id="propertyno" name="propertyno" ng-model="dataIn.propertyno">
+	                              <span class="bar"></span>
+	                              <div>
+								      Vehicle Regno <span ng-if="newvaluerForm.propertyno.$error.required" class="error">*</span>
+								  </div>
+	                            </div>
+	                		</div>
+	                		<div class="col-md-12">
+	                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+	                              <a ng-show="showcancel" class="btn btn-danger" href="#/valuers"><i class="fa fa-chevron-left"></i> Cancel</a>
+	                        </div>
+	                	</form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script>   
+  <script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, minDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.mask-money').mask("###0", {reverse: true});
+  })
+ </script>

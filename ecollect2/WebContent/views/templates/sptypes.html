@@ -1,0 +1,70 @@
+
+        <div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Service providers types</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">types of service providers</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-link" href="#newsptype"><i class="fa fa-file-text-o"></i> New</a>
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+						</div>
+						<div class="col-lg-3">
+							   <div class="form-group form-animate-text" style="margin-top:10px !important;">
+	                				<select class="form-text android" ng-model="dataIn.sp" id="sp" name="sp" required>
+											<option>INVESTIGATORS</option>
+											<option>VALUERS</option>
+											<option>AUCTIONEERS</option>
+											<option>DEBT COLLECTORS</option>
+											<option>STORAGE YARDS</option>
+											<option>REPOSSESSORS</option>
+											<option>MARKETORS</option>
+											<option>ALL PROVIDERS</option>
+								  	</select>
+								  <div>
+								      Select Service provider type
+								  </div>
+	                            </div>
+						</div>
+					</div>
+					<div class="col-md-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+						<table class="table table-striped header-fixed">
+		    				<thead>
+		    					<tr>
+		    						<th>Type#</th>
+		    						<th>Provider Name</th>
+		    						<th>Address</th>
+		    						<th>Contact Person</th>
+		    						<th>Telephone</th>
+		    						<th>Coverage</th>
+		    						<th></th>
+		    					</tr>
+		    				</thead>
+		    				<tbody>
+		    						<tr ng-repeat="p in Providers | filter:query">
+		    							<td>{{p.SPCODE}}</td>	
+		    							<td>{{p.SPTITLE}}</td>
+		    							<td>{{p.ADDRESS}}</td>
+		    							<td>{{p.CONTACTPERSON}}</td>	
+		    							<td>{{p.TELEPHONE}}</td>
+		    							<td>{{p.COVERAGE}}</td>
+		    							<td>
+		    								<a style="color:blue" href="#/editsptype/{{p.SPCODE}}/{{p.SPTITLE}}"><i class="fa fa-pencil"></i></a>
+		    								<a style="color:red" href="" ng-click="deleteSptype(p.SPCODE,p.SPTITLE)"><i class="fa fa-trash-o"></i></a>
+		    							</td>	
+		    						</tr> 	
+		    				</tbody>
+		    			</table>
+					</div>
+				</div>
+			</div>
+        </div>
+        

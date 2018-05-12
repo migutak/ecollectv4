@@ -1,0 +1,72 @@
+<div class="col-md-12">
+		<div class="col-md-12 panel">
+		<form class="cmxform" ng-submit="editMetadata()">
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="MetaEmployer" ng-model="meta.MetaEmployer" ng-disable="showedit"> <label>Employer Name</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="MetaEmpstatus" ng-model="meta.MetaEmpstatus" ng-disable="showedit"> <label>Employment Status</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="MetaDob" ng-model="meta.MetaDob" ng-disable="showedit"> <label>DOB/Incorporation</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 40px !important;">
+					<input type="text" class="form-text" id="MetaDoe" ng-model="meta.MetaDoe" ng-disable="showedit"> <label>Date of Employment</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaMarital" ng-model="meta.MetaMarital" ng-disable="showedit"> <label>Marital Status</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaPhone" ng-model="meta.MetaPhone" ng-disable="showedit"> <label>Primary Phone number</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaEmail" ng-model="meta.MetaEmail" ng-disable="showedit"> <label>Email Address</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaSalary" ng-model="meta.MetaSalary" ng-disable="showedit"> <label>Net Salary</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaFileno" ng-model="meta.MetaFileno" ng-disable="showedit"> <label>File Number</label>
+				</div>
+
+				<div class="form-group form-animate-text"
+					style="margin-top: 10px !important;">
+					<input type="text" class="form-text" id="MetaResidential" ng-model="meta.MetaResidential" ng-disable="showedit"> <label>Residential Address</label>
+				</div>
+			</div>
+			<div class="col-md-12" ng-show="!showedit">
+				<button type="submit" class="btn btn-primary" ladda="Loading" data-style="expand-left">Update</button>
+				<a href="" class="btn btn-danger" type="buttton" ng-click="cancelAdd()" ng-show="!Loading">Cancel</a>
+			</div>
+			</form>
+		</div>
+	</div>
+
+				<div class="row" ng-show="showedit">
+					<div class="col-lg-6">
+						<a href="" ng-click="editMeta()" ><i class="fa fa-pencil"></i> Edit</a>
+					</div>
+				</div>
+

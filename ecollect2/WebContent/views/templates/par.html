@@ -1,0 +1,36 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+		<div class="panel box-shadow-none content-header">
+			<div class="panel-body">
+				<div class="col-md-12">
+					<h3 class="animated fadeInLeft">Portfolio at Risk</h3>
+					<p class="animated fadeInDown" style="line-height: .4;">Summary</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12 padding-0" style="min-height: 600px; max-height: 700px; overflow-y: scroll;">
+		<div class="row">
+		  <div class="col-md-12">
+		  	<span us-spinner="{radius:30, width:8, length: 16}" spinner-on="partableSpinner"></span>
+		  	<div id="partablecontainer">
+		  		<p>Portfolio at risk = Unpaid principal balance of all loans with late payments + renegotiated loans / Gross loan portfolio</p>
+		  	</div>
+		  </div>
+		</div>
+		<div class="row">
+		  <div class="col-md-6">
+		  <span us-spinner="{radius:30, width:8, length: 16}" spinner-on="ageSpinner"></span>
+		  	<div id="agecontainer"></div>
+		  </div>
+		  <div class="col-md-6">
+		  <span us-spinner="{radius:30, width:8, length: 16, color:'blue'}" spinner-on="kpiSpinner"></span>
+		  	<div id="kpicontainer">
+		  		<p>Arrears rate = Amount past due/Gross loan portfolio</p>
+		  		<p>Repayment rate  = Amount received (current+past due) less prepayments / (total payments due this period + amounts due from past periods)</p>
+		  		<p>Current recovery rate = Amount received this period (P or P+I)/Amount due this period(P or P+I) under original loan terms</p>
+		  	</div>
+		  </div>
+		</div>
+	</div>
+</div>

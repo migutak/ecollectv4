@@ -1,0 +1,58 @@
+
+<div class="content">
+	<span us-spinner="{radius:30, width:8, length: 16}"></span>
+	<div class="row">
+		<div class="col-md-4">
+			<form role="form">
+				<div class="form-group">
+					<label>Mobile Number:</label> <input class="form-control"
+						ng-model="dataSms.smsNumber" required />
+				</div>
+				<div class="form-group">
+					<label>Template:</label> 
+					<select id="txtmaritaledit"
+						class="form-control" ng-model="dataSms.smsTemplate">
+						<option value="LOAN">LOAN</option>
+						<option value="LOANOD">LOANOD/LIABILITY</option>
+						<option value="CC">CC</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>SMS Message</label>
+					<textarea class="form-control" rows="3" maxlength="160" ng-model="dataSms.smsMessage" required id="smsMessage"></textarea>
+					<span>{{160 - dataSms.smsMessage.length}} characters left</span>
+				</div>
+				<div class="form-group">
+					<label>CallBack Number</label>
+					<textarea class="form-control" rows="1" maxlength="50" ng-model="dataSms.smsCallback" required id="smsCallback"></textarea>
+					<span>{{20 - dataSms.smsCallback.length}} characters left</span>
+				</div>
+				<button class="btn btn-primary" ladda="Loading" ng-click="sendsmsfunc()" data-style="expand-left" ng-show="showSendsms">Send SMS</button>
+			</form>
+		</div>
+
+		<div class="col-md-8" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+			<input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>CustNumber</th>
+						<th>Message</th>
+						<th>Date</th>
+						<th>By</th>
+						<th>Sent</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="d in sentsms | filter:query">
+						<td><strong>{{d.CUSTNUMBER}}</strong></td>
+						<td>{{d.MESSAGE}}</td>
+						<td>{{d.DATESENT}}</td>
+						<td>{{d.OWNER}}</td>
+						<td>{{d.SENT}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

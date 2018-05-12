@@ -1,0 +1,26 @@
+<div class="row" id="sameid">
+	<div class="col-lg-12">
+		<table class="table table-striped header-fixed">
+			<thead>
+				<tr>
+					<th>Account#</th>
+					<th>Customer Number</th>
+					<th>Customer Name</th>
+					<th>Book Balance</th>
+					<th>Product Code</th>
+					<th>ID Number</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="d in sameidnumbers">
+					<td>{{d.ACCNUMBER}}</td>
+					<td>{{d.CUSTNUMBER}}</td>
+					<td>{{d.CLIENT_NAME}}</td>
+					<td>{{d.OUSTBALANCE | number:0}}</td>
+					<td>{{d.PRODUCTCODE}}</td>
+					<td>{{d.NATIONID}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="col-md-12">
+	<form class="cmxform" ng-submit="addContact()">
+		<div class="col-md-6">
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="fullname" ng-model="addcontactData.fullname" required>
+				<span class="bar"></span> <label>Full Name</label>
+			</div>
+
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="contact" ng-model="addcontactData.contact" required>
+				<span class="bar"></span> <label>Contact</label>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<input type="text" class="form-text" id="rel" ng-model="addcontactData.rel" required>
+				<span class="bar"></span> <label>Relationship</label>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<button type="submit" class="btn btn-primary" ladda="Loading" data-style="expand-left">Add contact</button>
+			<a href="#/contacts" class="btn btn-warning" type="buttton" ng-show="!Loading">Cancel</a>
+		</div>
+	</form>
+</div>

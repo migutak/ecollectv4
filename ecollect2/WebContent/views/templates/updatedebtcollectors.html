@@ -1,0 +1,73 @@
+
+<div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Debt collectors</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">Status update</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<form class="cmxform" name="newstatusForm" ng-submit="statusfunc()">
+                                            	<div class="col-md-12">
+	                                            	<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="hidden" class="form-text" id="statusid" name="statusid" ng-model="newstatus.statusid" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="statuspname" name="statuspname" ng-model="newstatus.statuspname" readonly="readonly">
+						                              <span class="bar"></span>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text" id="remarks" name="remarks" ng-model="newstatus.remarks">
+						                              <span class="bar"></span>
+						                              <label>Remarks</label>
+						                            </div>
+						                            
+						                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <select class="form-text android" ng-model="newstatus.status" id="status" name="status" required>
+																<option>PENDING</option>
+																<option>PAYING</option>
+																<option>RECALLED</option>
+																<option>RETURNED</option>
+																<option>CLEARED</option>
+													  </select>
+						                              <span class="bar"></span>
+						                              <div>
+													      Status
+													  </div>
+						                            </div>
+
+													<div class="form-group form-animate-text" style="margin-top:40px !important;">
+						                              <input type="text" class="form-text dateAnimate2" id="daterecalled" name="daterecalled" ng-model="newstatus.daterecalled">
+						                              <span class="bar"></span>
+						                              <div> <span class="fa fa-calendar"></span> Date recalled</div>
+						                            </div>
+
+                                            	</div> 
+                                            	<div class="col-md-12">
+                                            		<a class="btn btn-danger btn-flat" href="#/debtcollectors"><i class="fa fa-chevron-left"></i> Cancel</a>
+						                              <button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-right">Submit</button>
+						                        </div>
+                                            </form>
+					</div>
+				</div>
+			</div>
+        </div>
+ 
+ <script src="asset/js/plugins/bootstrap-material-datetimepicker.js"></script> 
+ <script src="views/templates/plugins/jquery.mask.min.js"></script>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+  	$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, maxDate : new Date(),format : 'DD-MMM-YYYY'});
+  	$('.dateAnimate2').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true,format : 'DD-MMM-YYYY'});
+  	$('.mask-money').mask("###0", {reverse: true});
+  })
+ </script>

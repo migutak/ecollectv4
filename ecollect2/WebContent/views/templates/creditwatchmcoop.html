@@ -1,0 +1,191 @@
+
+<div id="content">
+            <div class="col-md-12 padding-0">
+                <div class="panel box-shadow-none content-header">
+                    <div class="panel-body">
+                        <div class="col-md-2">
+                            <h3 class="animated fadeInLeft">Paying Watch</h3>
+                            <p class="animated fadeInDown" style="line-height: .4;">Credit watch {{section}}</p>
+                        </div>
+                        <div class="col-md-2">
+                        <div class="form-group form-animate-text" style="margin-top: 30px !important;">
+                            <select class="form-text android" ng-model="section">
+                                    <option>CORPORATE</option>
+                                    <option>ASSETFINANCE</option>
+                                    <option>SACCO</option>
+                                    <option>AGRI</option>
+                                    <option>MORTGAGE</option>
+                                    <option>SME</option>
+                                    <option>MICROCREDIT</option>
+                                    <option>IPF</option>
+                                    <option>PBBSCHEME</option>
+                                    <option>PBBSCORED</option>
+                                    <option>CMDR</option>
+                                    <option>PORTFOLIO</option>
+                                    <option>MCOOPCASH</option>
+                            </select>
+                            <div>Division</div>
+                        </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div id="chart-container"> XT will load here!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <div class="col-md-12 padding-0">
+        <table id="users" data-height="500" data-side-pagination="server" data-pagination="true" data-search="true" data-toolbar="#Error">
+                </table>
+    </div>
+
+</div>
+
+<!-- Global valiable -->
+<script src="asset/js/global.js"></script>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>
+<script src="asset/js/bootstrap.min.js"></script>
+
+<script src="bower_components/bootstrap-table/dist/bootstrap-table.js"></script>
+<script src="bower_components/bootstrap-table/dist/bootstrap-table-export.js"></script>
+<script src="bower_components/bootstrap-table/dist/tableExport/tableExport.js"></script>
+
+<script src="bower_components/fusioncharts-suite-xt/js/fusioncharts.js"></script>
+<script src="bower_components/fusioncharts-suite-xt/js/themes/fusioncharts.theme.fint.js"></script>
+
+<script type="text/javascript">
+        $(document).ready(function(e) {
+            $('#users').bootstrapTable({
+                    method: 'GET',
+                    url: urladdress+'/api/v2/lazy',
+                    cache: false,
+                    height: 530,
+                    striped: true,
+                    pagination: true,
+                    pageSize: 50,
+                    search: true,
+                    showRefresh: true,
+                    columns: [
+                            {field: 'FIRSTNAME',title: 'FIRSTNAME',visible:true},
+                            {field: 'TELNUMBER',title: 'TELNUMBER',align: 'center',valign: 'middle',sortable: true}, 
+                            {field: 'ADDRESSLINE1',title: 'ADDRESSLINE1',align: 'left',valign: 'top',sortable: true},
+                            {field: 'DOB',title: 'DOB',align: 'center',valign: 'middle',clickToSelect: false,formatter: operateFormatter,events: operateEvents}]
+                });
+        });
+        
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="edit ml10" href="javascript:void(0)" title="Edit">',
+                    '<i class="glyphicon glyphicon-edit"></i>',
+                '</a>&nbsp;'
+            ].join('');
+        }
+        
+        window.operateEvents = {
+            'click .edit': function (e, value, row, index) {
+                console.log(row);
+            }
+        }; 
+
+        //chart
+
+FusionCharts.ready(function(){
+    var fusioncharts = new FusionCharts({
+    type: 'msspline',
+    renderAt: 'chart-container',
+    width: '100%',
+    height: '200',
+    dataFormat: 'json',
+    dataSource: {
+        "chart": {
+            "caption": "Credit watch Trend",
+            "captionFontSize": "8",
+            "baseFontColor": "#333333",
+            "baseFont": "Helvetica Neue,Arial",
+            "subcaptionFontBold": "0",
+            "xAxisName": "Day",
+            "yAxisName": "% Book value",
+            "showValues": "0",
+            "paletteColors": "#0075c2,#1aaf5d",
+            "bgColor": "#ffffff",
+            "showBorder": "0",
+            "showShadow": "0",
+            "showAlternateHGridColor": "0",
+            "showCanvasBorder": "0",
+            "showXAxisLine": "1",
+            "xAxisLineThickness": "1",
+            "xAxisLineColor": "#999999",
+            "canvasBgColor": "#ffffff",
+            "legendBorderAlpha": "0",
+            "legendShadow": "0",
+            "divlineAlpha": "100",
+            "divlineColor": "#999999",
+            "divlineThickness": "1",
+            "divLineIsDashed": "1",
+            "divLineDashLen": "1",
+            "divLineGapLen": "1"
+        },
+        "categories": [{
+            "category": [{
+                "label": "Mon"
+            }, {
+                "label": "Tue"
+            }, {
+                "label": "Wed"
+            }, {
+                "label": "Thu"
+            }, {
+                "label": "Fri"
+            }, {
+                "label": "Sat"
+            }, {
+                "label": "Sun"
+            }]
+        }],
+
+        "dataset": [{
+            "seriesname": "On Watch",
+            "data": [{
+                "value": "15123"
+            }, {
+                "value": "14233"
+            }, {
+                "value": "25507"
+            }, {
+                "value": "9110"
+            }, {
+                "value": "15529"
+            }, {
+                "value": "20803"
+            }, {
+                "value": "19202"
+            }]
+        }, {
+            "seriesname": "Deliquent",
+            "data": [{
+                "value": "13400"
+            }, {
+                "value": "12800"
+            }, {
+                "value": "22800"
+            }, {
+                "value": "12400"
+            }, {
+                "value": "15800"
+            }, {
+                "value": "19800"
+            }, {
+                "value": "21800"
+            }]
+        }]
+    }
+}
+);
+    fusioncharts.render();
+});
+
+    </script>
+

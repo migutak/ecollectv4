@@ -1,0 +1,37 @@
+<div id="content">
+	<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-6">
+									<h3 class="animated fadeInLeft">Departments</h3>
+									<a href="#/newdepartment">New department</a>
+								</div>
+							</div>
+						</div>
+	<div class="col-md-12">
+		    <div class="search col-md-3">
+		        <input type="text" class="form-text border-bottom" ng-model="query" placeholder="search.."/>
+		    </div>
+				<div class="col-lg-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+					<table class="table table-striped header-fixed" >
+						<thead>
+							<tr>
+								<th>No#</th>
+								<th>Department Name</th>
+								<th>Date created</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="d in departments | filter:query">
+								<td>{{d.DEPTCODE}}</td>
+								<td>{{d.DEPTNAME}}</td>
+								<td>{{d.DATECREATED}}</td>
+								<td><a href="" ng-click="deleteDepartment(d.DEPTCODE)">Delete</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+	</div>
+	</div>
+</div>

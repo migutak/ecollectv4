@@ -1,0 +1,470 @@
+
+
+        <div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0" style="min-height: 600px; max-height: 800px; overflow-y: scroll;">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Allocations</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">Allocate, upload notes, xls files</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-md-2"><h5>Allocate</h5></div>
+						<div class="col-md-6">
+							<form name="reallocateaccForm" ng-submit="updateBulk()">
+								<div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="fromcolofficer" name ="fromcolofficer" class="form-text android" ng-model="dataIn.fromcolofficer" required>
+										<option ng-repeat="c in Col" value="{{c.USERNAME}}"> {{c.FULLNAME}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>Select collection officer (from) <span ng-if="reallocateaccForm.fromcolofficer.$error.required" class="error">*</span></div>
+	                            </div>
+	                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              <select id="newcolofficer" name ="newcolofficer" class="form-text android" ng-model="dataIn.newcolofficer" required>
+										<option ng-repeat="c in Col" value="{{c.USERNAME}}"> {{c.FULLNAME}}</option>
+								  </select>
+	                              <span class="bar"></span>
+	                              <div>Select collection officer (new) <span ng-if="reallocateaccForm.newcolofficer.$error.required" class="error">*</span></div>
+	                            </div>
+								<button class="btn btn-default" ladda="Loading" ng-click="Submit()" data-style="expand-left">Reallocate</button>
+							</form>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-md-2"><h5>Reallocate from file (xls ONLY)</h5></div>
+                        <div class="col-lg-4">
+                        	<form id="reallocateuploadForm" action="UploadServlet" method="post" enctype="multipart/form-data">
+                            	<input type="file" name="reallocateuploadfile" id="reallocateuploadfile" onchange="reallocateupload()" accept=".xls"/>
+                            	<input type="submit" class=" btn btn-default" value="Reallocate"/>
+                            	<p id="reallocateupload_id"></p>
+                          	</form>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-2"><h5>Bulk Notes upload</h5></div>
+                        <div class="col-lg-4">
+                        <!--  <select ng-model='dataIn.Reviewdate' ng-show="showReviewdate">
+                        	<option selected>No_changes_to_reviewdate</option>
+                        	<option>ammend_reviewdate</option>
+                        </select><br>
+                        <form id="uploadnotesFrm" action="https://ecollectapp.co-opbank.co.ke:3000/upload_a_note" method="post" enctype="multipart/form-data" ng-show="!withreviewdate">
+                            No changes in reviewdate <input type="file" name="file" id="uploadnotesfile" onchange="Noteupload()" accept=".xls"/><br>
+                            <input type="text" name="lusername" id="lusername" readonly>
+                            <p id="uploadnotes_id"></p>
+                            <input class="btn btn-default" type="submit" value="Upload" />
+                          </form><br>
+                          <form id="uploadnotesFrm" action="https://ecollectapp.co-opbank.co.ke:3000/upload_a_note_r" method="post" enctype="multipart/form-data" ng-show="withreviewdate">
+                            With reviewdate change <input type="file" name="file" id="uploadnotesfile_r" onchange="Noteupload_r()" accept=".xls"/><br>
+                            <input type="text" name="lusername_r" id="lusername_r" readonly>
+                            <p id="uploadnotes_id_r"></p>
+                            <input class="btn btn-default" type="submit" value="Upload" />
+                          </form>-->
+                          <input type="text" name="lusername" id="lusername"><br>
+                          Please click
+                          <button onclick="openUpload()"> here</button>to upload
+                          <br>
+                        </div>
+                   </div>
+                   <hr>
+                   <div class="row">
+                   		<div class="col-md-2"><h5>Employer Letters</h5></div>
+                        <div class="col-lg-6">
+                        	<form id="uploadempletternotesFrm" action="UploadNotes" method="post" enctype="multipart/form-data">
+	                            <input type="file" name="uploadempletternotesfile" id="uploadempletternotesfile" onchange="Noteuploadempletter()" accept=".xls"/>
+	                            <p id="uploadnotesempletter_id"></p>
+	                            <input class="btn btn-default" type="submit" value="Upload" />
+	                         </form>
+                        </div>
+                   </div>
+                   <hr>
+                   <div class="row">
+                   		<div class="col-md-2"><h5>Employer notes</h5></div>
+                        <div class="col-lg-6">
+                        	<form id="uploadempnotesFrm" action="uploadempnotes2" method="post" enctype="multipart/form-data">
+	                            <input type="file" name="uploadempnotesfile" id="uploadempnotesfile" onchange="Noteuploademp()" accept=".xls"/>
+	                            <p id="uploadnotesemp_id"></p>
+	                            <input class="btn btn-default" type="submit" value="Upload" />
+	                         </form>
+                        </div>
+                   </div>
+                   <hr>
+                      <div class="row">
+						<div class="col-md-2"><h5>Service providers accs</h5></div>
+                        <div class="col-lg-6">
+                        	<form class="cmxform" name="uploadForm">
+                        		<div class="form-group form-animate-text" style="margin-top:40px !important;">
+								    <select id="sptitle" name ="sptitle" class="form-text android" ng-model="dataIn.sptitle" required>
+										<option>AUCTIONEERS</option>
+										<option>INVESTIGATORS</option>
+										<option>VALUERS</option>
+										<option>DEBT COLLECTORS</option>
+										<option>MARKETORS</option>
+										<option>VALUERS</option>
+										<option>REPOSSESSORS</option>
+									</select>
+									<div ng-if="uploadForm.sptitle.$error.required" class="error">
+								      Select the service provider
+								  </div>
+	                            </div>
+                        	</form>	
+                        <form id="uploadAuctioneers" action="auctioneersupload" method="post" enctype="multipart/form-data" ng-show="showuploadAuctioneers">
+                          	<p>Auctioneers file upload</p>
+							<input id="spvaluersuploadfile" type="file" name="spvaluersuploadfile" size="50" onchange="auctioneersupload()" accept=".xls" />
+							<p id="spvaluersupload_id"></p>
+							<br/> 
+							<input class="btn btn-default" type="submit" value="Upload" />
+                        </form>
+                        <form action="TestUpload" method="post" enctype="multipart/form-data" ng-show="showuploadValuers">
+                        	<p>Valuers file upload</p>
+							<input id="spvaluersuploadfile" type="file" name="spvaluersuploadfile" size="50" onchange="spvaluersupload()" accept=".xls" />
+							<p id="spvaluersupload_id"></p>
+							<br/> 
+							<input class="btn btn-default" type="submit" value="Upload" />
+                        </form>
+                        <form id="debtcollectorsuploadform" action="debtcollectorsupload" method="post" enctype="multipart/form-data" ng-show="showuploadDebtcollectors">
+                        	<p>Debt collectors file upload</p>
+                          		<input id="debtcollectorsuploadfile" type="file" name="debtcollectorsuploadfile" size="50" onchange="debtcollectorsupload()" accept=".xls" />
+								<p id="debtcollectorsupload_id"></p>
+								<br/> 
+								<input class="btn btn-default" type="submit" value="Upload" />
+                        </form>
+                        <form id="uploadInvestigatorsform" action="investigatorsupload" method="post" enctype="multipart/form-data" ng-show="showuploadInvestigators">
+                        	<p>investigators file upload</p>
+                          		<input id="investigatorsuploadfile" type="file" name="investigatorsuploadfile" size="50" onchange="investigatorsuploadfnc()" accept=".xls" />
+								<p id="investigatorsupload_id"></p>
+								<br/> 
+								<input class="btn btn-default" type="submit" value="Upload" />
+                        </form>
+                        <form id="uploadMarketors" action="marketorsupload" method="post" enctype="multipart/form-data" ng-show="showuploadMarketors">
+                        	<p>Marketors file upload</p>
+                          		<input id="marketorsuploadfile" type="file" name="marketorsuploadfile" size="50" onchange="marketorsuploadfnc()" accept=".xls" />
+								<p id="marketorsupload_id"></p>
+								<br/> 
+								<input class="btn btn-default" type="submit" value="Upload" />
+                        </form>
+                        <!-- <form id="uploadYards" action="yardsupload" method="post" enctype="multipart/form-data" ng-show="showuploadYards">
+                        	<p>Storage yards file upload</p>
+                          		<input id="yardsuploadfile" type="file" name="yardsuploadfile" size="50" onchange="yardsuploadfnc()" accept=".xls" />
+                          		<input class="btn btn-default" type="submit" value="Upload" />
+								<p id="yardsupload_id"></p>
+                        </form>-->
+                        <form id="uploadRepossessors" action="repossessorsupload" method="post" enctype="multipart/form-data" ng-show="showuploadRepossessors">
+                        	<p>Repossessors file upload</p>
+	                          	<input id="repossessorsuploadfile" type="file" name="repossessorsuploadfile" size="50" onchange="investigatorsuploadfnc()" accept=".xls" />
+	                          	<input class="btn btn-default" type="submit" value="Upload" />
+								<p id="repossessorsupload_id"></p>
+                        </form>
+                        </div>
+                      </div>
+				</div>
+			</div>
+        </div>
+<script>
+//upload
+ 
+ function openUpload(){
+ 	var username = document.getElementById('lusername').value;
+ 	console.log('openUpload() username='+username);
+    window.open("http://172.16.204.37:8080/apiecol/index.jsp?username=" + username,"_blank");
+   }
+//
+	function reallocateupload() {
+		var x = document.getElementById("reallocateuploadfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("reallocateupload_id").innerHTML = txt;
+	}
+	//
+	function myFunction() {
+		var x = document.getElementById("fileName");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("demo").innerHTML = txt;
+	}
+	//notes 
+	function investigatorsuploadfnc() {
+		var x = document.getElementById("investigatorsuploadfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("investigatorsupload_id").innerHTML = txt;
+	}
+	//
+	function yardsuploadfnc() {
+		var x = document.getElementById("yardsuploadfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("yardsupload_id").innerHTML = txt;
+	}
+
+	function marketorsuploadfnc() {
+		var x = document.getElementById("marketorsuploadfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("marketorsupload_id").innerHTML = txt;
+	}
+
+	function debtcollectorsupload() {
+		var x = document.getElementById("debtcollectorsuploadfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("debtcollectorsupload_id").innerHTML = txt;
+	}//()
+	                            
+	function Noteuploademp() {
+		var x = document.getElementById("uploadempnotesfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("uploadnotesemp_id").innerHTML = txt;
+	}
+	
+	function Noteupload_r() {
+		var x = document.getElementById("uploadnotesfile_r");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("uploadnotes_id_r").innerHTML = txt;
+	}
+	
+	function Noteupload() {
+		var x = document.getElementById("uploadnotesfile");
+		var txt = "";
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select one or more files.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("uploadnotes_id").innerHTML = txt;
+	}
+	//
+	function spvaluersupload() {
+		console.log('---> spvaluersupload');
+		var x = document.getElementById("spvaluersuploadfile");
+		var txt = "";
+		console.log(x);
+		if ('files' in x) {
+			if (x.files.length == 0) {
+				txt = "Select a file.";
+			} else {
+				for (var i = 0; i < x.files.length; i++) {
+					txt += "<br><strong>" + (i + 1) + ". File</strong><br>";
+					var file = x.files[i];
+					if ('name' in file) {
+						txt += "Name: " + file.name + "<br>";
+					}
+					if ('size' in file) {
+						txt += "Size: " + file.size + " bytes <br>";
+					}
+				}
+			}
+		} else {
+			if (x.value == "") {
+				txt += "Select one or more files.";
+			} else {
+				txt += "The files property is not supported by your browser!";
+				txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
+			}
+		}
+		document.getElementById("spvaluersupload_id").innerHTML = txt;
+	}//end spvaluersupload
+	
+</script>

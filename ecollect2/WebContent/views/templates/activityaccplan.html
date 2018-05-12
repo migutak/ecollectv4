@@ -1,0 +1,124 @@
+	<a href="" >Current Plan</a> | <a href="" >new plan</a> | <a href="" >History</a>
+					
+					<div class="panel panel-default" ng-show="showPlan">
+                      <div class="panel-heading">
+                      <h4>{{accountplan[0].PNAME}}</h4>
+                      </div>
+                      <div class="panel-body">
+                        <p>Update status of these activities below on the above account plan </p>
+                      </div>
+
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Code#</th>
+                            <th>Activity</th>
+                            <th>Planned Date</th>
+                            <th>Status</th>
+                            <th>Comment</th>
+                            <th>Date updated</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="p in accountplan">
+                            <td>{{p.PNAME}}</td>
+                            <td>{{p.ACTIVTITLE}}</td>
+                            <td>{{p.DATEOFEXEC}}</td>
+                            <td>{{p.COMPLETED}}</td>
+                            <td>{{p.COLCOMMENT}}</td>
+                            <td>{{p.DATEUPDATED}}</td>
+                            <td><a ng-show="p.COMPLETED == 'N'" href="#/updateaccplan/{{p.PCODE}}/{{p.ACTCODE}}/{{p.ACCNUMBER}}/{{p.OWNER}}"><span><i class="fa fa-arrow-right"></i></span> Update</a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+	
+	
+<div class="col-md-12" ng-show="!showPlan">
+	<form class="cmxform" name="activityplanForm" ng-submit="addaccplan()">
+		<div class="col-md-12">
+			<div class="form-group form-animate-text" style="margin-top: 40px !important;">
+				<select class="form-text android" ng-model="dataIn.rfd" id="rfd" name="rfd" required>
+					<option value="Hardship">Hardship</option>
+					<option value="Bankruptcy">Bankruptcy</option>
+					<option value="Death_In_family">Death in Family</option>
+					<option value="Deceased">Deceased</option>
+					<option value="Dispute">Dispute</option>
+					<option value="Divorce">Divorce</option>
+					<option value="Delay_in_proceeds">Delay in proceeds</option>
+					<option value="Diversion_of_proceeds">Diversion of proceeds</option>
+					<option value="Crop_failure">Crop failure</option>
+					<option value="AWOL">AWOL/Left employment</option>
+					<option value="Discharged">Discharged</option>
+					<option value="Dismissed">Dismissed</option>
+					<option value="Interdicted">Interdicted</option>
+					<option value="Left_Employment">Left Employment</option>
+					<option value="Resigned">Resigned</option>
+					<option value="Retired">Retired</option>
+					<option value="Retrenched">Retrenched</option>
+					<option value="Sacked">Sacked</option>
+					<option value="Self_Employed">Self Employed</option>
+					<option value="Summary_Dismissal">Summary Dismissal</option>
+					<option value="Suspended">Suspended</option>
+					<option value="Terminated">Terminated</option>
+					<option value="Business_Failure">Business Failure</option>
+					<option value="Business_Loss">Business Loss</option>
+					<option value="Other">Other</option>
+				</select>
+				<div>Reason for default<span ng-if="activityplanForm.rfd.$error.required" class="error">*</span></div>
+			</div>
+
+			<div class="form-group form-animate-text"
+				style="margin-top: 40px !important;">
+				<select id="accplan" name="accplan" class="form-text android" ng-model="dataIn.accplan" required>
+					<option ng-repeat="p in plans" value="{{p.PCODE}}">{{p.PNAME}}</option>
+				</select>
+				<div>Select a plan<span ng-if="activityplanForm.accplan.$error.required" style="color:red">*</span></div>
+			</div>
+							<div class="form-group form-animate-text" style="margin-top:40px !important;" ng-repeat="f in activs">
+	                              <input type="text" class="form-text dateAnimate" name="{{f.ACTIVCODE}}" id="{{f.ACTIVCODE}}" value="{{f.STARTDATE}}" required>
+	                              <span class="bar"></span>
+	                              <label><span class="fa fa-calendar"></span> Input date for {{f.ACTIVCODE}}</label>
+	        				</div>
+	        				 
+		</div>
+		<div class="col-md-12">
+			<button class="btn btn-primary" ladda="Loading" ng-click="Submit()" data-style="expand-left">Submit</button>
+		</div>
+	</form>
+</div>
+
+ 							<div class="col-md-12">
+                                <div class="modal fade" id="myModal" role="dialog">
+                                  <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">Plan update</h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form class="cmxform" ng-submit="planreasonbtn()">
+                                        <div class="form-group form-animate-text" style="margin-top:40px !important;">
+	                              			  <input type="text" class="form-text" name="planreason" id="planreason" ng-model="dataIn.planreason" required>
+				                              <span class="bar"></span>
+				                              <label>Provide comment</label>
+				        				</div>
+                                        </form>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                      </div>
+                                    </div><!-- /.modal-content -->
+                                  </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+                            </div>
+
+<!-- GLOBAL SCRIPTS -->
+<script src="views/templates/plugins/bootstrap-material-datetimepicker.js"></script>
+<script >
+	$(document).ready(function(){
+		$('.dateAnimate').bootstrapMaterialDatePicker({ weekStart : 0, time: false,animation:true, format : 'DD-MMM-YYYY'});
+	})
+</script>

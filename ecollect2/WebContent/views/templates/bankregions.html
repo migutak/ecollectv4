@@ -1,0 +1,47 @@
+
+        <div id="content">
+	        <div class="col-md-12 padding-0">
+				<div class="col-md-12 padding-0">
+					<div class="col-md-12 padding-0">
+						<div class="panel box-shadow-none content-header">
+							<div class="panel-body">
+								<div class="col-md-12">
+									<h3 class="animated fadeInLeft">Bank Regions</h3>
+									<p class="animated fadeInDown" style="line-height: .4;">Manage Bank regions</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<a class="btn-link" href="#/newregion"><i class="fa fa-file-text-o"></i> New region</a>
+							<a class="btn-link" href="#newbranchregion"><i class="fa fa-file-text-o"></i> Add branch</a>
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control border-bottom" ng-model="query" placeholder="search.."/>
+						</div>
+					</div>
+					<div class="col-md-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+						<table class="table table-striped header-fixed">
+		    				<thead>
+		    					<tr>
+		    						<th>Region#</th>
+		    						<th>BranchCode</th>
+		    						<th>BranchName</th>
+		    					</tr>
+		    				</thead>
+		    				<tbody>
+		    						<tr ng-repeat="d in Bankregions | filter:query">
+		    							<td>{{d.REGIONNAME}}</td>
+		    							<td>{{d.BRANCHCODE}}</td>
+		    							<td>{{d.BRANCHNAME}}</td>
+		    							<td>
+		    								<a href="#/updatebankregion/{{d.REGION}}/{{d.BRANCHCODE}}"><i class="fa fa-pencil-square-o fa-2x"></i></a>|
+		    								<a style="color:red" href="" ng-click="deletebankregion(d.REGION,d.BRANCHCODE)"><i class="fa fa-trash-o fa-2x"></i></a>
+		    							</td>	
+		    						</tr> 	
+		    				</tbody>
+		    			</table>
+					</div>
+				</div>
+			</div>
+        </div>
+        
