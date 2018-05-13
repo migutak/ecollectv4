@@ -935,6 +935,10 @@ app.controller('mainCtrl', function($scope,$timeout,StudentDataOp, Notification)
 	var username = gusername;//document.getElementById("username").value;
 
   console.log('---> mainCtrl '+rights);
+  
+  function openactivityaccplan(){
+	  window.open('views/templates/accountplans.jsp?accnumber='+acc+"&custnumber="+ cust+"&username="+ username,'_blank');
+  }
 
   $scope.allteles = [];
   $scope.teamleader = false;

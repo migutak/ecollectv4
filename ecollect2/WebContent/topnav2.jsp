@@ -141,7 +141,7 @@
 				                                    <a ui-sref="action"><span class="fa fa-circle text-primary"></span> Collector action</a>
 				                                  </li>
 				                                  <li>
-				                                    <a ui-sref="activityaccplan"><span class="fa fa-circle text-primary"></span> Account plan <span class="badge badge-danger pull-right" id="plannotification"></span></a>
+				                                    <button onclick="openactivityaccplan()" class="btn btn-link"><span class="fa fa-circle text-primary"></span> Account plan <span class="badge badge-danger pull-right"></span></button>
 				                                  </li>
 				                                   <li>
 				                                    <a ui-sref="files"><span class="fa fa-circle text-success"></span> Files<span class="badge badge-success pull-right" id="filelength"></span></a>
