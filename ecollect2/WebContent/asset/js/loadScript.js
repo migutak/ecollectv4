@@ -1,14 +1,14 @@
 $(document).ready(function(){
 	
-	var globalUrl = "https://jsonplaceholder.typicode.com";
-	//var globalUrl = urladdress;
+	//var globalUrl = "https://jsonplaceholder.typicode.com";
+	var globalUrl = urladdress;
 	
 	var cust= custnumber;//document.getElementById("cust").value;
 	var acc= accnumber;//document.getElementById("acc").value;
 	var user= document.getElementById("s_in_username").value;
     var dept= document.getElementById("s_in_division").value;
     
-	/*$.ajax({
+	$.ajax({
 		type: 'GET',
         url: globalUrl+'/api/v2/accountinfo/' + accnumber,
         //url: globalUrl+'/users',
@@ -25,7 +25,7 @@ $(document).ready(function(){
         		console.log('no data returned by /api/v2/accountinfo/' + acc);
         	}
         }
-	})*/
+	})
 	
 	//retrieve facilities
 	

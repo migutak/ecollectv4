@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="../../asset/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../../asset/css/buttons.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../../asset/css/plugins/font-awesome.min.css"/>
+
 <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
 <script src="../../bower_components/angular/angular.min.js"></script>
 <script type="text/javascript" src="../../asset/js/global.js"></script>
@@ -143,7 +145,9 @@
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary Comment:</label>
   											<textarea class="form-control" rows="5" id="comment"></textarea>
-  											<button type="button" class="button button1">Update</button>
+  											<!--  <button type="button" class="button button1">Update</button> -->
+  											<br/>
+  											<button type="button" class="btn btn-primary " id="backgroundbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
@@ -194,7 +198,8 @@
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary:</label>
   											<textarea class="form-control" rows="5" id="comment"></textarea>
-  											<button type="button" class="btn btn-info">Update</button>
+  											<br>
+  											<button type="button" class="btn btn-primary " id="problemdefinitionbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
@@ -268,7 +273,7 @@
 											      <textarea class="form-control" rows="3" id="threats" name="threats"></textarea>
 											    </div>
 											  </div>
-											  <button type="button" class="btn btn-info">Update</button>
+											  <button type="button" class="btn btn-primary " id="swotbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 											</form>
 							        	</div>
 							        	<div class="col-sm-4">
@@ -337,7 +342,8 @@
 												  </select>
 											    </div>
 											  </div>
-											  <button type="button" class="btn btn-info">Update</button>
+											  <br>
+											  <button type="button" class="btn btn-primary " id="abilitybtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 											</form>
 							        	</div>
 							        	<div class="col-sm-4">
@@ -389,7 +395,8 @@
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary:</label>
   											<textarea class="form-control" rows="5" id="customerproposal"></textarea>
-  											<button type="button" class="btn btn-info">Update</button>
+  											<br>
+  											<button type="button" class="btn btn-primary " id="customerproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
@@ -440,7 +447,8 @@
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary:</label>
   											<textarea class="form-control" rows="5" id="bankproposal"></textarea>
-  											<button type="button" class="btn btn-info">Update</button>
+  											<br>
+  											<button type="button" class="btn btn-primary " id="bankproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
