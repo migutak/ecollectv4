@@ -10,15 +10,15 @@
 <link rel="stylesheet" type="text/css" href="../../asset/css/buttons.css" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
-
+<script src="../../bower_components/angular/angular.min.js"></script>
 <script type="text/javascript" src="../../asset/js/global.js"></script>
 <script type="text/javascript" src="../../asset/js/activityglobal.js"></script>
-
+<script type="text/javascript" src="../../asset/js/accountplanApp.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 <title>E-Collect&reg;</title>
 </head>
-<body>
+<body ng-app="App" ng-controller="mainCtrl">
 <input type="hidden" id="s_in_username" value="<%=session.getAttribute("s_username")%>">
 <input type="hidden" id="s_in_division" value="<%=session.getAttribute("s_division")%>">
 <input type="hidden" id="s_in_rights" value="<%=session.getAttribute("s_rights")%>">
@@ -87,21 +87,33 @@
 								<div class="panel panel-default">
 							        <div class="panel-heading">
 							            <h3 class="panel-title">Customer facilities</h3>
-							        </div>   
+							        </div>
+							        <div class="panel-body" style="height:500px">   
 							        <ul class="list-group">
-							            <li class="list-group-item">
+							            <li class="list-group-item" id="accounts_list" ng-repeat="d in otheraccsData">
 							                <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
 							                    <div class="col-xs-10">
-							                        Account 1
+							                        customer number : {{d.CUSTNUMBER}}
 							                    </div>
-							                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
 							                </div>
 							                <div id="detail-1">
 							                    <hr></hr>
 							                    <div class="container">
 							                        <div class="fluid-row">
 							                            <div class="col-xs-1">
-							                                Detail:
+							                                account number : {{d.ACCNUMBER}}
+							                            </div>
+							                            <div class="col-xs-5">
+							                                oustbalance: {{d.OUSTBALANCE | number:0}}
+							                            </div>
+							                            <div class="col-xs-1">
+							                                product : {{d.PRODUCTCODE}}
+							                            </div>
+							                            <div class="col-xs-5">
+							                                arocode : {{d.AROCODE}}
+							                            </div>
+							                            <div class="col-xs-1">
+							                                rrocode:
 							                            </div>
 							                            <div class="col-xs-5">
 							                                sample.
@@ -110,64 +122,14 @@
 							                                Detail:
 							                            </div>
 							                            <div class="col-xs-5">
-							                                Sample.
-							                            </div>
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
 							                                sample.
-							                            </div>
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
-							                                sample.
-							                            </div>
-							                        </div>
-							                    </div>
-							                </div>
-							            </li>
-							            <li class="list-group-item">
-							                <div class="row toggle" id="dropdown-detail-2" data-toggle="detail-2">
-							                    <div class="col-xs-10">
-							                        Account 2
-							                    </div>
-							                    <div class="col-xs-2"><i class="fa fa-chevron-down pull-right"></i></div>
-							                </div>
-							                <div id="detail-2">
-							                    <hr></hr>
-							                    <div class="container">
-							                        <div class="fluid-row">
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
-							                                Sample.
-							                            </div>
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
-							                                Sample.
-							                            </div>
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
-							                                Sample.
-							                            </div>
-							                            <div class="col-xs-1">
-							                                Detail:
-							                            </div>
-							                            <div class="col-xs-5">
-							                                Sample.
 							                            </div>
 							                        </div>
 							                    </div>
 							                </div>
 							            </li>
 							        </ul>
+							        </div>
 								</div>
 							</div>
 						</div>
