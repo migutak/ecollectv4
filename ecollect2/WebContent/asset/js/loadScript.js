@@ -26,8 +26,4 @@ $(document).ready(function(){
 	
 	//open
 	
-	function openactivityaccplan(){
-		window.open('views/templates/accountplans.jsp?accnumber='+accnumber+"&custnumber="+ custnumber+"&username="+ username,'_blank');
-	}
-	
 })

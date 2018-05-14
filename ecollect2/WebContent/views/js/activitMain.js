@@ -936,11 +936,7 @@ app.controller('mainCtrl', function($scope,$timeout,StudentDataOp, Notification)
 
   console.log('---> mainCtrl '+rights);
   
-  function openactivityaccplan(){
-	  
-  }
-  
-  $("#myHref").on('click', function() {
+  	$("#myHref").on('click', function() {
 	  window.open('views/templates/accountplans.jsp?accnumber='+acc+"&custnumber="+ cust+"&username="+ username,'_blank');
 	});
 

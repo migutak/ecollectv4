@@ -80,7 +80,7 @@
   <!-- Global valiable -->
   <script type="text/javascript" src="asset/js/global.js"></script> 
   <script type="text/javascript" src="asset/js/activity_global.js"></script> 
-  <script type="text/javascript" src="views/js/activityMain.js"></script>
+  <script type="text/javascript" src="views/js/activitMain.js"></script>
   <script type="text/javascript" src="views/js/services/mainService.js"></script>
 
 </head>
@@ -141,7 +141,7 @@
 				                                    <a ui-sref="action"><span class="fa fa-circle text-primary"></span> Collector action</a>
 				                                  </li>
 				                                  <li>
-				                                    <button onclick="openactivityaccplan()" class="btn btn-link"><span class="fa fa-circle text-primary"></span> Account plan <span class="badge badge-danger pull-right"></span></button>
+				                                    <a href="#" id="myHref" class="btn btn-link"><span class="fa fa-circle text-primary"></span> Account plan <span class="badge badge-danger pull-right"></span></a>
 				                                  </li>
 				                                   <li>
 				                                    <a ui-sref="files"><span class="fa fa-circle text-success"></span> Files<span class="badge badge-success pull-right" id="filelength"></span></a>
