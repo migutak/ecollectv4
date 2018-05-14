@@ -10,7 +10,7 @@ $(document).ready(function(){
     
 	$.ajax({
 		type: 'GET',
-        url: globalUrl+'/api/v2/accountinfo/' + accnumber,
+        url: globalUrl + '/api/v2/accountinfo/' + accnumber,
         //url: globalUrl+'/users',
         success: function(data) {
         	//console.log(data);
@@ -18,15 +18,16 @@ $(document).ready(function(){
         	document.getElementById("firstname").innerHTML = data[0].FIRSTNAME;
         	document.getElementById("telnumber").innerHTML = data[0].TELNUMBER;
         	document.getElementById("addressline").innerHTML = data[0].ADDRESSLINE1;
-        		//document.getElementById("firstname").innerHTML = data[0].name;
-            	//document.getElementById("telnumber").innerHTML = data[0].phone;
-            	//document.getElementById("addressline").innerHTML = data[0].email;
         	} else{
         		console.log('no data returned by /api/v2/accountinfo/' + acc);
         	}
         }
 	})
 	
-	//retrieve facilities
+	//open
+	
+	function openactivityaccplan(){
+		window.open('views/templates/accountplans.jsp?accnumber='+accnumber+"&custnumber="+ custnumber+"&username="+ username,'_blank');
+	}
 	
 })

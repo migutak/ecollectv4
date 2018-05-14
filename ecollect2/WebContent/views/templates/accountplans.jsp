@@ -50,14 +50,13 @@
 			<div class="col-md-12">
 				<!-- Nav tabs -->
 				<div class="card">
-					<ul class="nav nav-tabs" role="tablist">
+					<ul class="nav nav-tabs" role="tablist" id="myTabs">
 						<li role="presentation" class="active"><a href="#facilities"
 							aria-controls="facilities" role="tab" data-toggle="tab">Facilities</a></li>
 						<li role="presentation"><a href="#background"
 							aria-controls="background" role="tab" data-toggle="tab">Background</a></li>
 						<li role="presentation"><a href="#problem"
-							aria-controls="problem" role="tab" data-toggle="tab">Problem
-								Definition</a></li>
+							aria-controls="problem" role="tab" data-toggle="tab">Problem Definition</a></li>
 						<li role="presentation"><a href="#swot" aria-controls="swot"
 							role="tab" data-toggle="tab">SWOT</a></li>
 						<li role="presentation"><a href="#ability"

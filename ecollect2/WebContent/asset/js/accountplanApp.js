@@ -34,4 +34,12 @@ app.controller('mainCtrl', function($scope, $http){
 	       $this.button('reset');
 	   }, 5000);
 	});
+	
+	$('#myTabs a').click(function (e) {
+		e.preventDefault();
+		var url = $(this).attr("aria-controls");
+		
+		console.log(url);
+	})
+	
 })
