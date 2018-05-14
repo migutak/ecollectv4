@@ -163,9 +163,9 @@
 											<div class="tab-content">
 												<div class="tab-pane active" id="tab_default_1">
 														<div class="card">
-														    <div class="card-body">
+														    <div class="card-body" ng-repeat="d in backgroundhistory">
 														      <h4 class="card-title"></h4>
-														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> Some example text. Some example text.</p>
+														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{d.BACKGROUND}} by {{d.OWNER}} on {{d.DATEUPDATED}}</p>
 														      <a href="#" class="card-link">Make Current</a>
 														      <a href="#" class="card-link">Remove</a>
 														    </div>
