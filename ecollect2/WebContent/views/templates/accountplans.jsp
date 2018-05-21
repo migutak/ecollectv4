@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>E-Collect&reg;</title>
+<link rel="shortcut icon" href="../../asset/img/favicon.ico">
 <script type="text/javascript"
 	src="jqwidgets/scripts/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../asset/css/bootstrap.min.css">
@@ -13,12 +15,11 @@
 
 <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
 <script src="../../bower_components/angular/angular.min.js"></script>
-<script type="text/javascript" src="../../asset/js/global.js"></script>
+<script type="text/javascript" src="../../asset/js/globalj.js"></script>
 <script type="text/javascript" src="../../asset/js/activityglobal.js"></script>
-<script type="text/javascript" src="../../asset/js/accountplanApp.js"></script>
+<script type="text/javascript" src="../../asset/js/accountplanAppj.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<title>E-Collect&reg;</title>
 </head>
 <body ng-app="App" ng-controller="mainCtrl">
 <input type="hidden" id="s_in_username" value="<%=session.getAttribute("s_username")%>">
@@ -89,7 +90,7 @@
 							        <div class="panel-heading">
 							            <h3 class="panel-title">Customer facilities</h3>
 							        </div>
-							        <div class="panel-body" style="height:500px">   
+							        <div class="panel-body" style="min-height: 500px; max-height: 600px; overflow-y: scroll;">   
 							        <ul class="list-group">
 							            <li class="list-group-item" id="accounts_list" ng-repeat="d in otheraccsData">
 							                <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
@@ -101,28 +102,34 @@
 							                    <hr></hr>
 							                    <div class="container">
 							                        <div class="fluid-row">
-							                            <div class="col-xs-1">
+							                            <div class="col-xs-6">
 							                                account number : {{d.ACCNUMBER}}
 							                            </div>
-							                            <div class="col-xs-5">
+							                            <div class="col-xs-6">
 							                                oustbalance: {{d.OUSTBALANCE | number:0}}
 							                            </div>
-							                            <div class="col-xs-1">
+							                         </div>
+							                         <div class="fluid-row">
+							                            <div class="col-xs-6">
 							                                product : {{d.PRODUCTCODE}}
 							                            </div>
-							                            <div class="col-xs-5">
+							                            <div class="col-xs-6">
 							                                arocode : {{d.AROCODE}}
 							                            </div>
-							                            <div class="col-xs-1">
+							                         </div>
+							                         <div class="fluid-row">
+							                            <div class="col-xs-6">
 							                                rrocode:
 							                            </div>
-							                            <div class="col-xs-5">
+							                            <div class="col-xs-6">
 							                                sample.
 							                            </div>
-							                            <div class="col-xs-1">
+							                         </div>
+							                         <div class="fluid-row">
+							                            <div class="col-xs-6">
 							                                Detail:
 							                            </div>
-							                            <div class="col-xs-5">
+							                            <div class="col-xs-6">
 							                                sample.
 							                            </div>
 							                        </div>
@@ -140,10 +147,10 @@
 									<div class="panel-heading">
 							            <h3 class="panel-title">Background</h3>
 							        </div>
-							        <div class="panel-body" style="height:500px">
+							        <div class="panel-body" style="min-height: 500px; max-height: 600px; overflow-y: scroll;">
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary Comment:</label>
-  											<textarea class="form-control" rows="5" id="comment"></textarea>
+  											<textarea class="form-control" rows="8" id="backgroundcomment"></textarea>
   											<!--  <button type="button" class="button button1">Update</button> -->
   											<br/>
   											<button type="button" class="btn btn-primary " id="backgroundbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
@@ -164,9 +171,10 @@
 														<div class="card">
 														    <div class="card-body" ng-repeat="d in backgroundhistory">
 														      <h4 class="card-title"></h4>
-														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{d.BACKGROUND}} by {{d.OWNER}} on {{d.DATEUPDATED}}</p>
-														      <a href="#" class="card-link">Make Current</a>
-														      <a href="#" class="card-link">Remove</a>
+														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{d.BACKGROUND}}</p>
+														      <p class="card-text"><span></span>By {{d.OWNER}} on {{d.DATEUPDATED}}</p>
+														      <button ng-click="makecurrent(d.ID)" class="btn-link">Make Current</button>
+														      <button ng-click="deletebackground(d.ID)" class="btn-link">Remove</button>
 														    </div>
 														 </div>
 												</div>
@@ -178,7 +186,6 @@
 														details.
 													</p>
 													<p>
-														
 													</p>
 												</div>
 											</div>
@@ -217,8 +224,8 @@
 														    <div class="card-body">
 														      <h4 class="card-title"></h4>
 														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> Some example text. Some example text.</p>
-														      <a href="#" class="card-link">Make Current</a>
-														      <a href="#" class="card-link">Remove</a>
+														      <a href="javascript:makecurrent('test1')" class="card-link">Make Current</a>
+														      <a href="javascript:alert('test1')" class="card-link">Remove</a>
 														    </div>
 														 </div>
 												</div>
@@ -601,5 +608,10 @@
 	</div>
 
 	<script type="text/javascript" src="../../asset/js/loadScript.js"></script>
+	<script type="text/javascript">
+		function makecurrent() {
+			console.log('clicked----');
+		}
+	</script>
 </body>
 </html>
