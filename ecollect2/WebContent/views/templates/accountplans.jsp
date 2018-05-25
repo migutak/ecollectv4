@@ -95,7 +95,7 @@
 							            <li class="list-group-item" id="accounts_list" ng-repeat="d in otheraccsData">
 							                <div class="row toggle" id="dropdown-detail-1" data-toggle="detail-1">
 							                    <div class="col-xs-10">
-							                        customer number : {{d.CUSTNUMBER}}
+							                        CUSTNUMBER: {{d.CUSTNUMBER}}
 							                    </div>
 							                </div>
 							                <div id="detail-1">
@@ -103,34 +103,34 @@
 							                    <div class="container">
 							                        <div class="fluid-row">
 							                            <div class="col-xs-6">
-							                                account number : {{d.ACCNUMBER}}
+							                                ACCNUMBER: {{d.ACCNUMBER}}
 							                            </div>
 							                            <div class="col-xs-6">
-							                                oustbalance: {{d.OUSTBALANCE | number:0}}
-							                            </div>
-							                         </div>
-							                         <div class="fluid-row">
-							                            <div class="col-xs-6">
-							                                product : {{d.PRODUCTCODE}}
-							                            </div>
-							                            <div class="col-xs-6">
-							                                arocode : {{d.AROCODE}}
+							                                OUSTBALANCE: {{d.OUSTBALANCE | number:0}}
 							                            </div>
 							                         </div>
 							                         <div class="fluid-row">
 							                            <div class="col-xs-6">
-							                                rrocode:
+							                                PRODUCTCODE: {{d.PRODUCTCODE}}
 							                            </div>
 							                            <div class="col-xs-6">
-							                                sample.
+							                                AROCODE: {{d.AROCODE}}
 							                            </div>
 							                         </div>
 							                         <div class="fluid-row">
 							                            <div class="col-xs-6">
-							                                Detail:
+							                                RROCODE: {{d.RROCODE}}
 							                            </div>
 							                            <div class="col-xs-6">
-							                                sample.
+							                                BRANCHCODE: {{d.BRANCHCODE}}
+							                            </div>
+							                         </div>
+							                         <div class="fluid-row">
+							                            <div class="col-xs-6">
+							                                COLOFFICER: {{d.COLOFFICER}}
+							                            </div>
+							                            <div class="col-xs-6">
+							                                BRANCHNAME: {{d.BRANCHNAME}}
 							                            </div>
 							                        </div>
 							                    </div>
@@ -180,12 +180,10 @@
 												</div>
 												<div class="tab-pane" id="tab_default_2">
 													<p>
-														sample
+														
 													</p>
 													<p>
-														details.
-													</p>
-													<p>
+														
 													</p>
 												</div>
 											</div>
@@ -202,34 +200,35 @@
 							        </div>
 							        <div class="panel-body" style="height:500px">
 							        	<div class="col-sm-8">
-							        		<label for="comment">Summary:</label>
-  											<textarea class="form-control" rows="5" id="comment"></textarea>
+							        		<label for="comment">Problem Summary:</label>
+  											<textarea class="form-control" rows="8" id="problemdefinitioncomment"></textarea>
   											<br>
   											<button type="button" class="btn btn-primary " id="problemdefinitionbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
 												<li class="active">
-													<a href="#tab_default_1" data-toggle="tab">
+													<a href="#tab_default_problem1" data-toggle="tab">
 													History </a>
 												</li>
 												<li>
-													<a href="#tab_default_2" data-toggle="tab">
+													<a href="#tab_default_problem2" data-toggle="tab">
 													Change logs </a>
 												</li>
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_default_1">
+												<div class="tab-pane active" id="tab_default_problem1">
 														<div class="card">
-														    <div class="card-body">
+														    <div class="card-body" ng-repeat="p in problemdefinitionhis">
 														      <h4 class="card-title"></h4>
-														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> Some example text. Some example text.</p>
-														      <a href="javascript:makecurrent('test1')" class="card-link">Make Current</a>
-														      <a href="javascript:alert('test1')" class="card-link">Remove</a>
+														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{p.PROBLEMDEFINITION}}</p>
+														      <p class="card-text"><span></span>By {{p.OWNER}} on {{p.DATEUPDATED}}</p>
+														      <button ng-click="makecurrentproblem(p.ID)" class="btn-link">Make Current</button>
+														      <button ng-click="deleteproblem(p.ID)" class="btn-link">Remove</button>
 														    </div>
 														 </div>
 												</div>
-												<div class="tab-pane" id="tab_default_2">
+												<div class="tab-pane" id="tab_default_problem2">
 													<p>
 														sample
 													</p>
@@ -250,7 +249,7 @@
 							<div class="container">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-							            <h3 class="panel-title">Actions</h3>
+							            <h3 class="panel-title">SWOT analysis</h3>
 							        </div>
 							        <div class="panel-body" style="height:500px">
 							        	<div class="col-sm-8">
@@ -285,16 +284,16 @@
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
 												<li class="active">
-													<a href="#tab_default_1" data-toggle="tab">
+													<a href="#tab_default_swot1" data-toggle="tab">
 													History </a>
 												</li>
 												<li>
-													<a href="#tab_default_2" data-toggle="tab">
+													<a href="#tab_default_swot2" data-toggle="tab">
 													Change logs </a>
 												</li>
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_default_1">
+												<div class="tab-pane active" id="tab_default_swot1">
 														<div class="card">
 														    <div class="card-body">
 														      <h4 class="card-title"></h4>
@@ -304,7 +303,7 @@
 														    </div>
 														 </div>
 												</div>
-												<div class="tab-pane" id="tab_default_2">
+												<div class="tab-pane" id="tab_default_swot2">
 													<p>
 														sample
 													</p>
@@ -334,17 +333,11 @@
 											    <label for="staticEmail" class="col-sm-2 col-form-label">ability to pay</label>
 											    <div class="col-sm-10">
 											      <select id="abilitytopay" class="form-control">
-													  <option value="volvo">YES</option>
-													  <option value="saab">NO</option>
-												  </select>
-											    </div>
-											  </div>
-											  <div class="form-group row">
-											    <label for="inputPassword" class="col-sm-2 col-form-label">willing to pay</label>
-											    <div class="col-sm-10">
-											      <select id="willingtopay" class="form-control">
-													  <option value="volvo">NO</option>
-													  <option value="saab">YES</option>
+													  <option>--Default--</option>
+													  <option>Able and Willing</option>
+													  <option>UnAble and Willing</option>
+													  <option>unWilling and Able</option>
+													  <option>unWilling and unAble</option>
 												  </select>
 											    </div>
 											  </div>
@@ -355,16 +348,16 @@
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
 												<li class="active">
-													<a href="#tab_default_1" data-toggle="tab">
+													<a href="#tab_default_ability1" data-toggle="tab">
 													History </a>
 												</li>
 												<li>
-													<a href="#tab_default_2" data-toggle="tab">
+													<a href="#tab_default_ability2" data-toggle="tab">
 													Change logs </a>
 												</li>
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_default_1">
+												<div class="tab-pane active" id="tab_default_ability1">
 														<div class="card">
 														    <div class="card-body">
 														      <h4 class="card-title"></h4>
@@ -374,7 +367,7 @@
 														    </div>
 														 </div>
 												</div>
-												<div class="tab-pane" id="tab_default_2">
+												<div class="tab-pane" id="tab_default_ability2">
 													<p>
 														sample
 													</p>
@@ -400,33 +393,34 @@
 							        <div class="panel-body" style="height:500px">
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary:</label>
-  											<textarea class="form-control" rows="5" id="customerproposal"></textarea>
+  											<textarea class="form-control" rows="8" id="customerproposalcomment"></textarea>
   											<br>
   											<button type="button" class="btn btn-primary " id="customerproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
 												<li class="active">
-													<a href="#tab_default_1" data-toggle="tab">
+													<a href="#tab_default_custproposal1" data-toggle="tab">
 													History </a>
 												</li>
 												<li>
-													<a href="#tab_default_2" data-toggle="tab">
+													<a href="#tab_default_custproposal2" data-toggle="tab">
 													Change logs </a>
 												</li>
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_default_1">
+												<div class="tab-pane active" id="tab_default_custproposal1">
 														<div class="card">
-														    <div class="card-body">
+														    <div class="card-body" ng-repeat="c in customerproposalhis">
 														      <h4 class="card-title"></h4>
-														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> Some example text. Some example text.</p>
-														      <a href="#" class="card-link">Make Current</a>
-														      <a href="#" class="card-link">Remove</a>
+														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{c.CUSTOMERPROPOSAL}}</p>
+														      <p class="card-text"><span></span>By {{c.OWNER}} on {{c.DATEUPDATED}}</p>
+														      <button ng-click="makecurrentcustomerproposal(c.ID)" class="btn-link">Make Current</button>
+														      <button ng-click="deletebackground(c.ID)" class="btn-link">Remove</button>
 														    </div>
 														 </div>
 												</div>
-												<div class="tab-pane" id="tab_default_2">
+												<div class="tab-pane" id="tab_default_custproposal2">
 													<p>
 														sample
 													</p>
@@ -452,33 +446,34 @@
 							        <div class="panel-body" style="height:500px">
 							        	<div class="col-sm-8">
 							        		<label for="comment">Summary:</label>
-  											<textarea class="form-control" rows="5" id="bankproposal"></textarea>
+  											<textarea class="form-control" rows="8" id="bankproposalcomment"></textarea>
   											<br>
   											<button type="button" class="btn btn-primary " id="bankproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
 							        		<ul class="nav nav-tabs ">
 												<li class="active">
-													<a href="#tab_default_1" data-toggle="tab">
+													<a href="#tab_default_bankproposal1" data-toggle="tab">
 													History </a>
 												</li>
 												<li>
-													<a href="#tab_default_2" data-toggle="tab">
+													<a href="#tab_default_bankproposal2" data-toggle="tab">
 													Change logs </a>
 												</li>
 											</ul>
 											<div class="tab-content">
-												<div class="tab-pane active" id="tab_default_1">
+												<div class="tab-pane active" id="tab_default_bankproposal1">
 														<div class="card">
-														    <div class="card-body">
+														    <div class="card-body" ng-repeat="k in bankproposalhis">
 														      <h4 class="card-title"></h4>
-														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> Some example text. Some example text.</p>
-														      <a href="#" class="card-link">Make Current</a>
-														      <a href="#" class="card-link">Remove</a>
+														      <p class="card-text"><span class="glyphicon glyphicon-list-alt"></span> {{k.BANKPROPOSALS}}</p>
+														      <p class="card-text"><span></span>By {{k.OWNER}} on {{k.DATEUPDATED}}</p>
+														      <button ng-click="makecurrentbankproposal(k.ID)" class="btn-link">Make Current</button>
+														      <button ng-click="deletebackground(k.ID)" class="btn-link">Remove</button>
 														    </div>
 														 </div>
 												</div>
-												<div class="tab-pane" id="tab_default_2">
+												<div class="tab-pane" id="tab_default_bankproposal2">
 													<p>
 														sample
 													</p>
@@ -513,14 +508,101 @@
 							<div class="container">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-							            <h3 class="panel-title">Actions</h3>
+							            <h3 class="panel-title">Actions agreed</h3>
 							        </div>
-							        <div class="panel-body" style="height:500px">
-							        	<p>Customer proposal Received</p>
-							        	<p>Internal approval sought </p>
-							        	<p>Internal Approval granted </p>
-							        	<p>Internal Approval Declined </p>
-							        	<p>Customer Accepted </p>
+							        <div class="panel-body" style="height:600px">
+							        		<form>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Customer proposal Received</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Internal approval sought</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Internal Approval granted</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Internal Approval Declined</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Customer Accepted</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											  <div class="form-group row">
+											    <label class="col-sm-2 col-form-label">Cure implemented</label>
+											    <div class="col-sm-3">
+											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    </div>
+											    <div class="col-sm-3">
+											      Attachment: <span><input type="file"></span>
+											    </div>
+											    <div class="col-sm-3">
+											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button class="btn btn-sm">update</button>
+											    </div>
+											  </div>
+											</form>
 							        </div>
 								</div>
 							</div>
@@ -534,7 +616,7 @@
 							        <div class="panel-body" style="height:500px">
 							        	<form>
 										  <div class="form-group row">
-										    <label for="staticEmail" class="col-sm-2 col-form-label">Next review date</label>
+										    <label class="col-sm-2 col-form-label">Next review date</label>
 										    <div class="col-sm-10">
 										      <input type="text" class="form-control">
 										    </div>
