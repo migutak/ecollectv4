@@ -79,7 +79,7 @@
 <script type="text/javascript" src="fusion-charts/themes/fusioncharts.theme.fint.js"></script>
 	
   <!-- Global valiable  -->
-<script type="text/javascript" src="asset/js/global.js"></script>
+<script type="text/javascript" src="asset/js/globalr.js"></script>
 
   <!-- Custom Scripts -->
 <script type="text/javascript" src="views/js/Mainapp.js"></script>

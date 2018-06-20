@@ -1,5 +1,5 @@
 
-var urladdress = "https://ecollecttst.co-opbank.co.ke:8443/ecollect2";
+var urladdress = "https://ecollecttst.co-opbank.co.ke/ecollect2";
 //var urladdress = "https://ecollect.co-opbank.co.ke/ecollect2"; 
 //var urladdress = "http://192.168.0.51:7001/ecollect2"
 
