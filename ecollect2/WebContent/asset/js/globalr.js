@@ -1,7 +1,7 @@
 
-//var urladdress = "https://ecollecttst.co-opbank.co.ke/ecollect2";
+var urladdress = "https://ecollecttst.co-opbank.co.ke/ecollect2";
 //var urladdress = "https://ecollect.co-opbank.co.ke/ecollect2"; 
-var urladdress = "http://localhost:8085/ecollect2"
+//var urladdress = "http://localhost:8085/ecollect2"
 
 //var urlupload = "https://ecollect.co-opbank.co.ke:3000";
 var urlupload = "https://ecollecttst.co-opbank.co.ke:3000";

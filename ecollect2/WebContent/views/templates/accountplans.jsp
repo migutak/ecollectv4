@@ -497,9 +497,23 @@
 							            <h3 class="panel-title">Remedial offerings</h3>
 							        </div>
 							        <div class="panel-body" style="height:500px">
-							        	<p>Private Treaty</p>
-							        	<p>Full & Final Settlement</p>
-							        	<p>Rescheduling</p>
+							        
+							        <select>
+									  <option>Private Treaty Sale</option>
+							        	<option>Debt discount/Full & Final Settlement</option>
+							        	<option>Rescheduling</option>
+							        	<option>Interest concessions</option>
+							        	<option>Insurance claims</option>
+							        	<option>Out of court settlements</option>
+							        	<option>Foreclosure</option>
+							        	<option>Lumpsum payment</option>
+							        	<option>Public sale below the reserve</option>
+							        	<option>Top Ups</option>
+							        	<option>Exit Relationship / take over</option>
+							        	<option>Write off</option>
+							        	<option>Restructure</option>
+							        	<option>Refinancing</option>
+									</select>
 							        </div>
 								</div>
 							</div>
