@@ -10,14 +10,17 @@
 	src="jqwidgets/scripts/jquery-1.11.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../asset/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../../asset/css/buttons.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="../../bootstrap/css/bootstrapv4.min.css"></link>
 <link rel="stylesheet" type="text/css" href="../../asset/css/plugins/font-awesome.min.css"/>
+
+<link rel="stylesheet" href="../../bootstrap/css/bootstrap-datetimepicker.css"></link>
 
 <script type="text/javascript" src="../../bootstrap/js/bootstrap.min.js"></script>
 <script src="../../bower_components/angular/angular.min.js"></script>
-<script type="text/javascript" src="../../asset/js/globalj.js"></script>
+<script type="text/javascript" src="../../asset/js/globalr.js"></script>
 <script type="text/javascript" src="../../asset/js/activityglobal.js"></script>
-<script type="text/javascript" src="../../asset/js/accountplanAppj.js"></script>
+<script type="text/javascript" src="../../asset/js/accountplanApp.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
 </head>
@@ -66,6 +69,8 @@
 						<li role="presentation"><a href="#custproposal"
 							aria-controls="custproposal" role="tab" data-toggle="tab">Customer
 								Proposals</a></li>
+						<li role="presentation"><a href="#paymentplans"
+							aria-controls="paymentplans" role="tab" data-toggle="tab">Payment Plan</a></li>
 						<li role="presentation"><a href="#bankproposal"
 							aria-controls="bankproposal" role="tab" data-toggle="tab">Bank
 								Proposals</a></li>
@@ -74,10 +79,7 @@
 								offerings</a></li>
 						<li role="presentation"><a href="#actions"
 							aria-controls="actions" role="tab" data-toggle="tab">Actions
-								agreed</a></li>
-						<li role="presentation"><a href="#nextreview"
-							aria-controls="nextreview" role="tab" data-toggle="tab">Next
-								Review</a></li>
+								agreed <span class="badge badge-danger" ng-cloak>{{actionsoverduebadge}}</span></a></li>
 						<li role="presentation"><a href="#expected"
 							aria-controls="expected" role="tab" data-toggle="tab">Collections</a></li>
 					</ul>
@@ -203,6 +205,8 @@
 							        		<label for="comment">Problem Summary:</label>
   											<textarea class="form-control" rows="8" id="problemdefinitioncomment"></textarea>
   											<br>
+  											Attachment: <span><input type="file"></span>
+  											<br/>
   											<button type="button" class="btn btn-primary " id="problemdefinitionbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
@@ -395,6 +399,8 @@
 							        		<label for="comment">Summary:</label>
   											<textarea class="form-control" rows="8" id="customerproposalcomment"></textarea>
   											<br>
+  											Attachment: <span><input type="file"></span>
+  											<br/>
   											<button type="button" class="btn btn-primary " id="customerproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
@@ -448,6 +454,7 @@
 							        		<label for="comment">Summary:</label>
   											<textarea class="form-control" rows="8" id="bankproposalcomment"></textarea>
   											<br>
+  											
   											<button type="button" class="btn btn-primary " id="bankproposalbtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
 							        	</div>
 							        	<div class="col-sm-4">
@@ -528,92 +535,152 @@
 							        		<form>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Customer proposal Received</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdateProposal" name="initiationdateProposal" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewProposal" name="reviewProposal" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkproposal" name="remarkproposal"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_proposalreceived" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Internal approval sought</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdateapprovalsort" name="initiationdateapprovalsort" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewedinternalApprovalSort" name="reviewedinternalApprovalSort" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkapprovalsought" name="remarkapprovalsought"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed_approvalsought">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_approvalsought" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Internal Approval granted</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdateapprovalgranted" name="initiationdateapprovalgranted" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewedinternalApprovalgranted" name="reviewedinternalApprovalgranted" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkapprovalgranted" name="remarkapprovalgranted"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed_approvalgranted">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_approvalgranted" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Internal Approval Declined</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdateapprovaldeclined" name="initiationdateapprovaldeclined" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewedinternalApprovaldeclined" name="reviewedinternalApprovaldeclined" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkapprovaldeclined" name="remarkapprovaldeclined"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed_approvaldeclined">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_approvaldeclined" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Customer Accepted</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdatecustomeraccepted" name="initiationdatecustomeraccepted" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewedinternalcustomeraccepted" name="reviewedinternalcustomeraccepted" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkcustomeraccepted" name="remarkcustomeraccepted"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed_customeraccepted">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_customeraccepted" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											  <div class="form-group row">
 											    <label class="col-sm-2 col-form-label">Cure implemented</label>
-											    <div class="col-sm-3">
-											      Reviewed: <input type="date" id="reviewedC" name="reviewedC" /> 
+											    <div class="col-sm-2">
+											      Initiation Date <input type="text" class="form-control form_date2" id="initiationdatecure" name="initiationdatecure" /> 
 											    </div>
-											    <div class="col-sm-3">
+											    <div class="col-sm-2">
+											      Next Review <input type="text" class="form-control form_date" id="reviewedcure" name="reviewedcure" /> 
+											    </div>
+											    <div class="col-sm-2">
 											      Attachment: <span><input type="file"></span>
 											    </div>
-											    <div class="col-sm-3">
-											      Remark: <textarea class="form-control" rows="2" id="remarkC" name="remarkC"></textarea>
+											    <div class="col-sm-2">
+											      Remark: <textarea class="form-control" rows="2" id="remarkcure" name="remarkcure"></textarea>
 											    </div>
 											    <div class="col-sm-1">
-											    	<button class="btn btn-sm">update</button>
+											      Completed: 
+											      <select id="action_completed_cure">
+													<option value="N">No</option>
+											        <option value="Y">Yes</option>
+												  </select>
+											    </div>
+											    <div class="col-sm-1">
+											    	<button type="button" class="btn btn-sm btn-info" id="btn_cureimplemented" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">update</button>
 											    </div>
 											  </div>
 											</form>
@@ -621,22 +688,66 @@
 								</div>
 							</div>
 						</div>
-						<div role="tabpanel" class="tab-pane" id="nextreview">
+						<div role="tabpanel" class="tab-pane" id="paymentplans">
 							<div class="container">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-							            <h3 class="panel-title">ReviewDate</h3>
+							            <h3 class="panel-title">Payment Plan</h3>
 							        </div>
 							        <div class="panel-body" style="height:500px">
-							        	<form>
-										  <div class="form-group row">
-										    <label class="col-sm-2 col-form-label">Next review date</label>
-										    <div class="col-sm-10">
-										      <input type="text" class="form-control">
-										    </div>
-										  </div>
-										  <button type="button" class="btn btn-info">Update</button>
-										</form>
+										 <div class="col-sm-8">
+  											<table class="grid table table-bordered table-sortable">
+  												<thead>
+									                <tr><th>accountNumber</th><th>PTP Amount</th><th>PTP Date</th><th>Frequency</th><th>dateMade</th></tr>
+									            </thead>
+									            <tbody>
+									               <tr ng-repeat="p in paymentplanshis">
+									            		<td>{{p.ACCNUMBER}}</td>
+									                	<td>{{p.PTPAMOUNT}}</td>
+									                	<td>{{p.PTPSTARTDATE}}</td>
+									                	<td>{{p.PTPFREQ}}</td>
+									                	<td>{{p.DATEUPDATED}}</td>
+									                </tr>
+									            </tbody>
+  											</table>
+							        	</div>
+							        	<div class="col-sm-4">
+							        		<p>New Plan</p>
+							        		
+							        		<hr />
+							        		
+							        		<form class="form-horizontal" action="/">
+											  <div class="form-group">
+											    <label class="control-label col-sm-4" for="email">amount:</label>
+											    <div class="col-sm-8">
+											      <input type="text" class="form-control" id="ptpamount" placeholder="Promise amount">
+											    </div>
+											  </div>
+											  <div class="form-group">
+											    <label class="control-label col-sm-4" for="ptpdate">Frequency:</label>
+											    <div class="col-sm-8">
+											      <select class="form-control" id="planfreq">
+											        	<option default value="One-time">One-time</option>
+											        	<option value="Daily">Daily</option>
+											        	<option value="Weekly">Weekly</option>
+											        	<option value="Monthly">Monthly</option>
+											        	<option value="Yearly">Yearly</option>
+													</select>
+											    </div>
+											  </div>
+											  <div class="form-group">
+											    <label class="control-label col-sm-4" for="pwd">Start date:</label>
+											    <div class="col-sm-8"> 
+											      <input type="text" class="form-control form_date" id="ptpstartdate">
+											    </div>
+											  </div>
+											  <div class="form-group"> 
+											    <div class="col-sm-offset-2 col-sm-10">
+											      <button type="button" class="btn btn-primary " id="btn_ptpplan" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing ...">Submit</button>
+											    </div>
+											  </div>
+											</form>
+							        	</div>
 							        </div>
 								</div>
 							</div>
@@ -649,7 +760,7 @@
 							        </div>
 							        <div class="panel-body" style="height:500px">
 							        	<div class="table-responsive col-md-12">
-									        <table id="sort2" class="grid table table-bordered table-sortable">
+									        <table class="grid table table-bordered table-sortable">
 									            <thead>
 									                <tr><th>MON-Year</th><th>Expected</th><th>Actual</th></tr>
 									            </thead>
@@ -702,6 +813,37 @@
 			</div>
 		</div>
 	</div>
+	
+	<script type="text/javascript" src="../../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+
+<script type="text/javascript">
+// https://www.malot.fr/bootstrap-datetimepicker/
+	$('.form_date').datetimepicker({
+        format:  'dd-M-yyyy',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		startDate : new Date(),
+		minView: 2,
+		forceParse: true
+    });
+    
+	$('.form_date2').datetimepicker({
+        format:  'dd-M-yyyy',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		startDate : new Date(),
+		endDate : new Date(),
+		minView: 2,
+		forceParse: true
+    });
+	
+</script>
 
 	<script type="text/javascript" src="../../asset/js/loadScript.js"></script>
 	<script type="text/javascript">
