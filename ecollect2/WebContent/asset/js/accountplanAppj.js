@@ -12,6 +12,13 @@ app.controller('mainCtrl', function($scope, $http){
 	
 	$scope.plan_proposalreceived = [];
 	
+	//disable fields
+	$scope.stateCheck = false;
+	$scope.stateCheckapprovalsort = false;
+	$scope.stateCheckapprovalgranted = false;
+	$scope.stateCheckapprovaldeclined = false;
+	$scope.stateCheckcustomeraccepted = false;
+	
 	$http.get(urladdress + '/api/v2/views/' + custnumber).success(function(data){
 		$scope.otheraccsData = data;
 	})
@@ -503,6 +510,7 @@ app.controller('mainCtrl', function($scope, $http){
 	}
 	
 	function actionplanshis(){
+		//console.log('in actionplanshis()')
 		$http.get(urladdress + '/api/accplans/actionplansoverdue/' + custnumber).success(function(data){
 			$scope.actionsoverduebadge = data[0].OVERDUEACTIONS
 		})
@@ -510,10 +518,14 @@ app.controller('mainCtrl', function($scope, $http){
 		$http.get(urladdress + '/api/accplans/actionplans/' + custnumber + '/proposalreceived').success(function(data){
 			var d = data[0]
 			if(data.length>0){
-			document.getElementById("initiationdateProposal").value = d.INITIATIONDATE; //""
-		    document.getElementById("reviewProposal").value = d.NEXTREVIEW; 
-		    document.getElementById("remarkproposal").value = d.RCOMMENT; 
-		    document.getElementById("action_completed").value = d.COMPLETED;
+				//console.log('proposalreceived',d)
+				document.getElementById("initiationdateProposal").value = d.INITIATIONDATE; //""
+			    document.getElementById("reviewProposal").value = d.NEXTREVIEW; 
+			    document.getElementById("remarkproposal").value = d.RCOMMENT; 
+			    document.getElementById("action_completed").value = d.COMPLETED;
+			    if(d.COMPLETED == "Y"){
+			    	$scope.stateCheck = true;
+			    }
 			}
 		})
 		
@@ -524,16 +536,23 @@ app.controller('mainCtrl', function($scope, $http){
 		    document.getElementById("reviewedinternalApprovalgranted").value = d.NEXTREVIEW; 
 		    document.getElementById("remarkapprovalgranted").value = d.RCOMMENT; 
 		    document.getElementById("action_completed_approvalgranted").value = d.COMPLETED;
+		    if(d.COMPLETED == "Y"){
+		    	$scope.stateCheckapprovalgranted = true;
+		    }
 			}
 		})
 		
 		$http.get(urladdress + '/api/accplans/actionplans/' + custnumber + '/approvalsought').success(function(data){
 			var d = data[0]
 			if(data.length>0){
+				///console.log(d)
 			document.getElementById("initiationdateapprovalsort").value = d.INITIATIONDATE; //""
 		    document.getElementById("reviewedinternalApprovalSort").value = d.NEXTREVIEW; 
 		    document.getElementById("remarkapprovalsought").value = d.RCOMMENT; 
 		    document.getElementById("action_completed_approvalsought").value = d.COMPLETED;
+		    if(d.COMPLETED == "Y"){
+		    	$scope.stateCheckapprovalsort = true;
+		    }
 			}
 		})
 		
@@ -544,6 +563,9 @@ app.controller('mainCtrl', function($scope, $http){
 		    document.getElementById("reviewedinternalApprovaldeclined").value = d.NEXTREVIEW; 
 		    document.getElementById("remarkapprovaldeclined").value = d.RCOMMENT; 
 		    document.getElementById("action_completed_approvaldeclined").value = d.COMPLETED;
+		    if(d.COMPLETED == "Y"){
+		    	$scope.stateCheckapprovaldeclined = true;
+		    }
 			}
 		})
 		
@@ -554,6 +576,9 @@ app.controller('mainCtrl', function($scope, $http){
 		    document.getElementById("reviewedinternalcustomeraccepted").value = d.NEXTREVIEW; 
 		    document.getElementById("remarkcustomeraccepted").value = d.RCOMMENT; 
 		    document.getElementById("action_completed_customeraccepted").value = d.COMPLETED;
+		    if(d.COMPLETED == "Y"){
+		    	$scope.stateCheckcustomeraccepted = true;
+		    }
 			}
 		})
 		
