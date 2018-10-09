@@ -80,19 +80,17 @@
   <!-- Global valiable -->
   <script type="text/javascript" src="asset/js/global.js"></script> 
   <script type="text/javascript" src="asset/js/activity_global.js"></script> 
-  <script type="text/javascript" src="views/js/activitMain.js"></script>
+  <script type="text/javascript" src="views/js/activitMainj.js"></script>
   <script type="text/javascript" src="views/js/services/mainService.js"></script>
+  
+  <!--  -->
 
 </head>
      <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
 <body id="mimin" class="dashboard topnav" ng-app="App" ng-controller="mainCtrl">
-<%
-    if ((session.getAttribute("s_username") == null) || (session.getAttribute("s_username") == "")) {
-    	response.sendRedirect(request.getContextPath() + "/login.jsp");
-    }
-%>
+
 <input type="hidden" id="s_in_username" value="<%=session.getAttribute("s_username")%>">
 <input type="hidden" id="s_in_division" value="<%=session.getAttribute("s_division")%>">
 <input type="hidden" id="s_in_rights" value="<%=session.getAttribute("s_rights")%>">
@@ -375,6 +373,8 @@
 	setTimeout(function(){
 		$( "html" ).removeClass("loading");
 	}, 2000);	*/
+	
+	/***/
 	
 });
 </script>

@@ -1,0 +1,31 @@
+<link rel="stylesheet" href="timeline.css">
+
+<div>
+	<div class="row">
+		<div id="console-event"></div>
+		<div class="col-lg-12" style="min-height: 500; max-height: 750px; overflow-y: scroll;">
+	  {{initialNotes}} notes
+	  <ul class="timeline" id="notesnode">
+        <li ng-repeat="item in pagedItems">
+          <i class="fa fa-envelope"></i>
+          <div class="timeline-item"><span class="time">{{item.NOTEDATE}}</span>
+          	<h3 class="timeline-header"><small><a href="#">{{item.OWNER}} </a>{{item.NOTESRC}} on acc: {{item.ACCNUMBER}}</small></h3>
+          	<div class="timeline-body">{{item.NOTEMADE}}</div>
+          </div>
+        </li>
+      </ul>
+		</div>
+		<button class="btn btn-block" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()">{{totalNotes}} More notes ...</button>
+	</div>
+</div>
+
+	<!-- Global valiable -->
+	<script src="asset/js/global.js"></script>
+	
+<script type="text/javascript">
+	var cust = custnumber;//document.getElementById("cust").value;
+	var acc = accnumber;//document.getElementById("acc").value;
+	var dept= document.getElementById("s_in_division").value;
+	var user= username;//document.getElementById("username").value;
+
+</script>

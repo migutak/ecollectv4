@@ -7563,6 +7563,10 @@ function MasterCtrl($scope,$state,$window,$http,$timeout, Idle, $mdDialog,Server
     $scope.openNotesrpt = function(){
     	window.open(ServerAddress.urlreports + "/frameset?__report=notes.rptdesign&__title=Notes","_blank");
     }
+    
+    $scope.openBulkNotesrpt = function(){
+    	window.open(ServerAddress.urlreports + "/frameset?__report=bulk_notes.rptdesign&__title=Bulk Notes","_blank");
+    }
 
     $scope.getWidth = function() {
     	return window.innerWidth;

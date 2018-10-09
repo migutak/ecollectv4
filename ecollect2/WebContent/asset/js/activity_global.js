@@ -2,6 +2,7 @@ var custnumber = getParameterByName('custnumber');
 var username = getParameterByName('username');
 var accnumber = getParameterByName('accnumber');
 var gusername = getParameterByName('username');
+var gnationid = getParameterByName('nationid');
 
 function getParameterByName(name, url) {
 	if (!url) url = window.location.href;

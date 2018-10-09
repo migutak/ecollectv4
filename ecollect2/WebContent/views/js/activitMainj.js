@@ -5,7 +5,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
 	.state('notes', {
 		url : "/notes",
-		templateUrl : "views/templates/notesj.html"
+		templateUrl : "views/templates/notes_lazy.html",
+		controller : 'notesCtrl'
 	}).state('directors', {
 		url : "/directors",
 		templateUrl : "views/templates/directors2.html",
@@ -92,6 +93,63 @@ app.config(function($stateProvider, $urlRouterProvider) {
 })
 });
 
+app.factory("Item", function($http) {
+
+	  var items = [];
+
+	  return {
+		all: function(custnumber){
+		  return $http.get('http://localhost:8085/ecollect2/api/status/notes/total/'+ custnumber);
+		},
+	    get: function(custnumber, start, end){
+	      return $http.get('http://localhost:8085/ecollect2/api/status/notes/'+ custnumber+'/'+ start +'/' + end);
+	    },
+	    total: function() {
+	      return items.length;
+	    }
+	  };
+	});
+
+	app.controller("notesCtrl", function($scope, Item) {
+	  $scope.itemsPerPage = 5;
+	  $scope.currentPage = 0;
+	  $scope.total = Item.total();
+	  $scope.totalNotes = 0;
+	  $scope.initialNotes = 0;
+	  
+	  Item.all(custnumber).success(function(data){
+		  $scope.totalNotes = data[0].TOTALNOTES;
+		  $scope.initialNotes = data[0].TOTALNOTES;
+	  })
+	  
+	  Item.get(custnumber,$scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage).success(function(data){
+		  // console.log('$scope.pagedItems',data);
+		  $scope.pagedItems = data;
+		  $scope.totalNotes = $scope.initialNotes - $scope.pagedItems.length;
+		  // console.log('shown notes', $scope.pagedItems.length);
+	  })
+	  
+	  $scope.loadMore = function() {
+	    $scope.currentPage++;
+	    Item.get(custnumber,$scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage).success(function(data){
+	    	var newItems = data;
+	    	$scope.pagedItems = $scope.pagedItems.concat(newItems);
+	    	$scope.totalNotes = $scope.initialNotes - $scope.pagedItems.length;
+	    	// console.log('newItems', newItems);
+	    	// console.log('shown notes', $scope.pagedItems.length);
+	    })
+	  };
+
+	  $scope.nextPageDisabledClass = function() {
+	    return $scope.currentPage === $scope.pageCount()-1 ? "disabled" : "";
+	  };
+
+	  $scope.pageCount = function() {
+	    return Math.ceil($scope.total/$scope.itemsPerPage);
+	  };
+
+	});
+
 app.controller('smsCtrl', function($scope,$mdDialog,$timeout,StudentDataOp,ServerAddress){
   var cust = custnumber;//document.getElementById("cust").value;
   var acc = accnumber;//document.getElementById("acc").value;
@@ -101,10 +159,10 @@ app.controller('smsCtrl', function($scope,$mdDialog,$timeout,StudentDataOp,Serve
   //show or hide sms send button
  // console.log(dept);
   if(dept == 'BRANCH'){
-	  console.log('Hide sms button');
+	  // console.log('Hide sms button');
 	  $scope.showSendsms = false;
   }else{
-	  console.log('Show sms button')
+	  // console.log('Show sms button')
 	  $scope.showSendsms = true;
   }
   
@@ -928,16 +986,18 @@ $scope.$watch("dataIn.ptp", function (newval) {
 });
 
 app.controller('mainCtrl', function($scope,$timeout,StudentDataOp, Notification){
-	var cust = custnumber;//document.getElementById("cust").value;
+	var cust = custnumber;//document.getElementById("cust").value; 
 	var acc = accnumber;//document.getElementById("acc").value;
 	var dept = document.getElementById("s_in_division").value;
 	var rights = document.getElementById("s_in_rights").value;
 	var username = gusername;//document.getElementById("username").value;
+	var nationid = gnationid;
 
   console.log('---> mainCtrl '+rights);
   
   	$("#myHref").on('click', function() {
-	  window.open('views/templates/accountplans.jsp?accnumber='+acc+"&custnumber="+ cust+"&username="+ username,'_blank');
+	  // window.open('views/templates/accountplans.jsp?accnumber='+acc+"&custnumber="+ cust+"&username="+ username,'_blank');
+  		window.open('http://ecollecttst.co-opbank.co.ke:3001/?accnumber='+acc+"&custnumber="+ cust+"&username="+ username +"&nationid="+ nationid ,'_blank');
 	});
 
   $scope.allteles = [];

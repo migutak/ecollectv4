@@ -283,6 +283,7 @@
                         <li><a href="" ng-click="openAmountcollectedrpt()">Amount collected</a></li>
                         <li><a href="" ng-click="openSmsrpt()">SMS report</a></li>
                         <li><a href="" ng-click="openNotesrpt()">Daily notes</a></li>
+                        <li><a href="" ng-click="openBulkNotesrpt()">Bulk notes</a></li>
                         
                         <li class="ripple">
                           <a class="sub-tree-toggle nav-header">
