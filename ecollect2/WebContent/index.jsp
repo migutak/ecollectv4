@@ -79,10 +79,10 @@
 <script type="text/javascript" src="fusion-charts/themes/fusioncharts.theme.fint.js"></script>
 	
   <!-- Global valiable  -->
-<script type="text/javascript" src="asset/js/globalr.js"></script>
+<script type="text/javascript" src="asset/js/globalrj.js"></script>
 
   <!-- Custom Scripts -->
-<script type="text/javascript" src="views/js/Mainapp.js"></script>
+<script type="text/javascript" src="views/js/Mainapp2.js"></script>
 <script type="text/javascript" src="views/js/services/mainService.js"></script>
 <script type="text/javascript" src="views/js/controllers/MasterCtrl.js"></script>
 <script type="text/javascript" src="views/js/controllers/worklistCtrl.js"></script>
@@ -185,6 +185,7 @@
                         <li><a ui-sref="predelinq">Pre-delinquent<span class="badge badge-primary pull right" id="predelinqnotify"></span></a></li>
                         <li><a ui-sref="funds">With funds<span class="badge badge-primary pull right" id="withfundsnotify"></span></a></li>
                         <li><a ui-sref="lettersdue">Letters due<span class="badge badge-primary pull right" id="lettersduenotify"></span></a></li>
+                        <!--  <li><a ui-sref="cleared">Cleared accounts<span class="badge badge-primary pull right" id="cleared"></span></a></li> -->
                       </ul>
                     </li>
                     <li class="ripple">

@@ -1,0 +1,62 @@
+<style>
+	.grid {
+	  height: 800px;
+	}
+	.blue { color: blue; }
+</style>
+
+<div id="content">
+			<div class="col-md-12 padding-0">
+				<!--  <div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-4">
+							<h3 class="animated fadeInLeft">Search</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">Search By Customer Number</p>
+						</div>
+						<div class="col-md-2">
+							<span class="fa fa-search icon-search"></span>
+		                    <div class="form-group form-animate-text">
+		                      <input type="text" class="form-text" ng-model="searchbyarocode" ng-keypress="mySearcharocode($event)" required>
+		                      <span class="bar"></span>
+		                      <label class="label-search">Search <b>AROCODE</b> </label>
+		                    </div>
+						</div>
+						<div class="col-md-2">
+							<span class="fa fa-search icon-search"></span>
+		                    <div class="form-group form-animate-text">
+		                      <input type="text" class="form-text" ng-model="searchbycustnumber" ng-keypress="mySearchcustnumber($event)" required>
+		                      <span class="bar"></span>
+		                      <label class="label-search">Search <b>Custnumber</b> </label>
+		                    </div>
+						</div>
+						<div class="col-md-2">
+							<span class="fa fa-search icon-search"></span>
+		                    <div class="form-group form-animate-text">
+		                      <input type="text" class="form-text" ng-model="searchbyname" ng-keypress="mySearchname($event)" required>
+		                      <span class="bar"></span>
+		                      <label class="label-search">Search <b>Name</b> </label>
+		                    </div>
+						</div>
+					</div>
+				</div> -->
+				<div class="panel box-shadow-none content-header">
+					<div class="panel-body">
+						<div class="col-md-3">
+							<h3 class="animated fadeInLeft">Cleared accs Search</h3>
+							<p class="animated fadeInDown" style="line-height: .4;">Custnumber - {{custnumber}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	<div class="col-md-12 padding-0">
+		<div id="grid1" ui-grid="gridOptions" ui-grid-save-state ui-grid-exporter ui-grid-move-columns ui-grid-resize-columns class="grid"></div>
+		
+		<!--  <button id="save" type="button" class="btn btn-success" ng-click="saveState()">Save</button>
+        	  <button id="restore" type="button" class="btn btn-success" ng-click="restoreState()">Restore</button>
+        -->
+	</div>
+</div>
+
+<!-- start: Javascript -->
+<script src="asset/js/jquery.min.js"></script>
+<script src="asset/js/jquery.ui.min.js"></script>

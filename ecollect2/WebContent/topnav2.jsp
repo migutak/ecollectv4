@@ -78,9 +78,9 @@
 	<script type="text/javascript" src="bower_components/angular/angular-fusioncharts.min.js"></script>
   
   <!-- Global valiable -->
-  <script type="text/javascript" src="asset/js/global.js"></script> 
+  <script type="text/javascript" src="asset/js/globalrj.js"></script> 
   <script type="text/javascript" src="asset/js/activity_global.js"></script> 
-  <script type="text/javascript" src="views/js/activitMainj.js"></script>
+  <script type="text/javascript" src="views/js/activitMainjr.js"></script>
   <script type="text/javascript" src="views/js/services/mainService.js"></script>
   
   <!--  -->

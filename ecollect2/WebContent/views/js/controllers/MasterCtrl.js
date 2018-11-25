@@ -166,7 +166,7 @@ angular.module('RDash')
   		$scope.searchbycustnumber = undefined;
   		$scope.searchbyname = undefined;
   		$scope.searchbyaccnumber = undefined;
-  		//$scope.mysearchempcode = undefined;
+  		$scope.searchcleared = undefined;
   		$scope.searchbyrrocode = undefined;
 
   		if($scope.searchbyarocode !== undefined){
@@ -184,7 +184,7 @@ angular.module('RDash')
 	  		$scope.searchbycustnumber = undefined;
 	  		$scope.searchbyname = undefined;
 	  		$scope.searchbyaccnumber = undefined;
-	  		//$scope.mysearchempcode = undefined;
+	  		$scope.searchcleared = undefined;
 	  		$scope.searchbyarocode = undefined;
 
 	  		if($scope.searchbyarocode !== undefined){
@@ -202,7 +202,7 @@ angular.module('RDash')
   				$scope.searchbycustnumber = undefined;
   				$scope.searchbyname = undefined;
   				//$scope.searchbyaccnumber = undefined;
-  				//$scope.mysearchempcode = undefined;
+  				$scope.searchcleared = undefined;
   				$scope.searchbyarocode = undefined;
   				$scope.searchbyrrocode = undefined;
 
@@ -222,7 +222,7 @@ angular.module('RDash')
 			  // $scope.searchbycustnumber = undefined;
 			  $scope.searchbyname = undefined;
 			  //$scope.searchbyaccnumber = undefined;
-			  //$scope.mysearchempcode = undefined;
+			  $scope.searchcleared = undefined;
 			  $scope.searchbyarocode = undefined;
 			  $scope.mysearchidnumber = undefined;
 			  $scope.searchbyrrocode = undefined;
@@ -231,6 +231,25 @@ angular.module('RDash')
 			  	console.log('searching by custnumber '+ $scope.searchbycustnumber);
 				  //loadgridData('searchbyarocode/' + $scope.searchbyarocode);
 				  $state.go('searchbycustnumber',{'custnumber':$scope.searchbycustnumber});
+				}else{
+					console.log('no search key detected'); 
+				}
+
+			}
+		}
+ 		
+ 		$scope.mySearchcleared = function(keyEvent) {
+ 			if (keyEvent.which === 13){
+			  $scope.searchbycustnumber = undefined;
+			  $scope.searchbyname = undefined;
+			  //$scope.searchbyaccnumber = undefined;
+			  //$scope.searchcleared = undefined;
+			  $scope.searchbyarocode = undefined;
+			  $scope.mysearchidnumber = undefined;
+			  $scope.searchbyrrocode = undefined;
+			  
+			  if($scope.searchcleared !== undefined){
+				  $state.go('clearedaccs',{'custnumber':$scope.searchcleared});
 				}else{
 					console.log('no search key detected'); 
 				}
@@ -2793,6 +2812,66 @@ function smsperuser(){
 		$http({
 			method: 'get',
 			url: ServerAddress.address+'/api/v2_status/searchbycustnumber/'+custnumber, //ServerAddress.address+'/api/v2/searchbycustnumber/'+custnumber
+			headers: {'Content-Type': 'application/json'}
+		}).success(function (data) {
+	    	  $scope.gridOptions.data = data;
+	    	}).error(function (err) {
+	    		alert('Error '+err) 
+	    	});
+	    }
+
+	    $scope.showMe = function(accnumber, custnumber){
+	    	$("#acc_number").val(accnumber);
+	    	$("#cust_number").val(custnumber);
+	    	$("#username").val(username);
+	    	$window.open('topnav2.jsp?accnumber='+accnumber+"&custnumber="+ custnumber+"&username="+ username,'_blank');
+		};  
+})
+
+.controller('clearedaccsCtrl', function($scope,$window,$stateParams,$http,StudentDataOp,ServerAddress, $state, uiGridConstants){
+	var custnumber = $stateParams.custnumber;
+	$scope.custnumber = $stateParams.custnumber;
+	//var username= localStorage.getItem("uname");
+	var username = document.getElementById("s_in_username").value;
+	
+	//console.log('==> Resolve data '+myParams)
+	
+	$scope.gridOptions = {  
+		enableFiltering: true,
+		flatEntityAccess: true,
+		showGridFooter: true,
+		showColumnFooter: true,
+		enableGridMenu: true,
+		enableSelectAll: true,
+		exporterCsvFilename: 'viewall.csv',
+		fastWatch: true,
+		onRegisterApi: function(gridApi){
+			$scope.gridApi = gridApi;
+		}
+	};
+	
+	$scope.gridOptions.columnDefs = [
+	{name: 'ACCNUMBER', cellTemplate:'<a href="" ng-click="grid.appScope.showMe(row.entity.ACCNUMBER,row.entity.CUSTNUMBER)">{{row.entity.ACCNUMBER}}</a>' },
+	{name:'CUSTNUMBER'},
+	{name:'CUSTNAME', field:'CLIENT_NAME'},
+	{name:'AROCODE'},
+	// {name:'DAYSINARR'},
+	// {name:'INTRATEARR'},
+	// {name:'OUSTBALANCE'},
+	{name:'REVIEWDATE'},
+	// {name:'TOTALARREARS'},
+	// {name:'PRINCARREARS'},
+	{name:'COLOFFICER'},
+	// {name:'BRANCHNAME'}
+	];
+	
+	loadgridData(custnumber);
+	//$scope.gridOptions.data = myParams;
+	
+	function loadgridData(custnumber){
+		$http({
+			method: 'get',
+			url: ServerAddress.address+'/api/v2_status/searchclearedaccsbycustnumber/' + custnumber, //ServerAddress.address+'/api/v2/searchbycustnumber/'+custnumber
 			headers: {'Content-Type': 'application/json'}
 		}).success(function (data) {
 	    	  $scope.gridOptions.data = data;

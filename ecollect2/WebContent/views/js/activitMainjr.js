@@ -99,10 +99,10 @@ app.factory("Item", function($http) {
 
 	  return {
 		all: function(custnumber){
-		  return $http.get('http://localhost:8085/ecollect2/api/status/notes/total/'+ custnumber);
+		  return $http.get(urladdress + '/api/status/notes/total/'+ custnumber);
 		},
 	    get: function(custnumber, start, end){
-	      return $http.get('http://localhost:8085/ecollect2/api/status/notes/'+ custnumber+'/'+ start +'/' + end);
+	      return $http.get(urladdress +'/api/status/notes/'+ custnumber+'/'+ start +'/' + end);
 	    },
 	    total: function() {
 	      return items.length;
